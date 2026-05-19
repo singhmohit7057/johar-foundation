@@ -1,8 +1,7 @@
 import { createBrowserRouter, RouterProvider, Outlet } from 'react-router-dom';
 
-//  Top Header Component
+// Top Header Component
 import { TopHeader } from './shared/top-header';
-
 
 // Shared Components
 import { Navbar } from './shared/navbar';
@@ -11,17 +10,20 @@ import { Footer } from './shared/footer';
 // UI Components
 import { StickyDonateButton } from './components/sticky-donate-button';
 import { ScrollToTop } from './components/scrolltotop';
+import { BackToTop } from './components/backtotop';
+
 
 // Popup
-//import { Popup } from './popup/popup'; // Added Popup import
+// import { Popup } from './popup/popup'; // Ready whenever you choose to uncomment
 
 // Page Imports 
 import HomePage from './pages/Homepage';
 import WhoWeAre from './pages/whoweare';
+import Initiatives from './pages/initiatives';
+import Impact from './pages/impact';
 import { GetInvolved } from './pages/getinvolved';
 import Contact from './pages/contact';
 import Donate from './pages/donate';
-
 
 // Legal Imports
 import PrivacyPolicy from './legal/privacy-policy';
@@ -41,10 +43,9 @@ const MainLayout = () => {
       margin: 0, 
       padding: 0,
       width: '100%',
-    
     }}>
       
-      {/* The Popup will now trigger on any page within this layout
+      {/* The Popup will trigger on any page within this layout once uncommented
       <Popup delay={4000} /> */}
       
       <TopHeader />
@@ -55,6 +56,7 @@ const MainLayout = () => {
         <Outlet />
       </main>
 
+      <BackToTop />
       <StickyDonateButton />
       <Footer />
     </div>
@@ -84,11 +86,11 @@ const router = createBrowserRouter([
       },
       {
         path: "initiatives",
-        element: <ComingSoon />,
+        element: <Initiatives />,
       },
       {
         path: "impact",
-        element: <ComingSoon />,
+        element: <Impact />,
       },
       {
         path: "get-involved",

@@ -34,6 +34,68 @@ export const Footer: React.FC = () => {
           </p>
         </div>
 
+        {/* Quick Link */}
+        <div>
+          <h4 style={{ marginBottom: '15px' }}>Quick Link</h4>
+          <div style={{ fontSize: '0.9rem' }}>
+            <Link 
+              to="/who-we-are" 
+              style={linkStyle('privacy')}
+              onMouseEnter={() => setHoveredLink('privacy')}
+              onMouseLeave={() => setHoveredLink(null)}
+            >
+              Who We Are
+            </Link>
+            <Link 
+              to="/initiatives" 
+              style={linkStyle('terms')}
+              onMouseEnter={() => setHoveredLink('terms')}
+              onMouseLeave={() => setHoveredLink(null)}
+            >
+              Initiatives
+            </Link>
+            <Link 
+              to="/impact" 
+              style={linkStyle('cookies')}
+              onMouseEnter={() => setHoveredLink('cookies')}
+              onMouseLeave={() => setHoveredLink(null)}
+            >
+              Impact
+            </Link>
+          </div>
+        </div>
+
+          {/* Take Action */}
+        <div>
+          <h4 style={{ marginBottom: '15px' }}>Take Action</h4>
+          <div style={{ fontSize: '0.9rem' }}>
+            <Link 
+              to="/contact" 
+              style={linkStyle('privacy')}
+              onMouseEnter={() => setHoveredLink('privacy')}
+              onMouseLeave={() => setHoveredLink(null)}
+            >
+              Contact
+            </Link>
+            <Link 
+              to="/donate" 
+              style={linkStyle('terms')}
+              onMouseEnter={() => setHoveredLink('terms')}
+              onMouseLeave={() => setHoveredLink(null)}
+            >
+              Donate
+            </Link>
+            <Link 
+              to="/get-involved" 
+              style={linkStyle('cookies')}
+              onMouseEnter={() => setHoveredLink('cookies')}
+              onMouseLeave={() => setHoveredLink(null)}
+            >
+              Get Involved
+            </Link>
+          </div>
+        </div>
+
         {/* Legal Column */}
         <div>
           <h4 style={{ marginBottom: '15px' }}>Legal</h4>
@@ -70,7 +132,7 @@ export const Footer: React.FC = () => {
           <h4 style={{ marginBottom: '15px' }}>Contact Us</h4>
           <p style={{ fontSize: '0.9rem', color: '#ccc', lineHeight: '1.8' }}>
             Email: info@joharfoundation.org<br/>
-            Phone: +91 XXXXX XXXXX<br/>
+            Phone: +91 9117115050<br/>
             Location: Jharkhand, India
           </p>
         </div>
