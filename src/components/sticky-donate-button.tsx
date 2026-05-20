@@ -6,7 +6,7 @@ export const StickyDonateButton: React.FC = () => {
   return (
     <Link to="/donate" style={{
       position: 'fixed',
-      bottom: '30px',
+      bottom: '35px',
       right: '30px',
       backgroundColor: theme.colors.primary,
       color: theme.colors.white,

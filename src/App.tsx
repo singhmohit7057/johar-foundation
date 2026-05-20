@@ -22,6 +22,7 @@ import WhoWeAre from './pages/whoweare';
 import Initiatives from './pages/initiatives';
 import Impact from './pages/impact';
 import { GetInvolved } from './pages/getinvolved';
+import Resources from './pages/resources';
 import Contact from './pages/contact';
 import Donate from './pages/donate';
 
@@ -98,7 +99,7 @@ const router = createBrowserRouter([
       },
       {
         path: "resources",
-        element: <ComingSoon />, 
+        element: <Resources />, 
       },
       {
         path: "donate",

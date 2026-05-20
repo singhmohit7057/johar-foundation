@@ -102,7 +102,8 @@ const Impact: React.FC = () => {
         }}>
           {/* Left Block: Narrative Selector Tabs */}
           <div className="stories-nav-panel" style={{ flex: '1', backgroundColor: '#fafafa', borderRight: '1px solid #f0f0f0', padding: '25px' }}>
-            <h4 style={{ color: '#999', fontSize: '0.7rem', fontWeight: '800', tracking: '1px', textTransform: 'uppercase', marginBottom: '20px', paddingLeft: '10px' }}>
+            {/* FIXED: Changed tracking to letterSpacing */}
+            <h4 style={{ color: '#999', fontSize: '0.7rem', fontWeight: '800', letterSpacing: '1px', textTransform: 'uppercase', marginBottom: '20px', paddingLeft: '10px' }}>
               Select a Narrative
             </h4>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
@@ -120,7 +121,7 @@ const Impact: React.FC = () => {
                   }}
                 >
                   <div>
-                    <span style={{ fontSize: '0.6rem', fontWeight: 'bold', color: activeStoryIdx === idx ? theme.colors.primary : '#888', display: 'inline-block', tracking: '0.5px' }}>
+                    <span style={{ fontSize: '0.6rem', fontWeight: 'bold', color: activeStoryIdx === idx ? theme.colors.primary : '#888', display: 'inline-block', letterSpacing: '0.5px' }}>
                       {story.tag}
                     </span>
                     <h5 style={{ margin: '4px 0 0 0', fontSize: '0.9rem', fontWeight: '700', color: theme.colors.secondary }}>
@@ -236,28 +237,28 @@ const Impact: React.FC = () => {
       </div>
 
       {/* ANNUAL AUDIT REPORTS DOWNLOAD CALLOUT */}
-<div style={{ backgroundColor: '#fafafa', padding: '50px 5%', borderBottom: '1px solid #f0f0f0', textAlign: 'center' }}>
-  <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
-    <h3 style={{ color: theme.colors.secondary, fontWeight: '700', fontSize: '1.5rem', marginBottom: '10px' }}>
-      Accountability & Transparency
-    </h3>
-    <p style={{ color: '#666', fontSize: '0.9rem', marginBottom: '30px' }}>
-      We hold our operations to the highest standards of financial governance and tracking.
-    </p>
-    <div style={{ display: 'flex', gap: '20px', justifyContent: 'center', flexWrap: 'wrap' }}>
-      <a href="/resources/annual-report-2025.pdf" target="_blank" style={{ textDecoration: 'none' }}>
-        <button style={{ backgroundColor: '#fff', border: '1px solid #ddd', padding: '12px 24px', borderRadius: '8px', color: '#333', fontWeight: '600', fontSize: '0.85rem', cursor: 'pointer' }}>
-          📄 Download Annual Report 2025
-        </button>
-      </a>
-      <a href="/resources/audit-statement.pdf" target="_blank" style={{ textDecoration: 'none' }}>
-        <button style={{ backgroundColor: '#fff', border: '1px solid #ddd', padding: '12px 24px', borderRadius: '8px', color: '#333', fontWeight: '600', fontSize: '0.85rem', cursor: 'pointer' }}>
-          📊 Financial Audit Statement
-        </button>
-      </a>
-    </div>
-  </div>
-</div>
+      <div style={{ backgroundColor: '#fafafa', padding: '50px 5%', borderBottom: '1px solid #f0f0f0', textAlign: 'center' }}>
+        <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
+          <h3 style={{ color: theme.colors.secondary, fontWeight: '700', fontSize: '1.5rem', marginBottom: '10px' }}>
+            Accountability & Transparency
+          </h3>
+          <p style={{ color: '#666', fontSize: '0.9rem', marginBottom: '30px' }}>
+            We hold our operations to the highest standards of financial governance and tracking.
+          </p>
+          <div style={{ display: 'flex', gap: '20px', justifyContent: 'center', flexWrap: 'wrap' }}>
+            <a href="/resources/annual-report-2025.pdf" target="_blank" style={{ textDecoration: 'none' }}>
+              <button className="audit-download-btn" style={{ backgroundColor: '#fff', border: '1px solid #ddd', padding: '12px 24px', borderRadius: '8px', color: '#333', fontWeight: '600', fontSize: '0.85rem', cursor: 'pointer', transition: 'all 0.2s ease' }}>
+                📄 Download Annual Report 2025
+              </button>
+            </a>
+            <a href="/resources/audit-statement.pdf" target="_blank" style={{ textDecoration: 'none' }}>
+              <button className="audit-download-btn" style={{ backgroundColor: '#fff', border: '1px solid #ddd', padding: '12px 24px', borderRadius: '8px', color: '#333', fontWeight: '600', fontSize: '0.85rem', cursor: 'pointer', transition: 'all 0.2s ease' }}>
+                📊 Financial Audit Statement
+              </button>
+            </a>
+          </div>
+        </div>
+      </div>
 
       {/* FINAL INTERACTIVE DRIVER CTA SECTION WITH ACTIVE LINKS */}
       <div style={{ padding: '80px 5%', textAlign: 'center', maxWidth: '850px', margin: '0 auto' }}>
@@ -334,6 +335,13 @@ const Impact: React.FC = () => {
 
         .share-photos-btn:active {
           transform: translateY(0);
+        }
+
+        /* Hover States for Audit Download Buttons */
+        .audit-download-btn:hover {
+          background-color: #f5f5f5 !important;
+          border-color: #b5b5b5 !important;
+          transform: translateY(-1px);
         }
 
         @media (max-width: 1024px) {
