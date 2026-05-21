@@ -8,28 +8,34 @@ export const VolunteerForm: React.FC = () => {
     name: '',
     email: '',
     phone: '',
-    interest: 'Community Work',
+    age: '',
+    gender: 'Male',
+    city: '',
+    interest: 'Skill Training',
     message: ''
   });
 
   const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
   const [errorMessage, setErrorMessage] = useState('');
 
+  // Squeezed margins slightly to match height of content columns
   const inputStyle: React.CSSProperties = {
     width: '100%',
-    padding: '12px 15px',
-    marginBottom: '20px',
+    padding: '10px 14px',
+    marginBottom: '14px',
     borderRadius: '8px',
     border: '1px solid #ddd',
-    fontSize: '0.95rem',
+    fontSize: '0.9rem',
     outline: 'none',
-    boxSizing: 'border-box'
+    boxSizing: 'border-box',
+    backgroundColor: '#fff',
+    fontFamily: 'inherit'
   };
 
   const labelStyle: React.CSSProperties = {
     display: 'block',
-    marginBottom: '8px',
-    fontSize: '0.85rem',
+    marginBottom: '6px',
+    fontSize: '0.78rem',
     fontWeight: 'bold',
     color: theme.colors.secondary,
     textTransform: 'uppercase',
@@ -45,7 +51,10 @@ export const VolunteerForm: React.FC = () => {
 
     if (response.success) {
       setStatus('success');
-      setFormData({ name: '', email: '', phone: '', interest: 'Community Work', message: '' });
+      setFormData({ 
+        name: '', email: '', phone: '', age: '', 
+        gender: 'Male', city: '', interest: 'Skill Training', message: '' 
+      });
     } else {
       setStatus('error');
       setErrorMessage(response.message || 'Submission request rejected by proxy.');
@@ -58,7 +67,7 @@ export const VolunteerForm: React.FC = () => {
         <FaRegCheckCircle style={{ color: '#1abc9c', fontSize: '3rem', marginBottom: '15px' }} />
         <h3 style={{ color: theme.colors.secondary, fontWeight: '700', margin: '0 0 10px 0' }}>Application Received!</h3>
         <p style={{ color: '#555', fontSize: '0.92rem', lineHeight: '1.5', margin: '0 0 20px 0' }}>
-          Thank you for your willingness to join our mission. Our regional outreach operational monitors will review your application parameters and touch base soon.
+          Thank you for your willingness to join our mission. Our team will review your details soon.
         </p>
         <button 
           onClick={() => setStatus('idle')}
@@ -71,8 +80,10 @@ export const VolunteerForm: React.FC = () => {
   }
 
   return (
-    <form onSubmit={handleSubmit} style={{ backgroundColor: 'white', padding: '30px', borderRadius: '16px' }}>
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '15px' }}>
+    <form onSubmit={handleSubmit} style={{ backgroundColor: 'white', padding: '5px 0 0 0', borderRadius: '16px' }}>
+      
+      {/* Row 1: Balanced Side-by-Side Split */}
+      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0 15px' }}>
         <div>
           <label style={labelStyle}>Full Name</label>
           <input 
@@ -99,7 +110,8 @@ export const VolunteerForm: React.FC = () => {
         </div>
       </div>
 
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '15px' }}>
+      {/* Row 2: Balanced Side-by-Side Split */}
+      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0 15px' }}>
         <div>
           <label style={labelStyle}>Phone Number</label>
           <input 
@@ -113,26 +125,74 @@ export const VolunteerForm: React.FC = () => {
           />
         </div>
         <div>
-          <label style={labelStyle}>Area of Interest</label>
+          <label style={labelStyle}>City</label>
+          <input 
+            type="text" 
+            placeholder="Jamshedpur" 
+            style={inputStyle} 
+            required 
+            disabled={status === 'submitting'}
+            value={formData.city}
+            onChange={(e) => setFormData({...formData, city: e.target.value})}
+          />
+        </div>
+      </div>
+
+      {/* Row 3: Balanced Side-by-Side Split */}
+      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0 15px' }}>
+        <div>
+          <label style={labelStyle}>Age</label>
+          <input 
+            type="number" 
+            placeholder="24" 
+            min="1"
+            max="120"
+            style={inputStyle} 
+            required 
+            disabled={status === 'submitting'}
+            value={formData.age}
+            onChange={(e) => setFormData({...formData, age: e.target.value})}
+          />
+        </div>
+        <div>
+          <label style={labelStyle}>Gender</label>
           <select 
             style={inputStyle} 
             disabled={status === 'submitting'}
-            value={formData.interest}
-            onChange={(e) => setFormData({...formData, interest: e.target.value})}
+            value={formData.gender}
+            onChange={(e) => setFormData({...formData, gender: e.target.value})}
           >
-            <option>Community Work</option>
-            <option>Education & Teaching</option>
-            <option>Healthcare Support</option>
-            <option>Digital Advocacy</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="Other">Other</option>
           </select>
         </div>
       </div>
 
+      {/* Row 4: Full Width Field */}
+      <label style={labelStyle}>Area of Interest</label>
+      <select 
+        style={inputStyle} 
+        disabled={status === 'submitting'}
+        value={formData.interest}
+        onChange={(e) => setFormData({...formData, interest: e.target.value})}
+      >
+        <option value="Skill Training">Skill Trainer</option>
+        <option value="Women's Program">Women's Program Facilitator</option>
+        <option value="Education Support">Education Volunteer</option>
+        <option value="Health Camps">Health Camp Support</option>
+        <option value="Media & Production">Media & Documentation</option>
+        <option value="Digital Tech Modules">Digital & Tech Support</option>
+        <option value="Community Outreach">Community Outreach</option>
+        <option value="Institutional Support">Grant Writing & Research</option>
+      </select>
+
+      {/* Row 5: Motivation Field (Slightly shortened to compress workspace height) */}
       <label style={labelStyle}>Why do you want to join us?</label>
       <textarea 
-        rows={4} 
+        rows={3} 
         placeholder="Tell us a bit about your motivation..." 
-        style={{ ...inputStyle, resize: 'none' }} 
+        style={{ ...inputStyle, height: '85px', resize: 'none', marginBottom: '16px' }} 
         required
         disabled={status === 'submitting'}
         value={formData.message}
@@ -144,14 +204,14 @@ export const VolunteerForm: React.FC = () => {
         disabled={status === 'submitting'}
         style={{
           width: '100%',
-          padding: '15px',
+          padding: '14px',
           backgroundColor: theme.colors.primary,
           color: 'white',
           border: 'none',
           borderRadius: '8px',
           fontWeight: 'bold',
           cursor: 'pointer',
-          fontSize: '1rem',
+          fontSize: '0.95rem',
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
@@ -167,7 +227,7 @@ export const VolunteerForm: React.FC = () => {
       </button>
 
       {status === 'error' && (
-        <p style={{ color: '#e74c3c', fontSize: '0.85rem', marginTop: '15px', fontWeight: '500', textAlign: 'center' }}>
+        <p style={{ color: '#e74c3c', fontSize: '0.85rem', marginTop: '12px', fontWeight: '500', textAlign: 'center' }}>
           {errorMessage}
         </p>
       )}
