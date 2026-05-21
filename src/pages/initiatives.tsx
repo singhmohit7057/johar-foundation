@@ -3,8 +3,7 @@ import { theme } from '../theme/styles';
 import { SEO } from '../shared/seo';
 import { 
   FaGraduationCap, FaBriefcase, FaStethoscope, FaLeaf, 
-  FaMapMarkedAlt, FaLayerGroup, FaUsers, FaCalendarCheck,
-  FaGlobe, FaSearch, FaUserFriends, FaChartBar,
+  FaUsers, FaGlobe, FaSearch, FaUserFriends, FaChartBar,
   FaBookOpen, FaHeart, FaBolt, FaShieldAlt, FaHandshake
 } from 'react-icons/fa';
 
@@ -316,7 +315,8 @@ const Initiatives: React.FC = () => {
 
           {/* Info Side Block */}
           <div style={{ flex: '1.2', padding: '45px', textAlign: 'left', display: 'flex', flexDirection: 'column', justifyContent: 'center', boxSizing: 'border-box' }}>
-            <span style={{ fontSize: '0.65rem', fontWeight: 'bold', color: theme.colors.primary, textTransform: 'uppercase', tracking: '1px', border: `1px solid ${theme.colors.primary}35`, padding: '3px 10px', borderRadius: '30px', display: 'inline-block', marginBottom: '12px', width: 'fit-content' }}>
+            <span style={{ fontSize: '0.65rem', fontWeight: 'bold', color: theme.colors.primary, textTransform: 'uppercase', letterSpacing: '1px', border: `1px solid ${theme.colors.primary}35`, padding: '3px 10px', borderRadius: '30px', display: 'inline-block', marginBottom: '12px', width: 'fit-content' }}>
+              {/* FIXED: Replaced 'tracking' with 'letterSpacing' */}
               {mapRegionsData[selectedState].tagline}
             </span>
             <h3 style={{ margin: '0 0 15px 0', fontSize: '1.8rem', color: theme.colors.secondary, fontWeight: '700' }}>
@@ -373,7 +373,8 @@ const Initiatives: React.FC = () => {
                 justifyContent: 'center', gap: '10px', transition: 'all 0.2s ease'
               }}>
                 <FaHandshake style={{ color: '#ccc', fontSize: '1.3rem' }} />
-                <span style={{ fontSize: '0.75rem', fontWeight: 'bold', color: '#666', tracking: '0.5px' }}>
+                <span style={{ fontSize: '0.75rem', fontWeight: 'bold', color: '#666', letterSpacing: '0.5px' }}>
+                  {/* FIXED: Replaced 'tracking' with 'letterSpacing' */}
                   {partner.name}
                 </span>
               </div>

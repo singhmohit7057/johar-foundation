@@ -1,5 +1,26 @@
-# Logs
-logs
+# Production Build Artifacts
+node_modules/
+dist/
+dist-ssr/
+build/
+out/
+
+# Vite & Development Environment Cache
+.vite/
+.turbo/
+.cache/
+*.local
+
+# Web3Forms API Secret Tokens & Local Credentials
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+*.env.json
+
+# Execution & Runtime System Logs
+logs/
 *.log
 npm-debug.log*
 yarn-debug.log*
@@ -7,18 +28,22 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
-node_modules
-dist
-dist-ssr
-*.local
+# System & OS Overhead Metadata Files
+.DS_Store
+Thumbs.db
+ehthumbs.db
+Desktop.ini
 
-# Editor directories and files
+# IDEs & Code Editor Workspace Settings
 .vscode/*
 !.vscode/extensions.json
-.idea
-.DS_Store
+!.vscode/launch.json
+.idea/
 *.suo
 *.ntvs*
 *.njsproj
 *.sln
 *.sw?
+
+# TypeScript Build & Incremental Compilation Cache
+*.tsbuildinfo

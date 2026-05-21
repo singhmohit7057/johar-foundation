@@ -34,6 +34,7 @@ import TermsAndCondition from './legal/terms-and-conditions';
 // System Imports
 import NotFound from './system/404-not-found';
 import ComingSoon from './system/coming-soon';
+import Unsubscribe from './components/unsubscribe';
 
 const MainLayout = () => {
   return (
@@ -105,6 +106,18 @@ const router = createBrowserRouter([
         path: "donate",
         element: <Donate />,
       },
+
+      // UnSubscribe Routes
+      {
+        path: "unsubscribe",
+        element: <Unsubscribe />,
+      },
+
+      {
+        path: "founder",
+        element: <ComingSoon />,
+      },
+
       // Legal Routes
       {
         path: "privacy-policy",

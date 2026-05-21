@@ -113,6 +113,14 @@ export const Footer: React.FC = () => {
             >
               Get Involved
             </Link>
+            <Link 
+              to="/unsubscribe" 
+              style={linkStyle('unsubscribe')}
+              onMouseEnter={() => setHoveredLink('unsubscribe')}
+              onMouseLeave={() => setHoveredLink(null)}
+            >
+              Unsubscribe
+            </Link>
           </div>
         </div>
 

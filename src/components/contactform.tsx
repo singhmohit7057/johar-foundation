@@ -1,29 +1,47 @@
 import React, { useState } from 'react';
 import { theme } from '../theme/styles';
+import { submitToWeb3Forms } from '../forms/formservice';
+import { FaSpinner } from 'react-icons/fa';
 
 export const ContactForm: React.FC = () => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
-    phone: '', // Added phone field
+    phone: '',
     subject: '',
     message: ''
   });
 
-  const [status, setStatus] = useState<'idle' | 'submitting' | 'success'>('idle');
+  const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
+  const [errorMessage, setErrorMessage] = useState('');
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setStatus('submitting');
-    // Simulate API logic
-    setTimeout(() => {
+    setErrorMessage('');
+
+    // FIX: Extract raw subject field to prevent Web3Forms auto-override logic
+    const { subject, ...otherFields } = formData;
+
+    const submissionPayload = {
+      ...otherFields,
+      "Message Subject": subject, // Saves user text securely under a safe label inside email body
+      subject: "New Submission: Contact Form" // Securely hard-locks the main email header title!
+    };
+
+    const response = await submitToWeb3Forms('CONTACT', submissionPayload);
+
+    if (response.success) {
       setStatus('success');
       setFormData({ name: '', email: '', phone: '', subject: '', message: '' });
-    }, 1500);
+    } else {
+      setStatus('error');
+      setErrorMessage(response.message || 'Failed to submit form data.');
+    }
   };
 
   const inputStyle: React.CSSProperties = {
@@ -76,25 +94,25 @@ export const ContactForm: React.FC = () => {
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0 20px' }}>
         <div style={{ gridColumn: 'span 2' }}>
            <label style={labelStyle}>Full Name</label>
-           <input type="text" name="name" required value={formData.name} onChange={handleChange} style={inputStyle} placeholder="Mohit Singh" />
+           <input type="text" name="name" required disabled={status === 'submitting'} value={formData.name} onChange={handleChange} style={inputStyle} placeholder="Mohit Singh" />
         </div>
         
         <div>
           <label style={labelStyle}>Email</label>
-          <input type="email" name="email" required value={formData.email} onChange={handleChange} style={inputStyle} placeholder="mohit@tmmt.in" />
+          <input type="email" name="email" required disabled={status === 'submitting'} value={formData.email} onChange={handleChange} style={inputStyle} placeholder="mohit@tmmt.in" />
         </div>
 
         <div>
           <label style={labelStyle}>Phone Number <span style={{ fontWeight: 'normal', color: '#888' }}>(Optional)</span></label>
-          <input type="tel" name="phone" value={formData.phone} onChange={handleChange} style={inputStyle} placeholder="+91 XXXXX XXXXX" />
+          <input type="tel" name="phone" disabled={status === 'submitting'} value={formData.phone} onChange={handleChange} style={inputStyle} placeholder="+91 XXXXX XXXXX" />
         </div>
       </div>
 
       <label style={labelStyle}>Subject</label>
-      <input type="text" name="subject" required value={formData.subject} onChange={handleChange} style={inputStyle} />
+      <input type="text" name="subject" required disabled={status === 'submitting'} value={formData.subject} onChange={handleChange} style={inputStyle} />
       
       <label style={labelStyle}>Message</label>
-      <textarea name="message" required value={formData.message} onChange={handleChange} style={{ ...inputStyle, height: '120px', resize: 'none' }} />
+      <textarea name="message" required disabled={status === 'submitting'} value={formData.message} onChange={handleChange} style={{ ...inputStyle, height: '120px', resize: 'none' }} />
       
       <button 
         type="submit" 
@@ -108,13 +126,32 @@ export const ContactForm: React.FC = () => {
           borderRadius: '6px',
           fontWeight: 'bold',
           cursor: 'pointer',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          gap: '8px',
           transition: theme.utils.transition
         }}
-        onMouseOver={(e) => (e.currentTarget.style.backgroundColor = theme.colors.secondary)}
-        onMouseOut={(e) => (e.currentTarget.style.backgroundColor = theme.colors.primary)}
+        onMouseOver={(e) => { if (status !== 'submitting') e.currentTarget.style.backgroundColor = theme.colors.secondary; }}
+        onMouseOut={(e) => { if (status !== 'submitting') e.currentTarget.style.backgroundColor = theme.colors.primary; }}
       >
-        {status === 'submitting' ? 'Sending...' : 'Send Message'}
+        {status === 'submitting' ? (
+          <>
+            <FaSpinner className="form-spinner" /> Sending...
+          </>
+        ) : 'Send Message'}
       </button>
+
+      {status === 'error' && (
+        <p style={{ color: '#e74c3c', fontSize: '0.85rem', marginTop: '15px', fontWeight: '500', textAlign: 'center' }}>
+          {errorMessage}
+        </p>
+      )}
+
+      <style>{`
+        .form-spinner { animation: spin 1s linear infinite; }
+        @keyframes spin { 100% { transform: rotate(360deg); } }
+      `}</style>
     </form>
   );
 };

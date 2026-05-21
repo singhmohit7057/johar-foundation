@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom'; // Ensure react-router-dom is installed
+import { Link } from 'react-router-dom';
 import { theme } from '../theme/styles';
 import { SEO } from '../shared/seo';
 import { VolunteerForm } from '../components/volunteerform';
 import { 
-  FaHandshake, FaUsers, FaQuestionCircle, FaChevronDown, FaChevronUp, 
+  FaHandshake, FaUsers, FaChevronDown, FaChevronUp, 
   FaDonate, FaBullhorn, FaGift 
 } from 'react-icons/fa';
 
