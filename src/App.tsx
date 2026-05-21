@@ -1,60 +1,60 @@
-import { createBrowserRouter, RouterProvider, Outlet } from 'react-router-dom';
+import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 
 // Top Header Component
-import { TopHeader } from './shared/top-header';
+import { TopHeader } from "./shared/top-header";
 
 // Shared Components
-import { Navbar } from './shared/navbar';
-import { Footer } from './shared/footer';
+import { Navbar } from "./shared/navbar";
+import { Footer } from "./shared/footer";
 
 // UI Components
-import { StickyDonateButton } from './components/sticky-donate-button';
-import { ScrollToTop } from './components/scrolltotop';
-import { BackToTop } from './components/backtotop';
-
+import { StickyDonateButton } from "./floating/sticky-donate-button";
+import { ScrollToTop } from "./router/scrolltotop";
+import { BackToTop } from "./floating/backtotop";
 
 // Popup
 // import { Popup } from './popup/popup'; // Ready whenever you choose to uncomment
 
-// Page Imports 
-import HomePage from './pages/Homepage';
-import WhoWeAre from './pages/whoweare';
-import Initiatives from './pages/initiatives';
-import Impact from './pages/impact';
-import { GetInvolved } from './pages/getinvolved';
-import Resources from './pages/resources';
-import Contact from './pages/contact';
-import Donate from './pages/donate';
+// Page Imports
+import HomePage from "./pages/Homepage";
+import WhoWeAre from "./pages/Whoweare";
+import Initiatives from "./pages/Initiatives";
+import Impact from "./pages/Impact";
+import { GetInvolved } from "./pages/Getinvolved";
+import Resources from "./pages/Resources";
+import Contact from "./pages/Contact";
+import Donate from "./pages/Donate";
 
 // Legal Imports
-import PrivacyPolicy from './legal/privacy-policy';
-import CookiesPolicy from './legal/cookies-policy';
-import TermsAndCondition from './legal/terms-and-conditions';
+import PrivacyPolicy from "./legal/privacy-policy";
+import CookiesPolicy from "./legal/cookies-policy";
+import TermsAndCondition from "./legal/terms-and-conditions";
 
 // System Imports
-import NotFound from './system/404-not-found';
-import ComingSoon from './system/coming-soon';
-import Unsubscribe from './components/unsubscribe';
+import NotFound from "./system/404-not-found";
+import ComingSoon from "./system/coming-soon";
+import Unsubscribe from "./subscribe/unsubscribe";
 
 const MainLayout = () => {
   return (
-    <div style={{ 
-      display: 'flex', 
-      flexDirection: 'column', 
-      minHeight: '100vh', 
-      margin: 0, 
-      padding: 0,
-      width: '100%',
-    }}>
-      
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        minHeight: "100vh",
+        margin: 0,
+        padding: 0,
+        width: "100%",
+      }}
+    >
       {/* The Popup will trigger on any page within this layout once uncommented
       <Popup delay={4000} /> */}
-      
+
       <TopHeader />
       <ScrollToTop />
       <Navbar />
-      
-      <main style={{ flex: 1, width: '100%' }}>
+
+      <main style={{ flex: 1, width: "100%" }}>
         <Outlet />
       </main>
 
@@ -72,7 +72,7 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <MainLayout />,
-    errorElement: <NotFound />, 
+    errorElement: <NotFound />,
     children: [
       {
         index: true,
@@ -84,7 +84,7 @@ const router = createBrowserRouter([
       },
       {
         path: "who-we-are",
-        element: <WhoWeAre />, 
+        element: <WhoWeAre />,
       },
       {
         path: "initiatives",
@@ -96,11 +96,11 @@ const router = createBrowserRouter([
       },
       {
         path: "get-involved",
-        element: <GetInvolved />, 
+        element: <GetInvolved />,
       },
       {
         path: "resources",
-        element: <Resources />, 
+        element: <Resources />,
       },
       {
         path: "donate",
@@ -135,12 +135,12 @@ const router = createBrowserRouter([
   },
   {
     path: "unsubscribe",
-    element: <div style={{ padding: '100px', textAlign: 'center' }}>Unsubscribe Page</div>,
+    element: <div style={{ padding: "100px", textAlign: "center" }}>Unsubscribe Page</div>,
   },
   {
     path: "*",
-    element: <NotFound />, 
-  }
+    element: <NotFound />,
+  },
 ]);
 
 export default function App() {

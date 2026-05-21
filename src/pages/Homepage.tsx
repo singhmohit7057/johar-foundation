@@ -1,7 +1,7 @@
 import React from 'react';
 import { theme } from '../theme/styles';
 import { SEO } from '../shared/seo';
-import { Newsletter } from '../components/newsletter'; // Imported the newsletter component
+import { Newsletter } from '../subscribe/newsletter'; // Imported the newsletter component
 
 const HomePage: React.FC = () => {
   // Styles for the placeholder box
