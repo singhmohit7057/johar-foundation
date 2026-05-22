@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { theme } from '../theme/styles';
 import { SEO } from '../shared/seo';
 import { Newsletter } from '../subscribe/newsletter'; // Imported the newsletter component
