@@ -2,9 +2,15 @@ import React, { useState, useRef, useEffect } from 'react';
 import { theme } from '../theme/styles';
 import { FaPhoneAlt, FaEnvelope, FaWhatsapp, FaFacebookF, FaInstagram, FaGlobe, FaChevronDown, FaCheck } from 'react-icons/fa';
 
+// Declare types for Google's injected global library variables
 declare global {
   interface Window {
-    doGTranslate?: (langPair: string) => void;
+    google?: {
+      translate: {
+        TranslateElement: new (options: any, targetId: string) => void;
+      };
+    };
+    googleTranslateElementInit?: () => void;
   }
 }
 
@@ -15,36 +21,47 @@ export const TopHeader: React.FC = () => {
   });
   const dropdownRef = useRef<HTMLDivElement>(null);
 
+  // Match languages explicitly defined in your HTML initialization options
   const languages = [
     { label: 'English', native: 'English', code: 'en' },
     { label: 'Hindi', native: 'हिन्दी', code: 'hi' },
     { label: 'Bengali', native: 'বাংলা', code: 'bn' },
     { label: 'Odia', native: 'ଓଡ଼ିଆ', code: 'or' },
-    { label: 'Santali', native: 'Ol Chiki', code: 'sat' }, 
   ];
 
-  // Auto-restore translation if user refreshes page while on an active selection
   useEffect(() => {
-    const savedCode = localStorage.getItem('johar_lang_code');
-    if (savedCode && savedCode !== 'en') {
-      const checkEngine = setInterval(() => {
-        if (window.doGTranslate) {
-          window.doGTranslate(`en|${savedCode}`);
-          clearInterval(checkEngine);
-        }
-      }, 100);
-      return () => clearInterval(checkEngine);
-    }
-  }, []);
+    // 1. Define the mandatory Google callback function globally
+    window.googleTranslateElementInit = () => {
+      if (window.google && window.google.translate) {
+        new window.google.translate.TranslateElement(
+          {
+            pageLanguage: 'en',
+            includedLanguages: 'hi,bn,or',
+            autoDisplay: false,
+          },
+          'google_translate_element'
+        );
+      }
+    };
 
-  // Close dropdown when clicking outside
-  useEffect(() => {
+    // 2. Inject the Google Translate core script element into the DOM if missing
+    const SCRIPT_ID = 'google-translate-script';
+    if (!document.getElementById(SCRIPT_ID)) {
+      const addScript = document.createElement('script');
+      addScript.id = SCRIPT_ID;
+      addScript.src = '//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
+      addScript.defer = true;
+      document.body.appendChild(addScript);
+    }
+
+    // 3. Close language dropdown when clicking elsewhere
     const handleClickOutside = (event: MouseEvent) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
         setIsLangOpen(false);
       }
     };
     document.addEventListener('mousedown', handleClickOutside);
+    
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
@@ -55,18 +72,25 @@ export const TopHeader: React.FC = () => {
     localStorage.setItem('johar_lang_label', langLabel);
     localStorage.setItem('johar_lang_code', langCode);
 
-    if (window.doGTranslate) {
-      window.doGTranslate(`en|${langCode}`);
+    // Root domains and subdomains have isolated cookie paths. We target both configurations.
+    const domain = window.location.hostname;
+    const baseDomain = domain.substring(domain.lastIndexOf('.', domain.lastIndexOf('.') - 1));
+
+    if (langCode === 'en') {
+      // Revert page back to English by nuking Google's tracking cookies
+      document.cookie = "googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+      document.cookie = `googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=${domain};`;
+      document.cookie = `googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=${baseDomain};`;
     } else {
-      // Fallback: Directly interact with GTranslate UI element
-      const selectEl = document.querySelector('.gtranslate_wrapper select') as HTMLSelectElement;
-      if (selectEl) {
-        selectEl.value = `en|${langCode}`;
-        selectEl.dispatchEvent(new Event('change'));
-      } else {
-        console.error("GTranslate engine target wrapper could not be reached.");
-      }
+      // Force cookie parameters for Google Translation engine interception
+      const cookieValue = `/en/${langCode}`;
+      document.cookie = `googtrans=${cookieValue}; path=/;`;
+      document.cookie = `googtrans=${cookieValue}; path=/; domain=${domain};`;
+      document.cookie = `googtrans=${cookieValue}; path=/; domain=${baseDomain};`;
     }
+
+    // Force application reload to let Google script reconstruct translation elements on bootstrap
+    window.location.reload();
   };
 
   const containerStyle: React.CSSProperties = {
@@ -108,6 +132,9 @@ export const TopHeader: React.FC = () => {
 
   return (
     <>
+      {/* Hidden container node required by Google initialization script */}
+      <div id="google_translate_element" style={{ display: 'none', visibility: 'hidden' }} />
+
       <div style={containerStyle} className="top-header">
         {/* Left Side: Contact */}
         <div style={{ display: 'flex', gap: '20px', alignItems: 'center' }} className="contact-info">
@@ -120,12 +147,36 @@ export const TopHeader: React.FC = () => {
         </div>
 
         {/* Right Side: Socials & Language */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
-          <div style={{ display: 'flex', gap: '15px' }} className="social-icons">
-            <FaFacebookF size={14} style={{ cursor: 'pointer' }} />
-            <FaInstagram size={14} style={{ cursor: 'pointer' }} />
-            <FaWhatsapp size={14} style={{ cursor: 'pointer' }} />
-          </div>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
+            <div style={{ display: 'flex', gap: '15px' }} className="social-icons">
+              <a 
+                href="https://facebook.com/themadmysteryteam" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                style={{ color: 'inherit', display: 'flex', alignItems: 'center' }}
+                aria-label="Visit our Facebook Page"
+              >
+                <FaFacebookF size={14} style={{ cursor: 'pointer' }} />
+              </a>
+              <a 
+                href="https://instagram.com/themadmysteryteam" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                style={{ color: 'inherit', display: 'flex', alignItems: 'center' }}
+                aria-label="Visit our Instagram Profile"
+              >
+                <FaInstagram size={14} style={{ cursor: 'pointer' }} />
+              </a>
+              <a 
+                href="https://wa.me/919117115050?text=Hi!%20I%27m%20interested%20in%20supporting%20Johar%20Foundation." 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                style={{ color: 'inherit', display: 'flex', alignItems: 'center' }}
+                aria-label="Chat with us on WhatsApp"
+              >
+                <FaWhatsapp size={14} style={{ cursor: 'pointer' }} />
+              </a>
+            </div>
 
           <div style={{ width: '1px', height: '15px', backgroundColor: 'rgba(255,255,255,0.3)' }} />
 
@@ -183,9 +234,9 @@ export const TopHeader: React.FC = () => {
           .contact-info { gap: 15px !important; }
         }
         
-        /* Safe Cleanup: Hide only Google's injection frames while protecting layout nodes */
+        /* Clean visual layer updates for injected third-party elements */
         body { top: 0px !important; position: static !important; }
-        .goog-te-banner-frame, #goog-gt-tt, .goog-te-balloon-frame, iframe.skiptranslate { 
+        .goog-te-banner-frame, #goog-gt-tt, .goog-te-balloon-frame, iframe.skiptranslate, .goog-te-spinner-pos { 
           display: none !important; 
           visibility: hidden !important; 
         }

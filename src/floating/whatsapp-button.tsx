@@ -11,8 +11,8 @@ export const WhatsAppButton: React.FC = () => {
       rel="noopener noreferrer"
       style={{
         position: 'fixed',
-        bottom: '100px', // FIXED: Placed at 100px height to stack perfectly above the BackToTop button (typically at 30px)
-        right: '30px',   // FIXED: Moved from left to right side
+        bottom: '100px', 
+        right: '30px',   
         backgroundColor: '#25D366',
         color: 'white',
         width: '50px',
