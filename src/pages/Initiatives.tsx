@@ -288,23 +288,23 @@ const Initiatives: React.FC = () => {
               <text x="160" y="155" style={{ fontSize: '11px', fontWeight: 'bold', fill: selectedState === 'JH' ? '#fff' : '#33px', pointerEvents: 'none', transition: 'all 0.2s ease' }}>JHARKHAND</text>
 
               {/* West Bengal */}
-              <path d="M260,110 L310,105 L330,170 L280,240 L265,195 L280,180 Z"
+              <path d="M260,110 L350,115 L340,170 L280,240 L265,195 L280,180 Z"
                 className={`map-path ${selectedState === 'WB' ? 'active' : ''}`}
                 onClick={() => setSelectedState('WB')} onMouseEnter={() => setSelectedState('WB')}
                 style={{ fill: selectedState === 'WB' ? theme.colors.primary : '#e5e5e5', stroke: '#fff', strokeWidth: 2, cursor: 'pointer', transition: 'all 0.2s ease' }}
               />
-              <text x="278" y="150" style={{ fontSize: '9px', fontWeight: 'bold', fill: selectedState === 'WB' ? '#fff' : '#666', pointerEvents: 'none', transform: 'rotate(12 278 150)', transition: 'all 0.2s ease' }}>W. BENGAL</text>
+              <text x="282" y="160" style={{ fontSize: '9px', fontWeight: 'bold', fill: selectedState === 'WB' ? '#fff' : '#666', pointerEvents: 'none', transform: 'rotate(12 278 150)', transition: 'all 0.2s ease' }}>W. BENGAL</text>
 
               {/* Chhattisgarh */}
-              <path d="M110,175 L190,200 L165,250 L145,340 L95,290 L100,220 Z"
+              <path d="M110,175 L190,200 L185,250 L145,340 L95,290 L100,220 Z"
                 className={`map-path ${selectedState === 'CG' ? 'active' : ''}`}
                 onClick={() => setSelectedState('CG')} onMouseEnter={() => setSelectedState('CG')}
                 style={{ fill: selectedState === 'CG' ? theme.colors.primary : '#ebebeb', stroke: '#fff', strokeWidth: 2, cursor: 'pointer', transition: 'all 0.2s ease' }}
               />
-              <text x="115" y="255" style={{ fontSize: '9px', fontWeight: 'bold', fill: selectedState === 'CG' ? '#fff' : '#666', pointerEvents: 'none', transform: 'rotate(-70 115 255)', transition: 'all 0.2s ease' }}>CHHATTISGARH</text>
+              <text x="103" y="240" style={{ fontSize: '9px', fontWeight: 'bold', fill: selectedState === 'CG' ? '#fff' : '#666', pointerEvents: 'none', transform: 'rotate(-70 115 255)', transition: 'all 0.2s ease' }}>CHHATTISGARH</text>
 
               {/* Odisha */}
-              <path d="M190,200 L265,195 L280,240 L230,310 L165,250 Z"
+              <path d="M190,200 L265,195 L280,240 L230,310 L185,250 Z"
                 className={`map-path ${selectedState === 'OR' ? 'active' : ''}`}
                 onClick={() => setSelectedState('OR')} onMouseEnter={() => setSelectedState('OR')}
                 style={{ fill: selectedState === 'OR' ? theme.colors.primary : '#dfdfdf', stroke: '#fff', strokeWidth: 2, cursor: 'pointer', transition: 'all 0.2s ease' }}

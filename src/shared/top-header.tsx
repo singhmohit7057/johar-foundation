@@ -2,18 +2,40 @@ import React, { useState, useRef, useEffect } from 'react';
 import { theme } from '../theme/styles';
 import { FaPhoneAlt, FaEnvelope, FaWhatsapp, FaFacebookF, FaInstagram, FaGlobe, FaChevronDown, FaCheck } from 'react-icons/fa';
 
+declare global {
+  interface Window {
+    doGTranslate?: (langPair: string) => void;
+  }
+}
+
 export const TopHeader: React.FC = () => {
   const [isLangOpen, setIsLangOpen] = useState(false);
-  const [selectedLang, setSelectedLang] = useState('English');
+  const [selectedLang, setSelectedLang] = useState(() => {
+    return localStorage.getItem('johar_lang_label') || 'English';
+  });
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   const languages = [
-    { label: 'English', native: 'English', code: 'EN' },
-    { label: 'Hindi', native: 'हिन्दी', code: 'HI' },
-    { label: 'Bengali', native: 'বাংলা', code: 'BN' },
-    { label: 'Odia', native: 'ଓଡ଼ିଆ', code: 'OR' },
-    { label: 'Santali', native: ' Ol Chiki', code: 'SAT' },
+    { label: 'English', native: 'English', code: 'en' },
+    { label: 'Hindi', native: 'हिन्दी', code: 'hi' },
+    { label: 'Bengali', native: 'বাংলা', code: 'bn' },
+    { label: 'Odia', native: 'ଓଡ଼ିଆ', code: 'or' },
+    { label: 'Santali', native: 'Ol Chiki', code: 'sat' }, 
   ];
+
+  // Auto-restore translation if user refreshes page while on an active selection
+  useEffect(() => {
+    const savedCode = localStorage.getItem('johar_lang_code');
+    if (savedCode && savedCode !== 'en') {
+      const checkEngine = setInterval(() => {
+        if (window.doGTranslate) {
+          window.doGTranslate(`en|${savedCode}`);
+          clearInterval(checkEngine);
+        }
+      }, 100);
+      return () => clearInterval(checkEngine);
+    }
+  }, []);
 
   // Close dropdown when clicking outside
   useEffect(() => {
@@ -25,6 +47,27 @@ export const TopHeader: React.FC = () => {
     document.addEventListener('mousedown', handleClickOutside);
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
+
+  const handleLanguageChange = (langLabel: string, langCode: string) => {
+    setSelectedLang(langLabel);
+    setIsLangOpen(false);
+
+    localStorage.setItem('johar_lang_label', langLabel);
+    localStorage.setItem('johar_lang_code', langCode);
+
+    if (window.doGTranslate) {
+      window.doGTranslate(`en|${langCode}`);
+    } else {
+      // Fallback: Directly interact with GTranslate UI element
+      const selectEl = document.querySelector('.gtranslate_wrapper select') as HTMLSelectElement;
+      if (selectEl) {
+        selectEl.value = `en|${langCode}`;
+        selectEl.dispatchEvent(new Event('change'));
+      } else {
+        console.error("GTranslate engine target wrapper could not be reached.");
+      }
+    }
+  };
 
   const containerStyle: React.CSSProperties = {
     backgroundColor: theme.colors.primary,
@@ -43,8 +86,8 @@ export const TopHeader: React.FC = () => {
     position: 'absolute',
     top: '110%',
     right: 0,
-    width: '240px', // Increased width
-    backgroundColor: '#1a1a1a', // Dark theme like reference
+    width: '240px',
+    backgroundColor: '#1a1a1a',
     borderRadius: '12px',
     padding: '12px 0',
     boxShadow: '0 10px 25px rgba(0,0,0,0.3)',
@@ -95,10 +138,10 @@ export const TopHeader: React.FC = () => {
                 alignItems: 'center',
                 gap: '8px',
                 border: '1px solid rgba(255,255,255,0.4)',
-                padding: '6px 16px', // Bigger padding
+                padding: '6px 16px',
                 borderRadius: '30px',
                 cursor: 'pointer',
-                fontSize: '0.9rem', // Bigger font
+                fontSize: '0.9rem',
                 fontWeight: 500,
                 backgroundColor: isLangOpen ? 'rgba(255,255,255,0.1)' : 'transparent'
               }}
@@ -119,16 +162,13 @@ export const TopHeader: React.FC = () => {
                   style={langItemStyle(selectedLang === lang.label)}
                   onMouseOver={(e) => (e.currentTarget.style.backgroundColor = 'rgba(255,255,255,0.05)')}
                   onMouseOut={(e) => (e.currentTarget.style.backgroundColor = selectedLang === lang.label ? 'rgba(166, 38, 57, 0.2)' : 'transparent')}
-                  onClick={() => {
-                    setSelectedLang(lang.label);
-                    setIsLangOpen(false);
-                  }}
+                  onClick={() => handleLanguageChange(lang.label, lang.code)}
                 >
                   <div style={{ display: 'flex', alignItems: 'baseline', gap: '10px' }}>
                     <span style={{ fontWeight: 'bold', fontSize: '1rem' }}>{lang.label}</span>
                     <span style={{ fontSize: '0.8rem', opacity: 0.6 }}>/ {lang.native}</span>
                   </div>
-                  {selectedLang === lang.label && <FaCheck size={12} color={theme.colors.primary} />}
+                  {selectedLang === lang.label && <FaCheck size={12} color={theme.colors.white} />}
                 </div>
               ))}
             </div>
@@ -141,6 +181,13 @@ export const TopHeader: React.FC = () => {
           .top-header { padding: 12px 5% !important; }
           .hide-mobile { display: none; }
           .contact-info { gap: 15px !important; }
+        }
+        
+        /* Safe Cleanup: Hide only Google's injection frames while protecting layout nodes */
+        body { top: 0px !important; position: static !important; }
+        .goog-te-banner-frame, #goog-gt-tt, .goog-te-balloon-frame, iframe.skiptranslate { 
+          display: none !important; 
+          visibility: hidden !important; 
         }
       `}</style>
     </>
