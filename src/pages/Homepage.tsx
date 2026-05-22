@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { theme } from '../theme/styles';
 import { SEO } from '../shared/seo';
 import { Newsletter } from '../subscribe/newsletter'; // Imported the newsletter component
@@ -34,6 +35,7 @@ const HomePage: React.FC = () => {
     <div style={{ width: '100%' }}>
       {/* Dynamic Title for the Home Page */}
       <SEO title="Home" description="Welcome to Johar Foundation - Jo Hare Na." />
+
 
       {/* Main Hero Placeholder Section */}
       <div style={containerStyle}>

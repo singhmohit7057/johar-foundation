@@ -117,6 +117,7 @@ const router = createBrowserRouter([
         element: <Unsubscribe />,
       },
 
+      // Coming Soon Routes
       {
         path: "founder",
         element: <ComingSoon />,
@@ -136,10 +137,6 @@ const router = createBrowserRouter([
         element: <TermsAndCondition />,
       },
     ],
-  },
-  {
-    path: "unsubscribe",
-    element: <div style={{ padding: "100px", textAlign: "center" }}>Unsubscribe Page</div>,
   },
   {
     path: "*",

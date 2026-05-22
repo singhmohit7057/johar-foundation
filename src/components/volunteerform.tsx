@@ -88,7 +88,7 @@ export const VolunteerForm: React.FC = () => {
           <label style={labelStyle}>Full Name</label>
           <input 
             type="text" 
-            placeholder="John Doe" 
+            placeholder="Mohit Singh" 
             style={inputStyle} 
             required 
             disabled={status === 'submitting'}
@@ -100,7 +100,7 @@ export const VolunteerForm: React.FC = () => {
           <label style={labelStyle}>Email Address</label>
           <input 
             type="email" 
-            placeholder="john@example.com" 
+            placeholder="mohitsingh@gmail.com" 
             style={inputStyle} 
             required 
             disabled={status === 'submitting'}
@@ -128,7 +128,7 @@ export const VolunteerForm: React.FC = () => {
           <label style={labelStyle}>City</label>
           <input 
             type="text" 
-            placeholder="Jamshedpur" 
+            placeholder="Kolkata" 
             style={inputStyle} 
             required 
             disabled={status === 'submitting'}
