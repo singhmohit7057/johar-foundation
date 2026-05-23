@@ -103,7 +103,7 @@ export const ContactForm: React.FC = () => {
         </div>
 
         <div>
-          <label style={labelStyle}>Phone Number <span style={{ fontWeight: 'normal', color: '#888' }}>(Optional)</span></label>
+          <label style={labelStyle}>Phone Number <span style={{ fontWeight: 'normal', color: '#888' }}></span></label>
           <input type="tel" name="phone" disabled={status === 'submitting'} value={formData.phone} onChange={handleChange} style={inputStyle} placeholder="+91 XXXXX XXXXX" />
         </div>
       </div>

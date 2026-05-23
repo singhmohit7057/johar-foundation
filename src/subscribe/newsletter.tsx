@@ -69,12 +69,17 @@ export const Newsletter: React.FC = () => {
         ) : (
           <div style={{ maxWidth: '480px', margin: '0 auto' }}>
             <form onSubmit={handleSubscribe} style={{
-              display: 'flex', gap: '12px', flexWrap: 'wrap', marginBottom: '15px'
+              display: 'flex', 
+              gap: '12px', 
+              flexWrap: 'wrap', 
+              marginBottom: '15px',
+              justifyContent: 'center', // Centers the wrapped layout items horizontally
+              alignItems: 'center'      // Centers the layout items vertically
             }}>
-              <div style={{ position: 'relative', flex: '1', minWidth: '260px' }}>
+              <div style={{ position: 'relative', flex: '1', minWidth: '260px', width: '100%' }}>
                 <FaRegEnvelope style={{
                   position: 'absolute', left: '16px', top: '50%', transform: 'translateY(-50%)',
-                  color: '#aaa', fontSize: '1rem'
+                  color: '#aaa', fontSize: '1rem', zIndex: 2
                 }} />
                 <input
                   type="email"
