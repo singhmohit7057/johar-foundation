@@ -123,10 +123,10 @@ export const Navbar: React.FC = () => {
       {isMobile && (
         <div style={mobileMenuStyle}>
           <Link to="/" onClick={() => setIsMenuOpen(false)} style={getLinkStyle('/')}>Home</Link>
-          <Link to="/who-we-are" onClick={() => setIsMenuOpen(false)} style={getLinkStyle('/who-we-are')}>About Us</Link>
-          <Link to="/initiatives" onClick={() => setIsMenuOpen(false)} style={getLinkStyle('/initiatives')}>Programs</Link>
+          <Link to="/who-we-are" onClick={() => setIsMenuOpen(false)} style={getLinkStyle('/who-we-are')}>Who We Are</Link>
+          <Link to="/initiatives" onClick={() => setIsMenuOpen(false)} style={getLinkStyle('/initiatives')}>Initiatives</Link>
           <Link to="/impact" onClick={() => setIsMenuOpen(false)} style={getLinkStyle('/impact')}>Impact</Link>
-           <Link to="/get-involved" onClick={() => setIsMenuOpen(false)} style={getLinkStyle('/get-involved')}>Impact</Link>
+           <Link to="/get-involved" onClick={() => setIsMenuOpen(false)} style={getLinkStyle('/get-involved')}>Get Involved</Link>
           <Link to="/resources" onClick={() => setIsMenuOpen(false)} style={getLinkStyle('/resources')}>Resources</Link>
           <Link to="/contact" onClick={() => setIsMenuOpen(false)} style={getLinkStyle('/contact')}>Contact</Link>
         </div>

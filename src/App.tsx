@@ -1,5 +1,8 @@
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 
+// Vercel Telemetry Modules
+import { Analytics } from '@vercel/analytics/react';
+
 // Top Header Component
 import { TopHeader } from "./shared/top-header";
 
@@ -52,6 +55,8 @@ const MainLayout = () => {
     >
       {/* The Popup will trigger on any page within this layout once uncommented
       <Popup delay={4000} /> */}
+
+      <Analytics/>
 
       <TopHeader />
       <ScrollToTop />
