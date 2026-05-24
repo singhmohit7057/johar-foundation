@@ -100,7 +100,7 @@ const HomePage: React.FC = () => {
           <div style={{ flex: '0.8' }} className="img-container">
             <div style={{
               width: '100%', height: '300px', backgroundColor: '#fafafa', borderRadius: '20px',
-              backgroundImage: 'url("/test.jpg")', backgroundSize: 'cover', backgroundPosition: 'center',
+              backgroundImage: 'url("/whoweare.jpg")', backgroundSize: 'cover', backgroundPosition: 'center',
               boxShadow: '0 10px 30px rgba(0,0,0,0.03)', border: '1px solid #f0f0f0'
             }} />
           </div>
