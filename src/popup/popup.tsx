@@ -58,17 +58,12 @@ export const Popup: React.FC<PopupProps> = ({ delay = 3000 }) => {
 
   const leftContentStyle: React.CSSProperties = {
     flex: 1,
-    backgroundImage: `url('/popup.jpg')`,
-    backgroundSize: 'cover',
-    backgroundPosition: 'center',
     minHeight: '450px',
-    display: 'none', // Hidden on mobile
+    display: 'none', // Controlled via the media queries in <style> block below
+    overflow: 'hidden',
+    position: 'relative',
+    backgroundColor: '#fafafa'
   };
-
-  // Media query simulation for left content
-  if (window.innerWidth > 768) {
-    leftContentStyle.display = 'block';
-  }
 
   const rightContentStyle: React.CSSProperties = {
     flex: 1.2,
@@ -101,8 +96,21 @@ export const Popup: React.FC<PopupProps> = ({ delay = 3000 }) => {
           ×
         </button>
 
-        {/* Left Side: Image */}
-        <div style={leftContentStyle} />
+        {/* Left Side: Performance Optimized Native Image Element */}
+        <div style={leftContentStyle} className="popup-left-image-wrapper">
+          <img 
+            src="/popup.png" 
+            alt="Johar Foundation Campaign" 
+            fetchPriority="high" // Signals the browser thread engine to download this immediately
+            loading="eager"      // Overrides default lazy-loading parameters
+            style={{
+              width: '100%',
+              height: '100%',
+              objectFit: 'cover',
+              display: 'block'
+            }}
+          />
+        </div>
 
         {/* Right Side: Content */}
         <div style={rightContentStyle}>
@@ -131,6 +139,7 @@ export const Popup: React.FC<PopupProps> = ({ delay = 3000 }) => {
             border: 'none',
             fontSize: '1.1rem',
             fontWeight: 'bold',
+            zIndex: 1,
             cursor: 'pointer',
             boxShadow: '0 4px 15px rgba(166, 38, 57, 0.3)',
             transition: 'transform 0.2s'
@@ -155,12 +164,17 @@ export const Popup: React.FC<PopupProps> = ({ delay = 3000 }) => {
         </div>
       </div>
       
-      {/* Animation Styles */}
+      {/* Animation Styles & Clean Media Queries */}
       <style>
         {`
           @keyframes modalSlideUp {
             from { opacity: 0; transform: translateY(50px); }
             to { opacity: 1; transform: translateY(0); }
+          }
+          @media (min-width: 769px) {
+            .popup-left-image-wrapper {
+              display: block !important;
+            }
           }
         `}
       </style>

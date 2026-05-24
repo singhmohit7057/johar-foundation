@@ -102,7 +102,6 @@ const Impact: React.FC = () => {
         }}>
           {/* Left Block: Narrative Selector Tabs */}
           <div className="stories-nav-panel" style={{ flex: '1', backgroundColor: '#fafafa', borderRight: '1px solid #f0f0f0', padding: '25px' }}>
-            {/* FIXED: Changed tracking to letterSpacing */}
             <h4 style={{ color: '#999', fontSize: '0.7rem', fontWeight: '800', letterSpacing: '1px', textTransform: 'uppercase', marginBottom: '20px', paddingLeft: '10px' }}>
               Select a Narrative
             </h4>
@@ -150,11 +149,13 @@ const Impact: React.FC = () => {
               </p>
             </div>
             
-            <div className="story-image-wrapper" style={{ flex: '0.9', height: '320px', borderRadius: '16px', overflow: 'hidden', boxShadow: '0 8px 25px rgba(0,0,0,0.06)' }}>
+            <div className="story-image-wrapper" style={{ flex: '0.9', height: '320px', borderRadius: '16px', overflow: 'hidden', boxShadow: '0 8px 25px rgba(0,0,0,0.06)', backgroundColor: '#eaeaea' }}>
               <img 
                 src={successStories[activeStoryIdx].image} 
                 alt={successStories[activeStoryIdx].title}
-                style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                fetchPriority="high" // PERFORMANCE FIX: Prioritizes active narrative switcher graphics
+                loading="eager"
+                style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
               />
             </div>
           </div>
@@ -173,17 +174,25 @@ const Impact: React.FC = () => {
           </p>
 
           <div className="gallery-grid-layout">
-            {galleryItems.map((item) => (
+            {galleryItems.map((item, idx) => (
               <div 
                 key={item.id} 
                 className="gallery-item-card"
                 onClick={() => setLightboxImg(item.imageUrl)}
                 style={{ 
                   position: 'relative', height: '240px', borderRadius: '16px', overflow: 'hidden',
-                  cursor: 'pointer', boxShadow: '0 4px 15px rgba(0,0,0,0.02)', boxSizing: 'border-box'
+                  cursor: 'pointer', boxShadow: '0 4px 15px rgba(0,0,0,0.02)', boxSizing: 'border-box',
+                  backgroundColor: '#eaeaea'
                 }}
               >
-                <img src={item.imageUrl} alt={item.title} style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 0.4s ease' }} className="gallery-img" />
+                <img 
+                  src={item.imageUrl} 
+                  alt={item.title} 
+                  loading={idx < 3 ? "eager" : "lazy"} // PERFORMANCE FIX: Progressive pipeline rendering
+                  fetchPriority={idx < 3 ? "high" : "low"}
+                  style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 0.4s ease' }} 
+                  className="gallery-img" 
+                />
                 
                 {/* Floating Meta Hover Mask overlay layout */}
                 <div className="gallery-overlay" style={{
@@ -214,7 +223,7 @@ const Impact: React.FC = () => {
                 className="share-photos-btn"
                 style={{
                   backgroundColor: 'transparent',
-                  color: '#A62639', // Johar Crimson Red
+                  color: '#A62639', 
                   border: '2px solid #A62639',
                   padding: '12px 28px',
                   borderRadius: '50px',
@@ -325,7 +334,6 @@ const Impact: React.FC = () => {
           background: linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.4) 100%) !important;
         }
 
-        /* Dynamic Hover States for Submission Trigger */
         .share-photos-btn:hover {
           background-color: #A62639 !important;
           color: #ffffff !important;
@@ -337,7 +345,6 @@ const Impact: React.FC = () => {
           transform: translateY(0);
         }
 
-        /* Hover States for Audit Download Buttons */
         .audit-download-btn:hover {
           background-color: #f5f5f5 !important;
           border-color: #b5b5b5 !important;

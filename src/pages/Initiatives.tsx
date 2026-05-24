@@ -11,7 +11,7 @@ import {
 const focusAreasData = [
   { title: 'Tourism Development', segment: 'PRIMARY', desc: 'Eco-tourism and cultural tourism in rural belts to generate community livelihoods.', icon: <FaGlobe />, imageUrl: 'tourism.jpg' },
   { title: 'Tribal Affairs', segment: 'PRIMARY', desc: 'Protecting rights, culture and heritage of indigenous communities across eastern India.', icon: <FaUserFriends />, imageUrl: 'tribal.jpg' },
-  { title: 'Women\'s Empowerment', segment: 'PRIMARY', desc: 'Enabling women through SHGs, legal literacy, and economic independence programs.', icon: <FaShieldAlt />, imageUrl: 'women.jpg' },
+  { title: "Women's Empowerment", segment: 'PRIMARY', desc: 'Enabling women through SHGs, legal literacy, and economic independence programs.', icon: <FaShieldAlt />, imageUrl: 'women.jpg' },
   { title: 'Youth Affairs', segment: 'PRIMARY', desc: 'Channeling youth energy into leadership, sports, and community service initiatives.', icon: <FaUsers />, imageUrl: 'youth.jpg' },
   { title: 'Skill Development', segment: 'SECONDARY', desc: 'Vocational and digital training to make rural youth employment-ready for modern industries.', icon: <FaBriefcase />, imageUrl: 'skill.jpg' },
   { title: 'Education & Literacy', segment: 'SECONDARY', desc: 'Building access to quality education in remote rural and semi-urban areas.', icon: <FaGraduationCap />, imageUrl: 'education.jpg' },
@@ -156,8 +156,14 @@ const Initiatives: React.FC = () => {
               flexDirection: 'column',
               boxSizing: 'border-box'
             }}>
-              <div style={{ width: '100%', height: '150px', position: 'relative', overflow: 'hidden' }}>
-                <img src={area.imageUrl} alt={area.title} style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+              <div style={{ width: '100%', height: '150px', position: 'relative', overflow: 'hidden', backgroundColor: '#eaeaea' }}>
+                <img 
+                  src={area.imageUrl} 
+                  alt={area.title} 
+                  loading={index < 2 ? "eager" : "lazy"} // PERFORMANCE FIX: Loads the top rows instantly, lazy-loads the remaining cards
+                  fetchPriority={index < 2 ? "high" : "low"} // PERFORMANCE FIX: Tells browser execution loops to prioritize first-view assets
+                  style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} 
+                />
                 <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', backgroundColor: 'rgba(0, 0, 0, 0.12)' }} />
                 <div style={{ 
                   position: 'absolute', top: '12px', right: '12px', backgroundColor: 'white', 
@@ -285,7 +291,7 @@ const Initiatives: React.FC = () => {
                 onClick={() => setSelectedState('JH')} onMouseEnter={() => setSelectedState('JH')}
                 style={{ fill: selectedState === 'JH' ? theme.colors.primary : '#dcdcdc', stroke: '#fff', strokeWidth: 2, cursor: 'pointer', transition: 'all 0.2s ease' }}
               />
-              <text x="160" y="155" style={{ fontSize: '11px', fontWeight: 'bold', fill: selectedState === 'JH' ? '#fff' : '#33px', pointerEvents: 'none', transition: 'all 0.2s ease' }}>JHARKHAND</text>
+              <text x="160" y="155" style={{ fontSize: '11px', fontWeight: 'bold', fill: selectedState === 'JH' ? '#fff' : '#333', pointerEvents: 'none', transition: 'all 0.2s ease' }}>JHARKHAND</text>
 
               {/* West Bengal */}
               <path d="M260,110 L350,115 L340,170 L280,240 L265,195 L280,180 Z"
@@ -316,7 +322,6 @@ const Initiatives: React.FC = () => {
           {/* Info Side Block */}
           <div style={{ flex: '1.2', padding: '45px', textAlign: 'left', display: 'flex', flexDirection: 'column', justifyContent: 'center', boxSizing: 'border-box' }}>
             <span style={{ fontSize: '0.65rem', fontWeight: 'bold', color: theme.colors.primary, textTransform: 'uppercase', letterSpacing: '1px', border: `1px solid ${theme.colors.primary}35`, padding: '3px 10px', borderRadius: '30px', display: 'inline-block', marginBottom: '12px', width: 'fit-content' }}>
-              {/* FIXED: Replaced 'tracking' with 'letterSpacing' */}
               {mapRegionsData[selectedState].tagline}
             </span>
             <h3 style={{ margin: '0 0 15px 0', fontSize: '1.8rem', color: theme.colors.secondary, fontWeight: '700' }}>
@@ -374,7 +379,6 @@ const Initiatives: React.FC = () => {
               }}>
                 <FaHandshake style={{ color: '#ccc', fontSize: '1.3rem' }} />
                 <span style={{ fontSize: '0.75rem', fontWeight: 'bold', color: '#666', letterSpacing: '0.5px' }}>
-                  {/* FIXED: Replaced 'tracking' with 'letterSpacing' */}
                   {partner.name}
                 </span>
               </div>
@@ -394,17 +398,12 @@ const Initiatives: React.FC = () => {
           grid-template-columns: repeat(4, 1fr);
         }
 
-        /* 6-Column Layout Blueprint */
         .fields-grid-6x {
           display: grid;
           gap: 20px;
           grid-template-columns: repeat(6, 1fr);
           width: 100%;
           margin-top: 20px;
-        }
-
-        .field-work-card {
-          box-sizing: border-box;
         }
 
         .field-work-card:hover {
