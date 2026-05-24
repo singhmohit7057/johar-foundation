@@ -19,7 +19,7 @@ import { BackToTop } from "./floating/backtotop";
 import { WhatsAppButton } from "./floating/whatsapp-button";
 
 // Popup
-// import { Popup } from './popup/popup'; // Ready whenever you choose to uncomment
+import { Popup } from './popup/popup'; // Ready whenever you choose to uncomment
 
 // Page Imports
 import HomePage from "./pages/Homepage";
@@ -53,8 +53,8 @@ const MainLayout = () => {
         width: "100%",
       }}
     >
-      {/* The Popup will trigger on any page within this layout once uncommented
-      <Popup delay={4000} /> */}
+      {/* The Popup will trigger on any page within this layout once uncommented */}
+      <Popup delay={4000} /> 
 
       <Analytics/>
 

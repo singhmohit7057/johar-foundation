@@ -9,14 +9,14 @@ import {
 
 // 8 Focus Areas Data with layout image mappings
 const focusAreasData = [
-  { title: 'Tourism Development', segment: 'PRIMARY', desc: 'Eco-tourism and cultural tourism in rural belts to generate community livelihoods.', icon: <FaGlobe />, imageUrl: 'test.jpg' },
-  { title: 'Tribal Affairs', segment: 'PRIMARY', desc: 'Protecting rights, culture and heritage of indigenous communities across eastern India.', icon: <FaUserFriends />, imageUrl: 'test.jpg' },
-  { title: 'Women\'s Empowerment', segment: 'PRIMARY', desc: 'Enabling women through SHGs, legal literacy, and economic independence programs.', icon: <FaShieldAlt />, imageUrl: 'test.jpg' },
-  { title: 'Youth Affairs', segment: 'PRIMARY', desc: 'Channeling youth energy into leadership, sports, and community service initiatives.', icon: <FaUsers />, imageUrl: 'test.jpg' },
-  { title: 'Skill Development', segment: 'SECONDARY', desc: 'Vocational and digital training to make rural youth employment-ready for modern industries.', icon: <FaBriefcase />, imageUrl: 'test.jpg' },
-  { title: 'Education & Literacy', segment: 'SECONDARY', desc: 'Building access to quality education in remote rural and semi-urban areas.', icon: <FaGraduationCap />, imageUrl: 'test.jpg' },
-  { title: 'Health & Family Welfare', segment: 'SECONDARY', desc: 'Health camps, nutrition programs, and maternal care in underserved communities.', icon: <FaStethoscope />, imageUrl: 'test.jpg' },
-  { title: 'Human Rights & Sports', segment: 'SECONDARY', desc: 'Advocating for justice while using sports as a vehicle for youth development.', icon: <FaChartBar />, imageUrl: 'test.jpg' }
+  { title: 'Tourism Development', segment: 'PRIMARY', desc: 'Eco-tourism and cultural tourism in rural belts to generate community livelihoods.', icon: <FaGlobe />, imageUrl: 'tourism.jpg' },
+  { title: 'Tribal Affairs', segment: 'PRIMARY', desc: 'Protecting rights, culture and heritage of indigenous communities across eastern India.', icon: <FaUserFriends />, imageUrl: 'tribal.jpg' },
+  { title: 'Women\'s Empowerment', segment: 'PRIMARY', desc: 'Enabling women through SHGs, legal literacy, and economic independence programs.', icon: <FaShieldAlt />, imageUrl: 'women.jpg' },
+  { title: 'Youth Affairs', segment: 'PRIMARY', desc: 'Channeling youth energy into leadership, sports, and community service initiatives.', icon: <FaUsers />, imageUrl: 'youth.jpg' },
+  { title: 'Skill Development', segment: 'SECONDARY', desc: 'Vocational and digital training to make rural youth employment-ready for modern industries.', icon: <FaBriefcase />, imageUrl: 'skill.jpg' },
+  { title: 'Education & Literacy', segment: 'SECONDARY', desc: 'Building access to quality education in remote rural and semi-urban areas.', icon: <FaGraduationCap />, imageUrl: 'education.jpg' },
+  { title: 'Health & Family Welfare', segment: 'SECONDARY', desc: 'Health camps, nutrition programs, and maternal care in underserved communities.', icon: <FaStethoscope />, imageUrl: 'health.jpg' },
+  { title: 'Human Rights & Sports', segment: 'SECONDARY', desc: 'Advocating for justice while using sports as a vehicle for youth development.', icon: <FaChartBar />, imageUrl: 'human.jpg' }
 ];
 
 // 6 Fields of Work Data from Ribbon

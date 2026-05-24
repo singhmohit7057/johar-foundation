@@ -17,7 +17,7 @@ const successStories = [
     location: "Dumka Cluster, Jharkhand",
     quote: "Joining the local Self-Help Group didn't just give me access to credit; it gave me the confidence to manage a business and support my children's higher education.",
     narrative: "Sumi started with a micro-loan of ₹5,000 to purchase sewing equipment. Today, she runs an independent tailoring cooperative employing four other tribal women, effectively multiplying the economic resilience of her entire village.",
-    image: "test.jpg"
+    image: "skill.jpg"
   },
   {
     id: 'story-2',
@@ -26,7 +26,7 @@ const successStories = [
     location: "Sundargarh, Odisha",
     quote: "Johar Foundation’s sports clinic provided me with professional kits and standard nutrition when I had no shoes to run in.",
     narrative: "Amit Oraon, an 11th-grade tribal youth, was identified during a rural sports talent hunt camp. After receiving 12 months of structured track mentoring and endurance mapping, he recently secured a silver medal at the State Athletics Championship.",
-    image: "test.jpg"
+    image: "popup.png"
   },
   {
     id: 'story-3',
@@ -35,18 +35,18 @@ const successStories = [
     location: "Purulia, West Bengal",
     quote: "I thought computers were only for urban graduates. Learning to use digital marketplaces changed how our family sells forest produce.",
     narrative: "Deepak Mahato completed our 3-month regional digital literacy program. He now independently operates an e-service kiosk in his panchayat, helping local collection centers process fair-price bank settlements digitally.",
-    image: "test.jpg"
+    image: "popup.png"
   }
 ];
 
 // Media Gallery Dataset
 const galleryItems = [
-  { id: 1, type: 'IMAGE', category: 'SHG Setup', title: 'Women Empowerment Drive', imageUrl: 'test.jpg' },
-  { id: 2, type: 'IMAGE', category: 'Sports Clinics', title: 'Youth Training Camp', imageUrl: 'test.jpg' },
-  { id: 3, type: 'IMAGE', category: 'Skill Labs', title: 'Digital Literacy Classroom', imageUrl: 'test.jpg' },
-  { id: 4, type: 'IMAGE', category: 'Heritage', title: 'Tribal Artisans Workshop', imageUrl: 'test.jpg' },
-  { id: 5, type: 'IMAGE', category: 'Healthcare', title: 'Rural Maternal Health Outpost', imageUrl: 'test.jpg' },
-  { id: 6, type: 'IMAGE', category: 'Eco-Tourism', title: 'Community Tourism Infrastructure', imageUrl: 'test.jpg' }
+  { id: 1, type: 'IMAGE', category: 'SHG Setup', title: 'Women Empowerment Drive', imageUrl: 'women.jpg' },
+  { id: 2, type: 'IMAGE', category: 'Sports Clinics', title: 'Youth Training Camp', imageUrl: 'youth.jpg' },
+  { id: 3, type: 'IMAGE', category: 'Skill Labs', title: 'Digital Literacy Classroom', imageUrl: 'education.jpg' },
+  { id: 4, type: 'IMAGE', category: 'Heritage', title: 'Tribal Artisans Workshop', imageUrl: 'tribal.jpg' },
+  { id: 5, type: 'IMAGE', category: 'Healthcare', title: 'Rural Maternal Health Outpost', imageUrl: 'health.jpg' },
+  { id: 6, type: 'IMAGE', category: 'Eco-Tourism', title: 'Community Tourism Infrastructure', imageUrl: 'tourism.jpg' }
 ];
 
 const Impact: React.FC = () => {

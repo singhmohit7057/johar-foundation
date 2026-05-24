@@ -58,7 +58,7 @@ export const Popup: React.FC<PopupProps> = ({ delay = 3000 }) => {
 
   const leftContentStyle: React.CSSProperties = {
     flex: 1,
-    backgroundImage: `url('https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?q=80&w=1000')`, // Placeholder for your children image
+    backgroundImage: `url('/popup.jpg')`,
     backgroundSize: 'cover',
     backgroundPosition: 'center',
     minHeight: '450px',
@@ -120,7 +120,7 @@ export const Popup: React.FC<PopupProps> = ({ delay = 3000 }) => {
           </h3>
 
           <p style={{ color: theme.colors.text, fontSize: '0.95rem', lineHeight: '1.6', marginBottom: '30px' }}>
-            Over <strong>23 Lakh Smiles</strong> and counting in 2025-26. Your small contribution helps us reach the underserved communities of Jharkhand and beyond.
+            Over <strong>5 Thousand Smiles</strong> and counting in 2026. Your small contribution helps us reach the underserved communities of Jharkhand and beyond.
           </p>
 
           <button style={{
@@ -138,7 +138,7 @@ export const Popup: React.FC<PopupProps> = ({ delay = 3000 }) => {
           onMouseOver={(e) => (e.currentTarget.style.transform = 'scale(1.02)')}
           onMouseOut={(e) => (e.currentTarget.style.transform = 'scale(1)')}
           >
-            Be the Change — Donate Now and Save Tax
+            Be the Change — Donate Now
           </button>
 
           <div style={{ marginTop: '20px', display: 'flex', alignItems: 'center', gap: '8px' }}>
