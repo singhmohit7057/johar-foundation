@@ -1,10 +1,15 @@
-/* src/index.css */
+/* 1. Import DM Sans directly from Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap');
+
+/* 2. Global Reset & Box Model Setup */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: 'DM Sans', sans-serif !important; /* Forces DM Sans across all elements */
 }
 
+/* 3. Global Structural Root Constraints */
 html, body, #root {
   margin: 0;
   padding: 0;
@@ -14,6 +19,14 @@ html, body, #root {
   flex-direction: column;
 }
 
+/* 4. Base Body Rendering Context */
 body {
-  background-color: #F9F7F2; /* Match your theme background */
+  background-color: #F9F7F2; /* Soft Cream background */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* 5. Native Form Controls Inheritance Override */
+input, button, select, textarea {
+  font-family: 'DM Sans', sans-serif !important;
 }
