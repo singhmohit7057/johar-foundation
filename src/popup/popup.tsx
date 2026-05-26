@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+import { Link } from 'react-router-dom';
 import { theme } from '../theme/styles';
 
 interface PopupProps {
@@ -8,9 +9,11 @@ interface PopupProps {
 export const Popup: React.FC<PopupProps> = ({ delay = 3000 }) => {
   const [isVisible, setIsVisible] = useState(false);
   const [dontShowAgain, setDontShowAgain] = useState(false);
+  
+  // Create a reference to the main modal box container
+  const modalRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    // Check if user has already dismissed the popup
     const isDismissed = localStorage.getItem('johar_popup_dismissed');
     
     if (!isDismissed) {
@@ -26,6 +29,13 @@ export const Popup: React.FC<PopupProps> = ({ delay = 3000 }) => {
       localStorage.setItem('johar_popup_dismissed', 'true');
     }
     setIsVisible(false);
+  };
+
+  // Closes the popup if a click event fires on the overlay but outside the modal box boundary
+  const handleOverlayClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (modalRef.current && !modalRef.current.contains(e.target as Node)) {
+      handleClose();
+    }
   };
 
   if (!isVisible) return null;
@@ -46,8 +56,8 @@ export const Popup: React.FC<PopupProps> = ({ delay = 3000 }) => {
 
   const modalStyle: React.CSSProperties = {
     backgroundColor: theme.colors.white,
-    width: '90%',
-    maxWidth: '850px',
+    width: '85%',
+    maxWidth: '720px', // REDUCED: Scaled down from 850px for a more balanced and compact desktop look
     borderRadius: '20px',
     overflow: 'hidden',
     display: 'flex',
@@ -57,9 +67,9 @@ export const Popup: React.FC<PopupProps> = ({ delay = 3000 }) => {
   };
 
   const leftContentStyle: React.CSSProperties = {
-    flex: 1,
-    minHeight: '450px',
-    display: 'none', // Controlled via the media queries in <style> block below
+    flex: '0.9', // REDUCED: Made the image profile column slightly narrower to scale down overall footprint
+    minHeight: '400px', // REDUCED: Scaled down from 450px height
+    display: 'none', 
     overflow: 'hidden',
     position: 'relative',
     backgroundColor: '#fafafa'
@@ -67,30 +77,33 @@ export const Popup: React.FC<PopupProps> = ({ delay = 3000 }) => {
 
   const rightContentStyle: React.CSSProperties = {
     flex: 1.2,
-    padding: '40px',
+    padding: '35px 30px', // REDUCED: Adjusted internal padding layout
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
   };
 
   return (
-    <div style={overlayStyle}>
-      <div style={modalStyle}>
+    <div style={overlayStyle} onClick={handleOverlayClick}>
+      <div style={modalStyle} ref={modalRef}>
         {/* Close Button */}
         <button 
           onClick={handleClose}
           style={{
             position: 'absolute',
-            top: '20px',
-            right: '20px',
+            top: '15px',
+            right: '15px',
             background: '#eee',
             border: 'none',
             borderRadius: '50%',
-            width: '30px',
-            height: '30px',
+            width: '28px',
+            height: '28px',
             cursor: 'pointer',
-            fontSize: '18px',
-            zIndex: 10
+            fontSize: '16px',
+            zIndex: 10,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center'
           }}
         >
           ×
@@ -101,8 +114,8 @@ export const Popup: React.FC<PopupProps> = ({ delay = 3000 }) => {
           <img 
             src="/popup.png" 
             alt="Johar Foundation Campaign" 
-            fetchPriority="high" // Signals the browser thread engine to download this immediately
-            loading="eager"      // Overrides default lazy-loading parameters
+            fetchPriority="high" 
+            loading="eager"      
             style={{
               width: '100%',
               height: '100%',
@@ -114,50 +127,53 @@ export const Popup: React.FC<PopupProps> = ({ delay = 3000 }) => {
 
         {/* Right Side: Content */}
         <div style={rightContentStyle}>
-          <img src="/logo.webp" alt="Logo" style={{ height: '40px', width: 'auto', marginBottom: '20px', alignSelf: 'flex-start' }} />
+          <img src="/logo.webp" alt="Logo" style={{ height: '35px', width: 'auto', marginBottom: '15px', alignSelf: 'flex-start' }} />
           
-          <div style={{ borderLeft: `4px solid ${theme.colors.primary}`, paddingLeft: '15px', marginBottom: '25px' }}>
-            <h2 style={{ color: theme.colors.primary, margin: 0, fontSize: '1.4rem' }}>सेवा परमो धर्म:</h2>
-            <p style={{ fontStyle: 'italic', color: '#666', fontSize: '0.9rem', margin: '5px 0 0' }}>
+          <div style={{ borderLeft: `3px solid ${theme.colors.primary}`, paddingLeft: '12px', marginBottom: '20px' }}>
+            <h2 style={{ color: theme.colors.primary, margin: 0, fontSize: '1.25rem' }}>सेवा परमो धर्म:</h2>
+            <p style={{ fontStyle: 'italic', color: '#666', fontSize: '0.85rem', margin: '3px 0 0' }}>
               "Service is the highest duty." — The mission of Johar Foundation
             </p>
           </div>
 
-          <h3 style={{ fontSize: '1.8rem', color: theme.colors.secondary, marginBottom: '15px', lineHeight: '1.2' }}>
+          <h3 style={{ fontSize: '1.5rem', color: theme.colors.secondary, marginBottom: '12px', lineHeight: '1.2' }}>
             Together, we build a brighter future.
           </h3>
 
-          <p style={{ color: theme.colors.text, fontSize: '0.95rem', lineHeight: '1.6', marginBottom: '30px' }}>
+          <p style={{ color: theme.colors.text, fontSize: '0.88rem', lineHeight: '1.5', marginBottom: '25px' }}>
             Over <strong>5 Thousand Smiles</strong> and counting in 2026. Your small contribution helps us reach the underserved communities of Jharkhand and beyond.
           </p>
 
-          <button style={{
-            backgroundColor: theme.colors.primary,
-            color: 'white',
-            padding: '16px',
-            borderRadius: '10px',
-            border: 'none',
-            fontSize: '1.1rem',
-            fontWeight: 'bold',
-            zIndex: 1,
-            cursor: 'pointer',
-            boxShadow: '0 4px 15px rgba(166, 38, 57, 0.3)',
-            transition: 'transform 0.2s'
-          }}
-          onMouseOver={(e) => (e.currentTarget.style.transform = 'scale(1.02)')}
-          onMouseOut={(e) => (e.currentTarget.style.transform = 'scale(1)')}
-          >
-            Be the Change — Donate Now
-          </button>
+          <Link to="/donate" onClick={handleClose} style={{ textDecoration: 'none', display: 'block', width: '100%' }}>
+            <button style={{
+              backgroundColor: theme.colors.primary,
+              color: 'white',
+              padding: '14px',
+              borderRadius: '8px',
+              border: 'none',
+              fontSize: '1rem',
+              fontWeight: 'bold',
+              zIndex: 1,
+              width: '100%',
+              cursor: 'pointer',
+              boxShadow: '0 4px 15px rgba(166, 38, 57, 0.3)',
+              transition: 'transform 0.2s'
+            }}
+            onMouseOver={(e) => (e.currentTarget.style.transform = 'scale(1.01)')}
+            onMouseOut={(e) => (e.currentTarget.style.transform = 'scale(1)')}
+            >
+              Be the Change — Donate Now
+            </button>
+          </Link>
 
-          <div style={{ marginTop: '20px', display: 'flex', alignItems: 'center', gap: '8px' }}>
+          <div style={{ marginTop: '15px', display: 'flex', alignItems: 'center', gap: '8px' }}>
             <input 
               type="checkbox" 
               id="dontShow" 
               checked={dontShowAgain} 
               onChange={(e) => setDontShowAgain(e.target.checked)} 
             />
-            <label htmlFor="dontShow" style={{ fontSize: '0.8rem', color: '#999', cursor: 'pointer' }}>
+            <label htmlFor="dontShow" style={{ fontSize: '0.78rem', color: '#999', cursor: 'pointer' }}>
               Don't show again
             </label>
           </div>
@@ -168,7 +184,7 @@ export const Popup: React.FC<PopupProps> = ({ delay = 3000 }) => {
       <style>
         {`
           @keyframes modalSlideUp {
-            from { opacity: 0; transform: translateY(50px); }
+            from { opacity: 0; transform: translateY(40px); }
             to { opacity: 1; transform: translateY(0); }
           }
           @media (min-width: 769px) {

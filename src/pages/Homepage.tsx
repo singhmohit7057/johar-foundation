@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { theme } from '../theme/styles';
 import { SEO } from '../shared/seo';
@@ -6,10 +6,21 @@ import { Newsletter } from '../subscribe/newsletter';
 
 import { 
   FaArrowRight, FaUsers, FaGraduationCap, 
-  FaHeartPulse, FaHandHoldingHeart, FaMapLocationDot
+  FaHeartPulse, FaHandHoldingHeart, FaMapLocationDot,
+  FaGlobe, FaVenus, FaBookOpen, FaBriefcase, FaStethoscope, FaChartBar
 } from 'react-icons/fa6';
 
-// Regional Data Dataset mapped with interactive vector hover hooks
+const sliderSectors = [
+  { label: 'TOURISM DEVELOPMENT', icon: <FaGlobe /> },
+  { label: 'TRIBAL AFFAIRS', icon: <FaUsers /> },
+  { label: "WOMEN'S EMPOWERMENT", icon: <FaVenus /> },
+  { label: 'YOUTH AFFAIRS', icon: <FaHandHoldingHeart /> },
+  { label: 'SKILL DEVELOPMENT', icon: <FaBriefcase /> },
+  { label: 'EDUCATION & LITERACY', icon: <FaBookOpen /> },
+  { label: 'HEALTH & FAMILY WELFARE', icon: <FaStethoscope /> },
+  { label: 'HUMAN RIGHTS & SPORTS', icon: <FaChartBar /> }
+];
+
 const footprintRegions = [
   { id: 'JH', name: 'Jharkhand', node: 'Core Hub', focus: 'SHG Networks, Sports Academies & Tribal Advocacy' },
   { id: 'OR', name: 'Odisha', node: 'Eco-Tourism Belt', focus: 'Artisanal Cluster Trade & Maternal Care' },
@@ -82,7 +93,37 @@ const HomePage: React.FC = () => {
         </div>
       </div>
 
-      {/* 2. WHO WE ARE PREVIEW */}
+      {/* 2. INFINITE SECTOR TICKER SLIDER (HEIGHT & SPACE OPTIMIZED) */}
+      <div style={{ 
+        backgroundColor: theme.colors.primary, 
+        overflow: 'hidden', 
+        whiteSpace: 'nowrap', 
+        padding: '24px 0', // UPDATED: Increased vertical width padding from 18px for structural presence
+        display: 'flex',
+        alignItems: 'center',
+        borderBottom: '1px solid rgba(0,0,0,0.1)'
+      }}>
+        <div className="marquee-track" style={{ display: 'inline-flex', gap: '60px' }}> {/* UPDATED: Increased gap between tracking blocks */}
+          {/* First loop initialization copy */}
+          {sliderSectors.map((sector, sIdx) => (
+            <div key={`s1-${sIdx}`} style={{ display: 'flex', alignItems: 'center', gap: '12px', color: 'white', fontWeight: '700', fontSize: '0.9rem', letterSpacing: '0.5px' }}>
+              <span style={{ display: 'flex', opacity: 0.9 }}>{sector.icon}</span>
+              <span>{sector.label}</span>
+              <span style={{ marginLeft: '45px', opacity: 0.4, fontSize: '0.8rem' }}>✦</span>
+            </div>
+          ))}
+          {/* Second duplicate buffer track loop */}
+          {sliderSectors.map((sector, sIdx) => (
+            <div key={`s2-${sIdx}`} style={{ display: 'flex', alignItems: 'center', gap: '12px', color: 'white', fontWeight: '700', fontSize: '0.9rem', letterSpacing: '0.5px' }}>
+              <span style={{ display: 'flex', opacity: 0.9 }}>{sector.icon}</span>
+              <span>{sector.label}</span>
+              <span style={{ marginLeft: '45px', opacity: 0.4, fontSize: '0.8rem' }}>✦</span>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* 3. WHO WE ARE PREVIEW */}
       <div style={sectionWrapperStyle}>
         <div style={{ display: 'flex', gap: '60px', alignItems: 'center' }} className="split-layout">
           <div style={{ flex: '1.2' }}>
@@ -107,7 +148,7 @@ const HomePage: React.FC = () => {
         </div>
       </div>
 
-      {/* 3. INITIATIVES PREVIEW */}
+      {/* 4. INITIATIVES PREVIEW */}
       <div style={{ backgroundColor: '#fafafa', borderTop: '1px solid #f2f2f2', borderBottom: '1px solid #f2f2f2' }}>
         <div style={sectionWrapperStyle}>
           <div style={{ textAlign: 'center', marginBottom: '50px' }}>
@@ -141,7 +182,7 @@ const HomePage: React.FC = () => {
         </div>
       </div>
 
-      {/* 4. REGIONAL FOOTPRINT PREVIEW */}
+      {/* 5. REGIONAL FOOTPRINT PREVIEW */}
       <div style={sectionWrapperStyle}>
         <div style={{ textAlign: 'center', marginBottom: '45px' }}>
           <div style={badgeStyle}>REGIONAL FOOTPRINT</div>
@@ -220,7 +261,7 @@ const HomePage: React.FC = () => {
         </div>
       </div>
 
-      {/* 5. IMPACT PREVIEW */}
+      {/* 6. IMPACT PREVIEW */}
       <div style={{ backgroundColor: '#fafafa', borderTop: '1px solid #f2f2f2', borderBottom: '1px solid #f2f2f2' }}>
         <div style={sectionWrapperStyle}>
           <div style={{ display: 'flex', gap: '60px', alignItems: 'center' }} className="split-layout reverse">
@@ -250,7 +291,7 @@ const HomePage: React.FC = () => {
         </div>
       </div>
 
-      {/* 6. VOLUNTEER WORKSPACE PREVIEW */}
+      {/* 7. VOLUNTEER WORKSPACE PREVIEW */}
       <div style={{ backgroundColor: theme.colors.secondary, color: 'white', borderTop: `4px solid ${theme.colors.primary}` }}>
         <div style={{ ...sectionWrapperStyle, textAlign: 'center', padding: '70px 5%' }}>
           <FaHandHoldingHeart size={40} color={theme.colors.primary} style={{ marginBottom: '15px' }} />
@@ -269,10 +310,10 @@ const HomePage: React.FC = () => {
         </div>
       </div>
 
-      {/* 7. NEWSLETTER SUBSCRIPTION (Positioned correctly outside the dark block) */}
+      {/* 8. NEWSLETTER SUBSCRIPTION */}
       <Newsletter />
 
-      {/* Embedded UI Styling Overrides */}
+      {/* Embedded UI Styling Overrides and CSS Marquee Keyframes */}
       <style>{`
         .hero-title { font-size: 3.6rem; }
         
@@ -301,6 +342,20 @@ const HomePage: React.FC = () => {
 
         .hero-sec-btn:hover { background-color: rgba(255,255,255,0.05) !important; border-color: #fff !important; }
         .white-hover-btn:hover { opacity: 0.95; }
+
+        .marquee-track {
+          animation: infiniteScrollMarquee 32s linear infinite; /* Adjusted speed balance for wider items */
+          width: max-content;
+        }
+
+        .marquee-track:hover {
+          animation-play-state: paused;
+        }
+
+        @keyframes infiniteScrollMarquee {
+          0% { transform: translateX(0); }
+          100% { transform: translateX(-50%); }
+        }
 
         @media (max-width: 1024px) {
           .hero-title { font-size: 2.8rem; }

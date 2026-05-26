@@ -16,7 +16,6 @@ import { ScrollToTop } from "./router/scrolltotop";
 // Floating Components
 import { StickyDonateButton } from "./floating/sticky-donate-button";
 import { BackToTop } from "./floating/backtotop";
-import { WhatsAppButton } from "./floating/whatsapp-button";
 
 // Popup
 import { Popup } from './popup/popup'; // Ready whenever you choose to uncomment
@@ -68,7 +67,6 @@ const MainLayout = () => {
 
       <BackToTop />
       <StickyDonateButton />
-      <WhatsAppButton/>
       <Footer />
     </div>
   );

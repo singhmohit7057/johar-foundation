@@ -10,16 +10,16 @@ export const Footer: React.FC = () => {
     textDecoration: 'none',
     transition: theme.utils.transition,
     display: 'block',
-    marginBottom: '12px' // Slightly larger tap target for mobile touch
+    marginBottom: '12px'
   });
 
-  // Reusable column wrapper style to center content on mobile natively
   const columnStyle: React.CSSProperties = {
     display: 'flex',
     flexDirection: 'column',
-    alignItems: 'center', // Centers items horizontally
-    textAlign: 'center',  // Centers inline text & paragraphs
-    padding: '0 15px'
+    alignItems: 'flex-start', // FIXED: Aligns text cleanly to the left for standard row layout balance
+    textAlign: 'left',         
+    padding: '0 5px',
+    boxSizing: 'border-box'
   };
 
   return (
@@ -27,29 +27,31 @@ export const Footer: React.FC = () => {
       backgroundColor: theme.colors.secondary, 
       color: theme.colors.white, 
       padding: '60px 5% 20px',
-      width: '100%',            // FIXED: Changed from 100vw to 100% to remove horizontal scroll
-      boxSizing: 'border-box'   // Keeps the padding inside the 100% bounds
+      width: '100%',        
+      boxSizing: 'border-box'   
     }}>
-      <div style={{ 
-        display: 'grid', 
-        // Automatically drops to 1 column and centers on mobile viewports
-        gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', 
-        gap: '40px', 
-        marginBottom: '40px',
-        justifyContent: 'center'
-      }}>
-        {/* About Column */}
+      <div 
+        className="footer-grid-container"
+        style={{ 
+          display: 'grid', 
+          // FIXED: Forces exactly 5 equal columns across desktop to eliminate word wrapping shifts
+          gridTemplateColumns: 'repeat(5, 1fr)', 
+          gap: '20px', // REDUCED: Lowered from 40px to give content more width to shrink safely
+          marginBottom: '40px'
+        }}
+      >
+        {/* 1. About Column */}
         <div style={columnStyle}>
-          <h3 style={{ color: theme.colors.primary, marginBottom: '15px' }}>JOHAR FOUNDATION</h3>
-          <p style={{ fontSize: '0.9rem', lineHeight: '1.6', color: '#ccc', maxWidth: '300px' }}>
+          <h4 style={{ color: theme.colors.primary, marginBottom: '20px', fontSize: '1rem', fontWeight: 'bold' }}>JOHAR FOUNDATION</h4>
+          <p style={{ fontSize: '0.85rem', lineHeight: '1.6', color: '#ccc', margin: 0 }}>
             "Jo Hare Na" — Dedicated to the resilience and empowerment of underserved communities.
           </p>
         </div>
 
-        {/* Quick Links */}
+        {/* 2. Quick Links */}
         <div style={columnStyle}>
-          <h4 style={{ marginBottom: '15px', color: theme.colors.white }}>Quick Link</h4>
-          <div style={{ fontSize: '0.9rem' }}>
+          <h4 style={{ marginBottom: '20px', color: theme.colors.white, fontSize: '1rem', fontWeight: 'bold' }}>Quick Link</h4>
+          <div style={{ fontSize: '0.85rem' }}>
             <Link 
               to="/who-we-are" 
               style={linkStyle('who-we-are')}
@@ -85,10 +87,10 @@ export const Footer: React.FC = () => {
           </div>
         </div>
 
-        {/* Take Action */}
+        {/* 3. Take Action */}
         <div style={columnStyle}>
-          <h4 style={{ marginBottom: '15px', color: theme.colors.white }}>Take Action</h4>
-          <div style={{ fontSize: '0.9rem' }}>
+          <h4 style={{ marginBottom: '20px', color: theme.colors.white, fontSize: '1rem', fontWeight: 'bold' }}>Take Action</h4>
+          <div style={{ fontSize: '0.85rem' }}>
             <Link 
               to="/contact" 
               style={linkStyle('contact')}
@@ -124,10 +126,10 @@ export const Footer: React.FC = () => {
           </div>
         </div>
 
-        {/* Legal Column */}
+        {/* 4. Legal Column */}
         <div style={columnStyle}>
-          <h4 style={{ marginBottom: '15px', color: theme.colors.white }}>Legal</h4>
-          <div style={{ fontSize: '0.9rem' }}>
+          <h4 style={{ marginBottom: '20px', color: theme.colors.white, fontSize: '1rem', fontWeight: 'bold' }}>Legal</h4>
+          <div style={{ fontSize: '0.85rem' }}>
             <Link 
               to="/privacy-policy" 
               style={linkStyle('privacy')}
@@ -155,10 +157,10 @@ export const Footer: React.FC = () => {
           </div>
         </div>
 
-        {/* Contact Column */}
+        {/* 5. Contact Column */}
         <div style={columnStyle}>
-          <h4 style={{ marginBottom: '15px', color: theme.colors.white }}>Contact Us</h4>
-          <p style={{ fontSize: '0.9rem', color: '#ccc', lineHeight: '1.8' }}>
+          <h4 style={{ marginBottom: '20px', color: theme.colors.white, fontSize: '1rem', fontWeight: 'bold' }}>Contact Us</h4>
+          <p style={{ fontSize: '0.85rem', color: '#ccc', lineHeight: '1.8', margin: 0 }}>
             Email: info@joharfoundation.org<br/>
             Phone: +91 9117115050<br/>
             Location: Jharkhand, India
@@ -167,7 +169,7 @@ export const Footer: React.FC = () => {
       </div>
 
       <div style={{ 
-        borderTop: '1px solid #555', 
+        borderTop: '1px solid #444', 
         paddingTop: '20px', 
         textAlign: 'center', 
         fontSize: '0.8rem', 
@@ -175,6 +177,26 @@ export const Footer: React.FC = () => {
       }}>
         © {new Date().getFullYear()} Johar Foundation. All Rights Reserved.
       </div>
+
+      {/* Embedded Breakpoint Queries to maintain multi-row stacking logic elegantly on mobile viewports */}
+      <style>{`
+        @media (max-width: 992px) {
+          .footer-grid-container {
+            grid-template-columns: repeat(3, 1fr) !important;
+            gap: 30px !important;
+          }
+        }
+        @media (max-width: 768px) {
+          .footer-grid-container {
+            grid-template-columns: 1fr !important;
+            gap: 35px !important;
+          }
+          .footer-grid-container > div {
+            align-items: center !important;
+            text-align: center !important;
+          }
+        }
+      `}</style>
     </footer>
   );
 };

@@ -78,14 +78,15 @@ export const Navbar: React.FC = () => {
           </>
         )}
 
-        {/* Donate Button (Always Visible) */}
+        {/* Donate Button (Color fixed to Organization Crimson Red) */}
         <Link 
           to="/donate" 
           onMouseEnter={() => setIsDonateHovered(true)}
           onMouseLeave={() => setIsDonateHovered(false)}
           style={{
             textDecoration: 'none',
-            backgroundColor: isDonateHovered ? theme.colors.secondary : theme.colors.accent,
+            // FIXED: Changed from theme.colors.accent to theme.colors.primary (Red)
+            backgroundColor: isDonateHovered ? theme.colors.secondary : theme.colors.primary,
             color: theme.colors.white,
             padding: isMobile ? '8px 16px' : '10px 24px',
             borderRadius: '24px',
@@ -97,6 +98,7 @@ export const Navbar: React.FC = () => {
             gap: '5px'
           }}
         >
+          {/* Note: Kept the heart icon symbol intact */}
           ❤ {isMobile ? 'Donate' : 'Donate Now'}
         </Link>
 
@@ -126,7 +128,7 @@ export const Navbar: React.FC = () => {
           <Link to="/who-we-are" onClick={() => setIsMenuOpen(false)} style={getLinkStyle('/who-we-are')}>Who We Are</Link>
           <Link to="/initiatives" onClick={() => setIsMenuOpen(false)} style={getLinkStyle('/initiatives')}>Initiatives</Link>
           <Link to="/impact" onClick={() => setIsMenuOpen(false)} style={getLinkStyle('/impact')}>Impact</Link>
-           <Link to="/get-involved" onClick={() => setIsMenuOpen(false)} style={getLinkStyle('/get-involved')}>Get Involved</Link>
+          <Link to="/get-involved" onClick={() => setIsMenuOpen(false)} style={getLinkStyle('/get-involved')}>Get Involved</Link>
           <Link to="/resources" onClick={() => setIsMenuOpen(false)} style={getLinkStyle('/resources')}>Resources</Link>
           <Link to="/contact" onClick={() => setIsMenuOpen(false)} style={getLinkStyle('/contact')}>Contact</Link>
         </div>
