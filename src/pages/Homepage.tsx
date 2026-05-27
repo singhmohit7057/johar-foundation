@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { theme } from '../theme/styles';
 import { SEO } from '../shared/seo';
-import { Newsletter } from '../subscribe/newsletter';
+// import { Newsletter } from '../subscribe/newsletter';
 
 import { 
   FaArrowRight, FaUsers, FaGraduationCap, 
@@ -85,11 +85,9 @@ export const HeroBackgroundSliderAsymmetric: React.FC = () => {
           </p>
 
           <div style={{ display: 'flex', gap: '20px' }}>
-            <Link to="/initiatives" style={{ backgroundColor: theme.colors.primary, color: 'white', textDecoration: 'none', padding: '14px 32px', borderRadius: '5px', fontWeight: 'bold' }}>
-              View Our Projects
-            </Link>
-            <Link to="/get-involved" style={{ color: 'white', textDecoration: 'none', border: '2px solid white', padding: '14px 32px', borderRadius: '5px', fontWeight: 'bold' }}>
-              Volunteer Now
+           
+            <Link to="/donate" style={{ color: 'white', textDecoration: 'none', border: '2px solid white', padding: '14px 32px', borderRadius: '5px', fontWeight: 'bold' }}>
+              BE THE CHANGE
             </Link>
           </div>
         </div>
@@ -104,7 +102,8 @@ export const HeroBackgroundSliderAsymmetric: React.FC = () => {
 const HomePage: React.FC = () => {
   const [hoveredState, setHoveredState] = useState<string>('JH');
 
-  const badgeStyle: React.CSSProperties = {
+{/*  commented for future use
+    const badgeStyle: React.CSSProperties = {
     display: 'inline-block',
     padding: '5px 14px',
     backgroundColor: `${theme.colors.primary}12`,
@@ -115,7 +114,9 @@ const HomePage: React.FC = () => {
     marginBottom: '14px',
     letterSpacing: '1px',
     textTransform: 'uppercase'
-  };
+  }; 
+  
+  */}
 
   const sectionWrapperStyle: React.CSSProperties = {
     padding: '80px 5%',
@@ -165,7 +166,9 @@ const HomePage: React.FC = () => {
       <div style={sectionWrapperStyle}>
         <div style={{ display: 'flex', gap: '60px', alignItems: 'center' }} className="split-layout">
           <div style={{ flex: '1.2', textAlign: 'left' }}>
-            <div style={badgeStyle}>OUR IDENTITY</div>
+
+          {/*  <div style={badgeStyle}>OUR IDENTITY</div> */}
+
             <h2 style={{ fontSize: '2.2rem', color: theme.colors.secondary, fontWeight: '800', margin: '0 0 20px 0' }}>
               Who We Are
             </h2>
@@ -190,7 +193,9 @@ const HomePage: React.FC = () => {
       <div style={{ backgroundColor: '#fafafa', borderTop: '1px solid #f2f2f2', borderBottom: '1px solid #f2f2f2' }}>
         <div style={sectionWrapperStyle}>
           <div style={{ textAlign: 'center', marginBottom: '50px' }}>
-            <div style={badgeStyle}> WHAT WE DO</div>
+
+          {/*  <div style={badgeStyle}> WHAT WE DO</div> */}
+
             <h2 style={{ fontSize: '2.2rem', color: theme.colors.secondary, fontWeight: '800', margin: 0 }}>
               Our Core Initiatives
             </h2>
@@ -223,7 +228,9 @@ const HomePage: React.FC = () => {
       {/* 5. INTERACTIVE REGIONAL MAP FOOTPRINT PREVIEW */}
       <div style={sectionWrapperStyle}>
         <div style={{ textAlign: 'center', marginBottom: '45px' }}>
-          <div style={badgeStyle}>REGIONAL FOOTPRINT</div>
+
+         {/* <div style={badgeStyle}>REGIONAL FOOTPRINT</div> */}
+
           <h2 style={{ fontSize: '2.2rem', color: theme.colors.secondary, fontWeight: '800', margin: '0 0 10px 0' }}>
             States We Serve
           </h2>
@@ -292,37 +299,7 @@ const HomePage: React.FC = () => {
         </div>
       </div>
 
-      {/* 6. GLOBAL IMPACT SUMMARY CARD BLOCK */}
-      <div style={{ backgroundColor: '#fafafa', borderTop: '1px solid #f2f2f2', borderBottom: '1px solid #f2f2f2' }}>
-        <div style={sectionWrapperStyle}>
-          <div style={{ display: 'flex', gap: '60px', alignItems: 'center' }} className="split-layout reverse">
-            <div style={{ flex: '0.8' }} className="img-container">
-              <div style={{
-                width: '100%', height: '240px', backgroundColor: 'white', borderRadius: '20px',
-                border: '1px solid #eaeaea', display: 'flex', flexDirection: 'column', 
-                justifyContent: 'center', alignItems: 'center', gap: '10px', padding: '30px', boxSizing: 'border-box'
-              }}>
-                <span style={{ fontSize: '3rem', fontWeight: '800', color: theme.colors.primary }}>350+</span>
-                <span style={{ fontSize: '0.9rem', fontWeight: 'bold', color: theme.colors.secondary, textTransform: 'uppercase', letterSpacing: '1px', textAlign: 'center' }}>Active Mahila SHGs</span>
-              </div>
-            </div>
-            <div style={{ flex: '1.2', textAlign: 'left' }}>
-              <div style={badgeStyle}>OUR FOOTPRINT</div>
-              <h2 style={{ fontSize: '2.2rem', color: theme.colors.secondary, fontWeight: '800', margin: '0 0 20px 0' }}>
-                The Impact Created
-              </h2>
-              <p style={{ color: '#555', fontSize: '0.98rem', lineHeight: '1.7', marginBottom: '25px' }}>
-                We monitor data lines transparently across 15+ engaged field districts. From establishing micro-financial literacy metrics for women to launching local athletic programs, every parameter is fully audited and available for community verification.
-              </p>
-              <Link to="/impact" className="redirect-btn">
-                View Audit Reports & Statistics <FaArrowRight size={12} />
-              </Link>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* 7. VOLUNTEER WORKSPACE ACTION PREVIEW */}
+      {/* 6. VOLUNTEER WORKSPACE ACTION PREVIEW */}
       <div style={{ backgroundColor: theme.colors.secondary, color: 'white', borderTop: `4px solid ${theme.colors.primary}` }}>
         <div style={{ ...sectionWrapperStyle, textAlign: 'center', padding: '70px 5%' }}>
           <FaHandHoldingHeart size={40} color={theme.colors.primary} style={{ marginBottom: '15px' }} />
@@ -341,8 +318,40 @@ const HomePage: React.FC = () => {
         </div>
       </div>
 
-      {/* 8. NEWSLETTER SUBSCRIPTION TRACK */}
-      <Newsletter />
+        {/* 7. GLOBAL IMPACT SUMMARY CARD BLOCK */}
+      <div style={{ backgroundColor: '#fafafa', borderTop: '1px solid #f2f2f2', borderBottom: '1px solid #f2f2f2' }}>
+        <div style={sectionWrapperStyle}>
+          <div style={{ display: 'flex', gap: '60px', alignItems: 'center' }} className="split-layout reverse">
+            <div style={{ flex: '0.8' }} className="img-container">
+              <div style={{
+                width: '100%', height: '240px', backgroundColor: 'white', borderRadius: '20px',
+                border: '1px solid #eaeaea', display: 'flex', flexDirection: 'column', 
+                justifyContent: 'center', alignItems: 'center', gap: '10px', padding: '30px', boxSizing: 'border-box'
+              }}>
+                <span style={{ fontSize: '3rem', fontWeight: '800', color: theme.colors.primary }}>350+</span>
+                <span style={{ fontSize: '0.9rem', fontWeight: 'bold', color: theme.colors.secondary, textTransform: 'uppercase', letterSpacing: '1px', textAlign: 'center' }}>Active Mahila SHGs</span>
+              </div>
+            </div>
+            <div style={{ flex: '1.2', textAlign: 'left' }}>
+
+             {/* <div style={badgeStyle}>OUR FOOTPRINT</div> */}
+
+              <h2 style={{ fontSize: '2.2rem', color: theme.colors.secondary, fontWeight: '800', margin: '0 0 20px 0' }}>
+                The Impact Created
+              </h2>
+              <p style={{ color: '#555', fontSize: '0.98rem', lineHeight: '1.7', marginBottom: '25px' }}>
+                We monitor data lines transparently across 15+ engaged field districts. From establishing micro-financial literacy metrics for women to launching local athletic programs, every parameter is fully audited and available for community verification.
+              </p>
+              <Link to="/impact" className="redirect-btn">
+                View Audit Reports & Statistics <FaArrowRight size={12} />
+              </Link>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* 8. NEWSLETTER SUBSCRIPTION TRACK 
+      <Newsletter /> */}
 
       {/* Scoped CSS Style Framework and Marquee Track Controllers */}
       <style>{`

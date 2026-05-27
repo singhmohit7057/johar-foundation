@@ -72,7 +72,7 @@ export const Navbar: React.FC = () => {
             <Link to="/who-we-are" style={getLinkStyle('/who-we-are')}>Who We Are</Link>
             <Link to="/initiatives" style={getLinkStyle('/initiatives')}>Initiatives</Link>
             <Link to="/impact" style={getLinkStyle('/impact')}>Impact</Link>
-            <Link to="/get-involved" style={getLinkStyle('/get-involved')}>Get Involved</Link>
+            <Link to="/get-involved" style={getLinkStyle('/get-involved')}>Volunteer</Link>
             <Link to="/contact" style={getLinkStyle('/contact')}>Contact</Link>
           </>
         )}
@@ -127,7 +127,7 @@ export const Navbar: React.FC = () => {
           <Link to="/who-we-are" onClick={() => setIsMenuOpen(false)} style={getLinkStyle('/who-we-are')}>Who We Are</Link>
           <Link to="/initiatives" onClick={() => setIsMenuOpen(false)} style={getLinkStyle('/initiatives')}>Initiatives</Link>
           <Link to="/impact" onClick={() => setIsMenuOpen(false)} style={getLinkStyle('/impact')}>Impact</Link>
-          <Link to="/get-involved" onClick={() => setIsMenuOpen(false)} style={getLinkStyle('/get-involved')}>Get Involved</Link>
+          <Link to="/get-involved" onClick={() => setIsMenuOpen(false)} style={getLinkStyle('/get-involved')}>Volunteer</Link>
           <Link to="/contact" onClick={() => setIsMenuOpen(false)} style={getLinkStyle('/contact')}>Contact</Link>
         </div>
       )}

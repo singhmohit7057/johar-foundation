@@ -27,6 +27,7 @@ export const TopHeader: React.FC = () => {
     { label: 'Hindi', native: 'हिन्दी', code: 'hi' },
     { label: 'Bengali', native: 'বাংলা', code: 'bn' },
     { label: 'Odia', native: 'ଓଡ଼ିଆ', code: 'or' },
+    { label: 'Santali', native: 'ᱚᱞ ᱪᱤᱠᱤ', code: 'sat-Olck' },
   ];
 
   useEffect(() => {
@@ -36,7 +37,7 @@ export const TopHeader: React.FC = () => {
         new window.google.translate.TranslateElement(
           {
             pageLanguage: 'en',
-            includedLanguages: 'hi,bn,or',
+            includedLanguages: 'hi,bn,or,sat-Olck',
             autoDisplay: false,
           },
           'google_translate_element'
@@ -139,7 +140,7 @@ export const TopHeader: React.FC = () => {
         {/* Left Side: Contact */}
         <div style={{ display: 'flex', gap: '20px', alignItems: 'center' }} className="contact-info">
           <a href="tel:+919117115050" style={{ color: 'inherit', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '8px' }}>
-            <FaPhoneAlt size={12} /> <span className="hide-mobile">+91 9117115050</span>
+            <FaPhoneAlt size={12} /> <span className="hide-mobile">+91-9117115050</span>
           </a>
           <a href="mailto:info@joharfoundation.com" style={{ color: 'inherit', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '8px' }}>
             <FaEnvelope size={12} /> <span className="hide-mobile">info@joharfoundation.com</span>
@@ -150,7 +151,7 @@ export const TopHeader: React.FC = () => {
           <div style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
             <div style={{ display: 'flex', gap: '15px' }} className="social-icons">
               <a 
-                href="https://facebook.com/themadmysteryteam" 
+                href="https://facebook.com/joharfoundation" 
                 target="_blank" 
                 rel="noopener noreferrer" 
                 style={{ color: 'inherit', display: 'flex', alignItems: 'center' }}
@@ -159,7 +160,7 @@ export const TopHeader: React.FC = () => {
                 <FaFacebookF size={14} style={{ cursor: 'pointer' }} />
               </a>
               <a 
-                href="https://instagram.com/themadmysteryteam" 
+                href="https://instagram.com/joharfoundation_" 
                 target="_blank" 
                 rel="noopener noreferrer" 
                 style={{ color: 'inherit', display: 'flex', alignItems: 'center' }}

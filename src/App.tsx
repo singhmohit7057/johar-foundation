@@ -14,7 +14,6 @@ import { Footer } from "./shared/footer";
 import { ScrollToTop } from "./router/scrolltotop";
 
 // Floating Components
-import { StickyDonateButton } from "./floating/sticky-donate-button";
 import { BackToTop } from "./floating/backtotop";
 
 // Popup
@@ -66,7 +65,6 @@ const MainLayout = () => {
       </main>
 
       <BackToTop />
-      <StickyDonateButton />
       <Footer />
     </div>
   );
