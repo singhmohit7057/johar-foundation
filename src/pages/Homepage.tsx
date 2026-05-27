@@ -46,32 +46,51 @@ export const HeroBackgroundSliderAsymmetric: React.FC = () => {
   }, [slides.length]);
 
   return (
-    <div style={{ 
+    <div className="hero-slider-root" style={{ 
       position: 'relative',
-      height: '85vh',
+      height: '80vh',
       display: 'flex',
       alignItems: 'center',
       overflow: 'hidden',
       backgroundColor: '#111',
       borderBottom: `5px solid ${theme.colors.primary}`
     }}>
+
       {/* Background Image Layer Loops */}
       {slides.map((img, idx) => (
-        <div key={idx} style={{
-          position: 'absolute',
-          top: 0, left: 0, width: '100%', height: '100%',
-          backgroundImage: `linear-gradient(to right, rgba(0,0,0,0.9) 20%, rgba(0,0,0,0.2) 100%), url("${img}")`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          opacity: current === idx ? 1 : 0,
-          transition: 'opacity 1.5s ease-in-out',
-          zIndex: 0
-        }} />
+        <div 
+          key={idx} 
+          className="hero-bg-layer" 
+          style={{
+            position: 'absolute',
+            top: 0, 
+            left: 0, 
+            width: '100%', 
+            height: '100%',
+            backgroundImage: `url("${img}")`, 
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            opacity: current === idx ? 1 : 0,
+            transition: 'opacity 1.5s ease-in-out',
+            zIndex: 0
+          }}
+        >
+          {/* Standalone Dark Text-Contrast Overlay Layer */}
+          <div className="hero-gradient-overlay" style={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            width: '100%',
+            height: '100%',
+            background: 'linear-gradient(to right, rgba(0,0,0,0.8) 20%, rgba(0,0,0,0.4) 100%)',
+            zIndex: 1
+          }} />
+        </div>
       ))}
 
-      <div style={{ maxWidth: '1200px', width: '100%', margin: '0 auto', padding: '0 5%', position: 'relative', zIndex: 1 }}>
-        <div style={{ maxWidth: '600px', textAlign: 'left' }}>
-          <div style={{ borderLeft: `4px solid ${theme.colors.primary}`, paddingLeft: '20px', marginBottom: '30px' }}>
+      <div style={{ maxWidth: '1200px', width: '100%', margin: '0 auto', padding: '0 5%', position: 'relative', zIndex: 1 }} className="hero-wrapper-inner">
+        <div style={{ maxWidth: '600px', textAlign: 'left' }} className="hero-text-container">
+          <div style={{ borderLeft: `4px solid ${theme.colors.primary}`, paddingLeft: '20px', marginBottom: '30px' }} className="hero-badge-container">
             <h3 style={{ color: theme.colors.primary, margin: 0, fontSize: '1.2rem', fontWeight: 'bold' }}>Our On-Ground Reality</h3>
             <p style={{ color: '#ccc', margin: 0, fontSize: '0.9rem', fontStyle: 'italic' }}>Creating sustainable futures for tribal youth.</p>
           </div>
@@ -80,12 +99,11 @@ export const HeroBackgroundSliderAsymmetric: React.FC = () => {
             Sustainable Models.<br />Scalable Change.
           </h1>
           
-          <p style={{ fontSize: '1.05rem', color: '#bbb', lineHeight: '1.7', marginBottom: '35px' }}>
+          <p style={{ fontSize: '1.05rem', color: '#bbb', lineHeight: '1.7', marginBottom: '35px' }} className="hero-desc-responsive">
             Johar Welfare Foundation doesn't just provide aid; we build infrastructure and self-reliance pipelines that remain long after we leave.
           </p>
 
-          <div style={{ display: 'flex', gap: '20px' }}>
-           
+          <div style={{ display: 'flex', gap: '20px' }} className="hero-btn-group">
             <Link to="/donate" style={{ color: 'white', textDecoration: 'none', border: '2px solid white', padding: '14px 32px', borderRadius: '5px', fontWeight: 'bold' }}>
               BE THE CHANGE
             </Link>
@@ -102,7 +120,7 @@ export const HeroBackgroundSliderAsymmetric: React.FC = () => {
 const HomePage: React.FC = () => {
   const [hoveredState, setHoveredState] = useState<string>('JH');
 
-{/*  commented for future use
+{/* commented for future use
     const badgeStyle: React.CSSProperties = {
     display: 'inline-block',
     padding: '5px 14px',
@@ -164,22 +182,23 @@ const HomePage: React.FC = () => {
 
       {/* 3. WHO WE ARE INTRODUCTION SECTION PREVIEW */}
       <div style={sectionWrapperStyle}>
-        <div style={{ display: 'flex', gap: '60px', alignItems: 'center' }} className="split-layout">
-          <div style={{ flex: '1.2', textAlign: 'left' }}>
+        {/* Classes added to inner child components to structure the layout breakdown on mobile */}
+        <div style={{ display: 'flex', gap: '60px', alignItems: 'center' }} className="split-layout whoweare-layout">
+          <div style={{ flex: '1.2', textAlign: 'left' }} className="whoweare-text-col">
 
-          {/*  <div style={badgeStyle}>OUR IDENTITY</div> */}
+          {/* <div style={badgeStyle}>OUR IDENTITY</div> */}
 
-            <h2 style={{ fontSize: '2.2rem', color: theme.colors.secondary, fontWeight: '800', margin: '0 0 20px 0' }}>
+            <h2 style={{ fontSize: '2.2rem', color: theme.colors.secondary, fontWeight: '800', margin: '0 0 20px 0' }} className="whoweare-title">
               Who We Are
             </h2>
-            <p style={{ color: '#555', fontSize: '0.98rem', lineHeight: '1.7', marginBottom: '25px' }}>
+            <p style={{ color: '#555', fontSize: '0.98rem', lineHeight: '1.7', marginBottom: '25px' }} className="whoweare-desc">
               Headquartered in Jamshedpur, <strong>Johar Welfare Foundation</strong> is a Section 8 identity working across 5 eastern states. Guided by our philosophy <strong>"Jo Hare Na,"</strong> we co-create programs alongside tribal and rural communities to ensure absolute, sustainable transformation rather than transactional aid.
             </p>
-            <Link to="/who-we-are" className="redirect-btn">
+            <Link to="/who-we-are" className="redirect-btn whoweare-btn">
               Learn More About Our Team <FaArrowRight size={12} />
             </Link>
           </div>
-          <div style={{ flex: '0.8' }} className="img-container">
+          <div style={{ flex: '0.8' }} className="img-container whoweare-img-col">
             <div style={{
               width: '100%', height: '300px', backgroundColor: '#fafafa', borderRadius: '20px',
               backgroundImage: 'url("/whoweare.jpg")', backgroundSize: 'cover', backgroundPosition: 'center',
@@ -194,7 +213,7 @@ const HomePage: React.FC = () => {
         <div style={sectionWrapperStyle}>
           <div style={{ textAlign: 'center', marginBottom: '50px' }}>
 
-          {/*  <div style={badgeStyle}> WHAT WE DO</div> */}
+          {/* <div style={badgeStyle}> WHAT WE DO</div> */}
 
             <h2 style={{ fontSize: '2.2rem', color: theme.colors.secondary, fontWeight: '800', margin: 0 }}>
               Our Core Initiatives
@@ -318,7 +337,7 @@ const HomePage: React.FC = () => {
         </div>
       </div>
 
-        {/* 7. GLOBAL IMPACT SUMMARY CARD BLOCK */}
+      {/* 7. GLOBAL IMPACT SUMMARY CARD BLOCK */}
       <div style={{ backgroundColor: '#fafafa', borderTop: '1px solid #f2f2f2', borderBottom: '1px solid #f2f2f2' }}>
         <div style={sectionWrapperStyle}>
           <div style={{ display: 'flex', gap: '60px', alignItems: 'center' }} className="split-layout reverse">
@@ -333,9 +352,6 @@ const HomePage: React.FC = () => {
               </div>
             </div>
             <div style={{ flex: '1.2', textAlign: 'left' }}>
-
-             {/* <div style={badgeStyle}>OUR FOOTPRINT</div> */}
-
               <h2 style={{ fontSize: '2.2rem', color: theme.colors.secondary, fontWeight: '800', margin: '0 0 20px 0' }}>
                 The Impact Created
               </h2>
@@ -349,9 +365,6 @@ const HomePage: React.FC = () => {
           </div>
         </div>
       </div>
-
-      {/* 8. NEWSLETTER SUBSCRIPTION TRACK 
-      <Newsletter /> */}
 
       {/* Scoped CSS Style Framework and Marquee Track Controllers */}
       <style>{`
@@ -414,10 +427,144 @@ const HomePage: React.FC = () => {
 
         @media (max-width: 768px) {
           .hero-metric-panel-hide, .hero-media-container-hide { display: none !important; }
-          .split-layout { flex-direction: column !important; gap: 35px !important; text-align: center !important; }
-          .split-layout.reverse { flex-direction: column-reverse !important; }
+          
+          .split-layout { 
+            flex-direction: column !important; 
+            gap: 35px !important; 
+            text-align: center !important; 
+            align-items: center !important;
+          }
+          
+          .split-layout.reverse { 
+            flex-direction: column-reverse !important; 
+          }
+          
+          /* ==========================================================================
+             WHO WE ARE: STRUCTURAL SEPARATION (TITLE -> IMAGE -> TEXT)
+             ========================================================================== */
+          .split-layout.whoweare-layout {
+            display: flex !important;
+            flex-direction: column !important; /* Enforces top-to-bottom stack block routing */
+            gap: 20px !important;
+          }
+
+          .whoweare-text-col {
+            display: contents !important; /* Breaks out of container styles to isolate children sequencing */
+          }
+
+          .whoweare-title {
+            order: 1 !important; /* Title to dead top position */
+            text-align: center !important;
+            margin-bottom: 5px !important;
+          }
+
+          .whoweare-img-col {
+            order: 2 !important; /* Image locks directly in the center row context */
+            width: 100% !important;
+            margin-bottom: 10px !important;
+          }
+
+          .whoweare-desc {
+            order: 3 !important; /* Paragraph text flows cleanly underneath the layout image */
+            text-align: center !important;
+            margin-bottom: 20px !important;
+          }
+
+          .whoweare-btn {
+            order: 4 !important; /* Redirect link element settles at the final footer bounds */
+            justify-content: center !important;
+          }
+          /* ========================================================================== */
+          
+          .split-layout > div {
+            text-align: center !important;
+          }
+
           .img-container { width: 100% !important; }
-          .hero-title-responsive { font-size: 2.2rem !important; }
+          
+          /* ==========================================================================
+             PREMIUM GLASS CONTAINER CARDS FOR IMMERSIVE RESPONSIVE LAYOUTS
+             ========================================================================== */
+          .hero-slider-root {
+            height: 75vh !important; 
+            padding: 0 !important;
+            display: flex !important;
+            justify-content: center !important;
+            align-items: center !important;
+          }
+
+          .hero-wrapper-inner {
+            padding: 0 20px !important;
+            width: 100% !important;
+            z-index: 2 !important;
+          }
+
+          .hero-text-container {
+            text-align: center !important;
+            max-width: 100% !important;
+            background: rgba(0, 0, 0, 0.65) !important; 
+            backdrop-filter: blur(8px) !important; 
+            -webkit-backdrop-filter: blur(8px) !important;
+            padding: 30px 20px !important;
+            border-radius: 16px !important;
+            border: 1px solid rgba(255, 255, 255, 0.1) !important;
+            display: flex !important;
+            flex-direction: column !important;
+            align-items: center !important;
+          }
+          
+          .hero-badge-container {
+            border-left: none !important;
+            padding-left: 0 !important;
+            display: flex !important;
+            flex-direction: column !important;
+            align-items: center !important;
+            margin-bottom: 15px !important;
+          }
+
+          .hero-title-responsive { 
+            font-size: 2rem !important; 
+            text-align: center !important;
+            line-height: 1.3 !important;
+            margin-bottom: 12px !important;
+          }
+          
+          .hero-desc-responsive {
+            text-align: center !important;
+            font-size: 0.92rem !important;
+            line-height: 1.6 !important;
+            margin-bottom: 20px !important;
+            color: #dddddd !important;
+          }
+
+          .hero-btn-group {
+            justify-content: center !important;
+            width: 100% !important;
+          }
+
+          .hero-btn-group a {
+            padding: 12px 28px !important;
+            font-size: 0.85rem !important;
+          }
+
+          .hero-bg-layer {
+            position: absolute !important;
+            height: 100% !important; 
+            width: 100% !important;
+            background-size: cover !important; 
+            background-position: center center !important;
+            order: unset !important;
+            margin-top: 0 !important;
+            top: 0 !important;
+            left: 0 !important;
+          }
+
+          .hero-gradient-overlay {
+            display: block !important;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.4), rgba(0,0,0,0.7)) !important;
+          }
+          /* ========================================================================== */
+
           .hero-img-pane { height: 240px !important; }
         }
 

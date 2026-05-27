@@ -27,7 +27,7 @@ export const TopHeader: React.FC = () => {
     { label: 'Hindi', native: 'हिन्दी', code: 'hi' },
     { label: 'Bengali', native: 'বাংলা', code: 'bn' },
     { label: 'Odia', native: 'ଓଡ଼ିଆ', code: 'or' },
-    { label: 'Santali', native: 'ᱚᱞ ᱪᱤᱠᱤ', code: 'sat-Olck' },
+    { label: 'Santali', native: 'ᱚᱞ ᱪᱤᱠᱤ', code: 'sat' },
   ];
 
   useEffect(() => {
@@ -37,7 +37,7 @@ export const TopHeader: React.FC = () => {
         new window.google.translate.TranslateElement(
           {
             pageLanguage: 'en',
-            includedLanguages: 'hi,bn,or,sat-Olck',
+            includedLanguages: 'hi,bn,or,sat',
             autoDisplay: false,
           },
           'google_translate_element'
