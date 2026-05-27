@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { theme } from '../theme/styles';
 import { SEO } from '../shared/seo';
@@ -10,6 +10,7 @@ import {
   FaGlobe, FaVenus, FaBookOpen, FaBriefcase, FaStethoscope, FaChartBar
 } from 'react-icons/fa6';
 
+// Multi-Ticker Marquee Continuous Items Array Source
 const sliderSectors = [
   { label: 'TOURISM DEVELOPMENT', icon: <FaGlobe /> },
   { label: 'TRIBAL AFFAIRS', icon: <FaUsers /> },
@@ -21,6 +22,7 @@ const sliderSectors = [
   { label: 'HUMAN RIGHTS & SPORTS', icon: <FaChartBar /> }
 ];
 
+// Geographical Dataset mapped for Vector Paths
 const footprintRegions = [
   { id: 'JH', name: 'Jharkhand', node: 'Core Hub', focus: 'SHG Networks, Sports Academies & Tribal Advocacy' },
   { id: 'OR', name: 'Odisha', node: 'Eco-Tourism Belt', focus: 'Artisanal Cluster Trade & Maternal Care' },
@@ -29,6 +31,76 @@ const footprintRegions = [
   { id: 'CG', name: 'Chhattisgarh', node: 'Resilience Pocket', focus: 'Forest Produce Collectives & Rights Workshops' }
 ];
 
+/* ==========================================================================
+   HERO SELECTION VARIATION (Asymmetric Narrative Slider)
+   ========================================================================== */
+export const HeroBackgroundSliderAsymmetric: React.FC = () => {
+  const slides = ["/skill.jpg", "/whoweare.jpg"]; 
+  const [current, setCurrent] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrent((prev) => (prev + 1) % slides.length);
+    }, 6000);
+    return () => clearInterval(timer);
+  }, [slides.length]);
+
+  return (
+    <div style={{ 
+      position: 'relative',
+      height: '85vh',
+      display: 'flex',
+      alignItems: 'center',
+      overflow: 'hidden',
+      backgroundColor: '#111',
+      borderBottom: `5px solid ${theme.colors.primary}`
+    }}>
+      {/* Background Image Layer Loops */}
+      {slides.map((img, idx) => (
+        <div key={idx} style={{
+          position: 'absolute',
+          top: 0, left: 0, width: '100%', height: '100%',
+          backgroundImage: `linear-gradient(to right, rgba(0,0,0,0.9) 20%, rgba(0,0,0,0.2) 100%), url("${img}")`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          opacity: current === idx ? 1 : 0,
+          transition: 'opacity 1.5s ease-in-out',
+          zIndex: 0
+        }} />
+      ))}
+
+      <div style={{ maxWidth: '1200px', width: '100%', margin: '0 auto', padding: '0 5%', position: 'relative', zIndex: 1 }}>
+        <div style={{ maxWidth: '600px', textAlign: 'left' }}>
+          <div style={{ borderLeft: `4px solid ${theme.colors.primary}`, paddingLeft: '20px', marginBottom: '30px' }}>
+            <h3 style={{ color: theme.colors.primary, margin: 0, fontSize: '1.2rem', fontWeight: 'bold' }}>Our On-Ground Reality</h3>
+            <p style={{ color: '#ccc', margin: 0, fontSize: '0.9rem', fontStyle: 'italic' }}>Creating sustainable futures for tribal youth.</p>
+          </div>
+
+          <h1 style={{ fontSize: '3.5rem', fontWeight: '800', color: 'white', lineHeight: '1.2', marginBottom: '25px' }} className="hero-title-responsive">
+            Sustainable Models.<br />Scalable Change.
+          </h1>
+          
+          <p style={{ fontSize: '1.05rem', color: '#bbb', lineHeight: '1.7', marginBottom: '35px' }}>
+            Johar Welfare Foundation doesn't just provide aid; we build infrastructure and self-reliance pipelines that remain long after we leave.
+          </p>
+
+          <div style={{ display: 'flex', gap: '20px' }}>
+            <Link to="/initiatives" style={{ backgroundColor: theme.colors.primary, color: 'white', textDecoration: 'none', padding: '14px 32px', borderRadius: '5px', fontWeight: 'bold' }}>
+              View Our Projects
+            </Link>
+            <Link to="/get-involved" style={{ color: 'white', textDecoration: 'none', border: '2px solid white', padding: '14px 32px', borderRadius: '5px', fontWeight: 'bold' }}>
+              Volunteer Now
+            </Link>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+/* ==========================================================================
+   MAIN ROUTER PAGE WRAPPER 
+   ========================================================================== */
 const HomePage: React.FC = () => {
   const [hoveredState, setHoveredState] = useState<string>('JH');
 
@@ -56,55 +128,21 @@ const HomePage: React.FC = () => {
     <div style={{ backgroundColor: theme.colors.background, overflowX: 'hidden' }}>
       <SEO title="Home" description="Welcome to Johar Welfare Foundation (Jo Hare Na). Dedicated to sustainable development and community empowerment." />
 
-      {/* 1. HERO SECTION */}
-      <div style={{
-        background: `linear-gradient(135deg, ${theme.colors.secondary} 0%, #151515 100%)`,
-        color: '#fff',
-        padding: '120px 5% 100px 5%',
-        textAlign: 'center',
-        borderBottom: `5px solid ${theme.colors.primary}`
-      }}>
-        <div style={{ maxWidth: '900px', margin: '0 auto' }}>
-          <div style={{ ...badgeStyle, backgroundColor: 'rgba(255,255,255,0.08)', color: '#ff9da9' }}>
-            जोहार • Welcome to Johar Foundation
-          </div>
-          <h1 className="hero-title" style={{ fontWeight: '800', lineHeight: '1.2', margin: '0 0 20px 0' }}>
-            Rooted in Jharkhand.<br />Driven by Purpose.
-          </h1>
-          <p style={{ fontSize: '1.1rem', color: '#ccc', maxWidth: '650px', margin: '0 auto 35px auto', lineHeight: '1.6' }}>
-            Building self-reliance and long-term resilience across rural and tribal clusters through scalable implementation models.
-          </p>
-          <div style={{ display: 'flex', gap: '15px', justifyContent: 'center', flexWrap: 'wrap' }}>
-            <Link to="/get-involved" style={{
-              backgroundColor: theme.colors.primary, color: 'white', textDecoration: 'none',
-              padding: '14px 32px', borderRadius: '50px', fontWeight: 'bold', fontSize: '0.95rem',
-              display: 'flex', alignItems: 'center', gap: '8px', boxShadow: '0 4px 15px rgba(166, 38, 57, 0.3)'
-            }}>
-              Join Us As Volunteer <FaArrowRight size={14} />
-            </Link>
-            <Link to="/donate" style={{
-              backgroundColor: 'transparent', color: 'white', textDecoration: 'none',
-              padding: '14px 32px', borderRadius: '50px', fontWeight: 'bold', fontSize: '0.95rem',
-              border: '2px solid rgba(255,255,255,0.2)', transition: 'all 0.2s'
-            }} className="hero-sec-btn">
-              Donate Now
-            </Link>
-          </div>
-        </div>
-      </div>
+      {/* 1. MOUNTED ACTIVE HERO BLOCK */}
+      <HeroBackgroundSliderAsymmetric />
 
-      {/* 2. INFINITE SECTOR TICKER SLIDER (HEIGHT & SPACE OPTIMIZED) */}
+      {/* 2. INFINITE SECTOR TICKER SLIDER MARQUEE RUNWAY */}
       <div style={{ 
         backgroundColor: theme.colors.primary, 
         overflow: 'hidden', 
         whiteSpace: 'nowrap', 
-        padding: '24px 0', // UPDATED: Increased vertical width padding from 18px for structural presence
+        padding: '24px 0', 
         display: 'flex',
         alignItems: 'center',
         borderBottom: '1px solid rgba(0,0,0,0.1)'
       }}>
-        <div className="marquee-track" style={{ display: 'inline-flex', gap: '60px' }}> {/* UPDATED: Increased gap between tracking blocks */}
-          {/* First loop initialization copy */}
+        <div className="marquee-track" style={{ display: 'inline-flex', gap: '60px' }}>
+          {/* Loop Set 1 */}
           {sliderSectors.map((sector, sIdx) => (
             <div key={`s1-${sIdx}`} style={{ display: 'flex', alignItems: 'center', gap: '12px', color: 'white', fontWeight: '700', fontSize: '0.9rem', letterSpacing: '0.5px' }}>
               <span style={{ display: 'flex', opacity: 0.9 }}>{sector.icon}</span>
@@ -112,7 +150,7 @@ const HomePage: React.FC = () => {
               <span style={{ marginLeft: '45px', opacity: 0.4, fontSize: '0.8rem' }}>✦</span>
             </div>
           ))}
-          {/* Second duplicate buffer track loop */}
+          {/* Mirror Duplicate Track loop */}
           {sliderSectors.map((sector, sIdx) => (
             <div key={`s2-${sIdx}`} style={{ display: 'flex', alignItems: 'center', gap: '12px', color: 'white', fontWeight: '700', fontSize: '0.9rem', letterSpacing: '0.5px' }}>
               <span style={{ display: 'flex', opacity: 0.9 }}>{sector.icon}</span>
@@ -123,10 +161,10 @@ const HomePage: React.FC = () => {
         </div>
       </div>
 
-      {/* 3. WHO WE ARE PREVIEW */}
+      {/* 3. WHO WE ARE INTRODUCTION SECTION PREVIEW */}
       <div style={sectionWrapperStyle}>
         <div style={{ display: 'flex', gap: '60px', alignItems: 'center' }} className="split-layout">
-          <div style={{ flex: '1.2' }}>
+          <div style={{ flex: '1.2', textAlign: 'left' }}>
             <div style={badgeStyle}>OUR IDENTITY</div>
             <h2 style={{ fontSize: '2.2rem', color: theme.colors.secondary, fontWeight: '800', margin: '0 0 20px 0' }}>
               Who We Are
@@ -148,7 +186,7 @@ const HomePage: React.FC = () => {
         </div>
       </div>
 
-      {/* 4. INITIATIVES PREVIEW */}
+      {/* 4. MAIN PROGRAMMATIC INITIATIVES PREVIEW TRACK */}
       <div style={{ backgroundColor: '#fafafa', borderTop: '1px solid #f2f2f2', borderBottom: '1px solid #f2f2f2' }}>
         <div style={sectionWrapperStyle}>
           <div style={{ textAlign: 'center', marginBottom: '50px' }}>
@@ -182,7 +220,7 @@ const HomePage: React.FC = () => {
         </div>
       </div>
 
-      {/* 5. REGIONAL FOOTPRINT PREVIEW */}
+      {/* 5. INTERACTIVE REGIONAL MAP FOOTPRINT PREVIEW */}
       <div style={sectionWrapperStyle}>
         <div style={{ textAlign: 'center', marginBottom: '45px' }}>
           <div style={badgeStyle}>REGIONAL FOOTPRINT</div>
@@ -198,10 +236,8 @@ const HomePage: React.FC = () => {
           display: 'flex', backgroundColor: '#fff', border: '1px solid #ececec', 
           borderRadius: '24px', overflow: 'hidden', boxShadow: '0 10px 30px rgba(0,0,0,0.015)' 
         }}>
-          {/* SVG Map Vector Block */}
           <div style={{ flex: '1', padding: '40px', display: 'flex', justifyContent: 'center', alignItems: 'center', backgroundColor: '#fafafa' }}>
             <svg viewBox="0 0 400 380" style={{ width: '100%', maxWidth: '320px', height: 'auto' }}>
-              {/* Bihar */}
               <path d="M120,60 L240,55 L260,110 L160,120 L115,110 Z"
                 tabIndex={0} role="button" aria-label="Bihar"
                 onClick={() => setHoveredState('BR')} onMouseEnter={() => setHoveredState('BR')} onFocus={() => setHoveredState('BR')}
@@ -209,7 +245,6 @@ const HomePage: React.FC = () => {
               />
               <text x="165" y="90" style={{ fontSize: '10px', fontWeight: 'bold', fill: hoveredState === 'BR' ? '#fff' : '#666', pointerEvents: 'none' }}>BIHAR</text>
 
-              {/* Jharkhand */}
               <path d="M115,110 L160,120 L260,110 L280,180 L190,200 L110,175 Z"
                 tabIndex={0} role="button" aria-label="Jharkhand"
                 onClick={() => setHoveredState('JH')} onMouseEnter={() => setHoveredState('JH')} onFocus={() => setHoveredState('JH')}
@@ -217,7 +252,6 @@ const HomePage: React.FC = () => {
               />
               <text x="160" y="155" style={{ fontSize: '11px', fontWeight: 'bold', fill: hoveredState === 'JH' ? '#fff' : '#333', pointerEvents: 'none' }}>JHARKHAND</text>
 
-              {/* West Bengal */}
               <path d="M260,110 L350,115 L340,170 L280,240 L265,195 L280,180 Z"
                 tabIndex={0} role="button" aria-label="West Bengal"
                 onClick={() => setHoveredState('WB')} onMouseEnter={() => setHoveredState('WB')} onFocus={() => setHoveredState('WB')}
@@ -225,7 +259,6 @@ const HomePage: React.FC = () => {
               />
               <text x="285" y="155" style={{ fontSize: '9px', fontWeight: 'bold', fill: hoveredState === 'WB' ? '#fff' : '#666', pointerEvents: 'none', transform: 'rotate(12 278 150)' }}>W. BENGAL</text>
 
-              {/* Chhattisgarh */}
               <path d="M110,175 L190,200 L185,250 L145,340 L95,290 L100,220 Z"
                 tabIndex={0} role="button" aria-label="Chhattisgarh"
                 onClick={() => setHoveredState('CG')} onMouseEnter={() => setHoveredState('CG')} onFocus={() => setHoveredState('CG')}
@@ -233,8 +266,7 @@ const HomePage: React.FC = () => {
               />
               <text x="103" y="255" style={{ fontSize: '9px', fontWeight: 'bold', fill: hoveredState === 'CG' ? '#fff' : '#666', pointerEvents: 'none', transform: 'rotate(-70 115 255)' }}>CHHATTISGARH</text>
 
-              {/* Odisha */}
-                <path d="M190,200 L265,195 L280,240 L230,310 L185,250 Z"
+              <path d="M190,200 L265,195 L280,240 L230,310 L185,250 Z"
                 tabIndex={0} role="button" aria-label="Odisha"
                 onClick={() => setHoveredState('OR')} onMouseEnter={() => setHoveredState('OR')} onFocus={() => setHoveredState('OR')}
                 style={{ fill: hoveredState === 'OR' ? theme.colors.primary : '#dfdfdf', stroke: '#fff', strokeWidth: 2, cursor: 'pointer', transition: 'all 0.2s ease', outline: 'none' }}
@@ -243,7 +275,6 @@ const HomePage: React.FC = () => {
             </svg>
           </div>
 
-          {/* Context Details Panel Block */}
           <div style={{ flex: '1.2', padding: '45px', textAlign: 'left', display: 'flex', flexDirection: 'column', justifyContent: 'center', boxSizing: 'border-box' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: theme.colors.primary, fontSize: '0.82rem', fontWeight: '800', marginBottom: '8px', textTransform: 'uppercase' }}>
               <FaMapLocationDot /> {footprintRegions.find(r => r.id === hoveredState)?.node}
@@ -261,7 +292,7 @@ const HomePage: React.FC = () => {
         </div>
       </div>
 
-      {/* 6. IMPACT PREVIEW */}
+      {/* 6. GLOBAL IMPACT SUMMARY CARD BLOCK */}
       <div style={{ backgroundColor: '#fafafa', borderTop: '1px solid #f2f2f2', borderBottom: '1px solid #f2f2f2' }}>
         <div style={sectionWrapperStyle}>
           <div style={{ display: 'flex', gap: '60px', alignItems: 'center' }} className="split-layout reverse">
@@ -275,7 +306,7 @@ const HomePage: React.FC = () => {
                 <span style={{ fontSize: '0.9rem', fontWeight: 'bold', color: theme.colors.secondary, textTransform: 'uppercase', letterSpacing: '1px', textAlign: 'center' }}>Active Mahila SHGs</span>
               </div>
             </div>
-            <div style={{ flex: '1.2' }}>
+            <div style={{ flex: '1.2', textAlign: 'left' }}>
               <div style={badgeStyle}>OUR FOOTPRINT</div>
               <h2 style={{ fontSize: '2.2rem', color: theme.colors.secondary, fontWeight: '800', margin: '0 0 20px 0' }}>
                 The Impact Created
@@ -291,7 +322,7 @@ const HomePage: React.FC = () => {
         </div>
       </div>
 
-      {/* 7. VOLUNTEER WORKSPACE PREVIEW */}
+      {/* 7. VOLUNTEER WORKSPACE ACTION PREVIEW */}
       <div style={{ backgroundColor: theme.colors.secondary, color: 'white', borderTop: `4px solid ${theme.colors.primary}` }}>
         <div style={{ ...sectionWrapperStyle, textAlign: 'center', padding: '70px 5%' }}>
           <FaHandHoldingHeart size={40} color={theme.colors.primary} style={{ marginBottom: '15px' }} />
@@ -310,12 +341,12 @@ const HomePage: React.FC = () => {
         </div>
       </div>
 
-      {/* 8. NEWSLETTER SUBSCRIPTION */}
+      {/* 8. NEWSLETTER SUBSCRIPTION TRACK */}
       <Newsletter />
 
-      {/* Embedded UI Styling Overrides and CSS Marquee Keyframes */}
+      {/* Scoped CSS Style Framework and Marquee Track Controllers */}
       <style>{`
-        .hero-title { font-size: 3.6rem; }
+        .hero-title-responsive { font-size: 3.6rem; }
         
         .preview-card {
           background-color: white;
@@ -344,7 +375,7 @@ const HomePage: React.FC = () => {
         .white-hover-btn:hover { opacity: 0.95; }
 
         .marquee-track {
-          animation: infiniteScrollMarquee 32s linear infinite; /* Adjusted speed balance for wider items */
+          animation: infiniteScrollMarquee 32s linear infinite;
           width: max-content;
         }
 
@@ -358,25 +389,30 @@ const HomePage: React.FC = () => {
         }
 
         @media (max-width: 1024px) {
-          .hero-title { font-size: 2.8rem; }
+          .hero-title-responsive { font-size: 2.8rem !important; }
           .grid-layout-3x { grid-template-columns: repeat(2, 1fr) !important; gap: 20px !important; }
         }
 
         @media (max-width: 992px) {
+          .hero-split-responsive { flex-direction: column !important; text-align: center !important; gap: 40px !important; }
+          .hero-split-responsive > div { text-align: center !important; }
           .map-split-container { flex-direction: column !important; }
           .map-split-container > div { padding: 30px !important; text-align: center !important; }
           .map-split-container > div:last-child { align-items: center !important; }
           .redirect-btn { justify-content: center; }
+          .hero-img-pane { height: 300px !important; width: 100% !important; }
         }
 
         @media (max-width: 768px) {
+          .hero-metric-panel-hide, .hero-media-container-hide { display: none !important; }
           .split-layout { flex-direction: column !important; gap: 35px !important; text-align: center !important; }
           .split-layout.reverse { flex-direction: column-reverse !important; }
           .img-container { width: 100% !important; }
+          .hero-title-responsive { font-size: 2.2rem !important; }
+          .hero-img-pane { height: 240px !important; }
         }
 
         @media (max-width: 550px) {
-          .hero-title { font-size: 2.2rem; }
           .grid-layout-3x { grid-template-columns: 1fr !important; }
         }
       `}</style>
