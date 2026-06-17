@@ -7,6 +7,10 @@ export const theme = {
     white: '#FFFFFF',
     text: '#2D2926',
   },
+  typography: {
+    // ADDED: Explicit token declaration mapping your clean DM Sans typeface scale
+    fontFamily: "'DM Sans', sans-serif",
+  },
   spacing: {
     paddingSide: '5%',
     sectionGap: '80px',

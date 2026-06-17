@@ -5,7 +5,6 @@ import { ContactForm } from '../components/contactform';
 import { 
   FaFacebookF, 
   FaInstagram, 
-  FaLinkedinIn, 
   FaTwitter 
 } from 'react-icons/fa';
 
@@ -38,10 +37,9 @@ const Contact: React.FC = () => {
   });
 
   const socialLinks = [
-    { platform: 'facebook', icon: <FaFacebookF />, url: 'https://facebook.com/joharfoundation' },
-    { platform: 'instagram', icon: <FaInstagram />, url: 'https://instagram.com/joharfoundation' },
-    { platform: 'linkedin', icon: <FaLinkedinIn />, url: 'https://linkedin.com/company/joharfoundation' },
-    { platform: 'twitter', icon: <FaTwitter />, url: 'https://twitter.com/joharfoundation' },
+    { platform: 'facebook', icon: <FaFacebookF />, url: 'https://facebook.com/joharwelfarefoundation' },
+    { platform: 'instagram', icon: <FaInstagram />, url: 'https://instagram.com/joharfoundation_' },
+    { platform: 'twitter', icon: <FaTwitter />, url: 'https://twitter.com/joharwelfarefoundation' },
   ];
 
   return (

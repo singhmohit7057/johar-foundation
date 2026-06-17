@@ -21,19 +21,7 @@ const DonatePage: React.FC = () => {
     textTransform: 'uppercase'
   };
 
-  const theoryTileStyle = (color: string): React.CSSProperties => ({
-    backgroundColor: color,
-    color: 'white',
-    padding: '25px 15px',
-    borderRadius: '12px',
-    textAlign: 'center',
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    gap: '12px',
-    flex: '1 1 250px',
-    boxShadow: '0 8px 15px rgba(0,0,0,0.08)'
-  });
+  // FIXED: Removed the unused theoryTileStyle definition block to satisfy the build runner compiler parameters
 
   const impactItemStyle: React.CSSProperties = {
     flex: '1 1 150px',
@@ -153,7 +141,7 @@ const DonatePage: React.FC = () => {
       <style>{`
         .responsive-h1 { font-size: 2.8rem; }
         @media (max-width: 992px) {
-          .donate-grid, .theory-grid { flex-direction: column !important; gap: 40px !important; align-items: center !important; }
+          .donate-grid { flex-direction: column !important; gap: 40px !important; align-items: center !important; }
           .responsive-h1 { font-size: 2.2rem !important; }
           .bank-box { width: 100%; box-sizing: border-box; }
         }
