@@ -77,6 +77,7 @@ export const TopHeader: React.FC = () => {
     const domain = window.location.hostname;
     const baseDomain = domain.substring(domain.lastIndexOf('.', domain.lastIndexOf('.') - 1));
 
+    /* eslint-disable react-hooks/immutability */
     if (langCode === 'en') {
       // Revert page back to English by nuking Google's tracking cookies
       document.cookie = "googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
@@ -89,6 +90,7 @@ export const TopHeader: React.FC = () => {
       document.cookie = `googtrans=${cookieValue}; path=/; domain=${domain};`;
       document.cookie = `googtrans=${cookieValue}; path=/; domain=${baseDomain};`;
     }
+    /* eslint-enable react-hooks/immutability */
 
     // Force application reload to let Google script reconstruct translation elements on bootstrap
     window.location.reload();

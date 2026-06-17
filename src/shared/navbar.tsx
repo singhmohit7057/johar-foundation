@@ -28,6 +28,7 @@ export const Navbar: React.FC = () => {
     localStorage.setItem('johar_lang_code', code);
     const domain = window.location.hostname;
     const base = domain.substring(domain.lastIndexOf('.', domain.lastIndexOf('.') - 1));
+    /* eslint-disable react-hooks/immutability */
     if (code === 'en') {
       document.cookie = 'googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
       document.cookie = `googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=${domain};`;
@@ -38,6 +39,7 @@ export const Navbar: React.FC = () => {
       document.cookie = `googtrans=${v}; path=/; domain=${domain};`;
       document.cookie = `googtrans=${v}; path=/; domain=${base};`;
     }
+    /* eslint-enable react-hooks/immutability */
     window.location.reload();
   };
 

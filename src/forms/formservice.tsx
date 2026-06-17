@@ -30,7 +30,7 @@ const getAccessKey = (type: FormType): string => {
  */
 export const submitToWeb3Forms = async (
   type: FormType, 
-  data: Record<string, any>
+  data: Record<string, unknown>
 ): Promise<{ success: boolean; message: string }> => {
   const accessKey = getAccessKey(type);
 

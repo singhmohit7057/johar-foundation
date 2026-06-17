@@ -306,7 +306,9 @@ const Initiatives: React.FC = () => {
                 style={{ width: '100%', maxWidth: 340, height: 'auto', display: 'block' }}
               >
                 <Geographies geography="/india-states.json">
+                  {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
                   {({ geographies }: { geographies: any[] }) =>
+                    // eslint-disable-next-line @typescript-eslint/no-explicit-any
                     geographies.filter((geo: any) => footprintRegions.some(r => r.name === geo.properties.name)).map((geo: any) => {
                       const match = footprintRegions.find(r => r.name === geo.properties.name)!;
                       const isActive = selectedState === match.id;
