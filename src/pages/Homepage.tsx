@@ -8,7 +8,8 @@ import { footprintRegions } from '../data/footprintRegions';
 import {
   FaArrowRight, FaUsers, FaGraduationCap,
   FaHeartPulse, FaHandHoldingHeart,
-  FaGlobe, FaVenus, FaBookOpen, FaBriefcase, FaStethoscope, FaChartBar
+  FaGlobe, FaVenus, FaBookOpen, FaBriefcase, FaStethoscope, FaChartBar,
+  FaUserShield
 } from 'react-icons/fa6';
 
 // Multi-Ticker Marquee Continuous Items Array Source
@@ -24,6 +25,17 @@ const sliderSectors = [
 ];
 
 // footprintRegions imported from src/data/footprintRegions.ts
+
+const WaveDivider: React.FC<{ topColor: string; bottomColor: string; flip?: boolean }> = ({
+  topColor, bottomColor, flip = false,
+}) => (
+  <div style={{ lineHeight: 0, background: topColor, transform: flip ? 'scaleX(-1)' : undefined }}>
+    <svg viewBox="0 0 1440 72" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none"
+      style={{ display: 'block', width: '100%', height: 72 }}>
+      <path d="M0,36 C240,72 480,0 720,36 C960,72 1200,0 1440,36 L1440,72 L0,72 Z" fill={bottomColor} />
+    </svg>
+  </div>
+);
 
 /* ==========================================================================
    HERO — POLAROID DENSE (Warm Red Blob)
@@ -55,7 +67,7 @@ const HeroCopyContent = ({ size }: { size: 'mobile' | 'tablet' | 'desktop' }) =>
       letterSpacing: '-0.02em', margin: 0,
     }}>
       Together, we're not just reaching lives —<br />
-      we're <span style={{ borderBottom: `3px solid ${theme.colors.primary}`, paddingBottom: '1px' }}>transforming them.</span>
+      we're <span>transforming them.</span>
     </h1>
 
     <div style={{ height: 28 }} />
@@ -380,8 +392,10 @@ const HomePage: React.FC = () => {
         </div>
       </div>
 
+      <WaveDivider topColor="#F9F7F2" bottomColor="#fafafa" />
+
       {/* 4. MAIN PROGRAMMATIC INITIATIVES PREVIEW TRACK */}
-      <div style={{ backgroundColor: '#fafafa', borderTop: '1px solid #f2f2f2', borderBottom: '1px solid #f2f2f2' }}>
+      <div style={{ backgroundColor: '#fafafa' }}>
         <div style={sectionWrapperStyle}>
           <div style={{ textAlign: 'center', marginBottom: '50px' }}>
             <h2 style={{ fontSize: '2.2rem', color: theme.colors.secondary, fontWeight: '800', margin: 0 }}>
@@ -392,17 +406,32 @@ const HomePage: React.FC = () => {
             <div className="preview-card">
               <FaUsers size={24} color={theme.colors.primary} />
               <h4>Tribal Affairs & Advocacy</h4>
-              <p>Protecting rights, custom mapping forest assets, and preserving cultural heritage structures.</p>
+              <p>Working with tribal communities on forest rights, land mapping, and getting their claims on record before someone else decides.</p>
             </div>
             <div className="preview-card">
               <FaGraduationCap size={24} color={theme.colors.primary} />
               <h4>Skill Development</h4>
-              <p>Providing modern vocational training and tech classrooms for underprivileged rural youth.</p>
+              <p>Vocational training and digital classrooms for rural youth — tailoring, computing, and trades that actually lead somewhere.</p>
             </div>
             <div className="preview-card">
               <FaHeartPulse size={24} color={theme.colors.primary} />
               <h4>Health & Family Welfare</h4>
-              <p>Deploying responsive screening health camps and baseline child nutrition programs.</p>
+              <p>Free health camps, child nutrition tracking, and maternal care in villages where the nearest clinic is more than a walk away.</p>
+            </div>
+            <div className="preview-card">
+              <FaVenus size={24} color={theme.colors.primary} />
+              <h4>Women's Empowerment</h4>
+              <p>SHGs, legal literacy, and livelihood training. Women in the program have opened bank accounts and started small businesses.</p>
+            </div>
+            <div className="preview-card">
+              <FaBookOpen size={24} color={theme.colors.primary} />
+              <h4>Education & Literacy</h4>
+              <p>Tuition centres and digital classrooms in areas where the nearest school is a long walk. Someone who shows up changes things.</p>
+            </div>
+            <div className="preview-card">
+              <FaUserShield size={24} color={theme.colors.primary} />
+              <h4>Child Protection & Rights</h4>
+              <p>Village-level work on birth registration, child labour, and school re-enrollment. Getting children on record and back in a classroom.</p>
             </div>
           </div>
           <div style={{ textAlign: 'center' }}>
@@ -412,6 +441,8 @@ const HomePage: React.FC = () => {
           </div>
         </div>
       </div>
+
+      <WaveDivider topColor="#fafafa" bottomColor="#F9F7F2" flip />
 
       {/* 5. INTERACTIVE REGIONAL MAP FOOTPRINT PREVIEW */}
       <div style={sectionWrapperStyle}>
@@ -481,19 +512,9 @@ const HomePage: React.FC = () => {
 
           {/* Right: info panel */}
           <div style={{ flex: '1.2', padding: '45px', display: 'flex', flexDirection: 'column', justifyContent: 'center', boxSizing: 'border-box', borderLeft: '1px solid #f0f0f0' }}>
-            {/* Tag pill */}
-            <span style={{
-              fontSize: '0.65rem', fontWeight: 'bold', color: theme.colors.primary,
-              textTransform: 'uppercase', letterSpacing: '1px',
-              border: `1px solid ${theme.colors.primary}35`,
-              padding: '3px 10px', borderRadius: '30px',
-              display: 'inline-block', marginBottom: '12px', width: 'fit-content',
-            }}>
-              {footprintRegions.find(r => r.id === hoveredState)?.tagline}
-            </span>
             {/* State name heading */}
             <h3 style={{ margin: '0 0 15px 0', fontSize: '1.8rem', color: theme.colors.secondary, fontWeight: '700' }}>
-              {footprintRegions.find(r => r.id === hoveredState)?.name} Focus
+              {footprintRegions.find(r => r.id === hoveredState)?.name}
             </h3>
             {/* Description */}
             <p style={{ margin: '0 0 25px 0', color: '#555', fontSize: '0.9rem', lineHeight: '1.6' }}>
@@ -515,33 +536,15 @@ const HomePage: React.FC = () => {
         </div>
       </div>
 
-      {/* 6. VOLUNTEER WORKSPACE ACTION PREVIEW */}
-      <div style={{ backgroundColor: theme.colors.secondary, color: 'white', borderTop: `4px solid ${theme.colors.primary}` }}>
-        <div style={{ ...sectionWrapperStyle, textAlign: 'center', padding: '70px 5%' }}>
-          <FaHandHoldingHeart size={40} color={theme.colors.primary} style={{ marginBottom: '15px' }} />
-          <h2 style={{ fontSize: '2.2rem', fontWeight: '800', margin: '0 0 15px 0', color: 'white' }}>
-            Become a Catalyst for Change
-          </h2>
-          <p style={{ color: '#bbb', fontSize: '1rem', maxWidth: '600px', margin: '0 auto 35px auto', lineHeight: '1.6' }}>
-            Our field operations run on the energy of over 30+ dedicated on-ground volunteers. Whether your skill is digital advocacy or grassroot teaching, your hours matter.
-          </p>
-          <Link to="/get-involved" style={{
-            display: 'inline-block', backgroundColor: 'white', color: 'black', textDecoration: 'none',
-            padding: '12px 35px', borderRadius: '50px', fontWeight: 'bold', fontSize: '0.9rem'
-          }} className="white-hover-btn">
-            Apply For Open Roles
-          </Link>
-        </div>
-      </div>
-
-      {/* 7. GLOBAL IMPACT SUMMARY CARD BLOCK */}
-      <div style={{ backgroundColor: '#fafafa', borderTop: '1px solid #f2f2f2', borderBottom: '1px solid #f2f2f2' }}>
+      {/* 6. GLOBAL IMPACT SUMMARY CARD BLOCK — commented out for future use
+      <WaveDivider topColor="#F9F7F2" bottomColor="#fafafa" />
+      <div style={{ backgroundColor: '#fafafa' }}>
         <div style={sectionWrapperStyle}>
           <div style={{ display: 'flex', gap: '60px', alignItems: 'center' }} className="split-layout reverse">
             <div style={{ flex: '0.8' }} className="img-container">
               <div style={{
                 width: '100%', height: '240px', backgroundColor: 'white', borderRadius: '20px',
-                border: '1px solid #eaeaea', display: 'flex', flexDirection: 'column', 
+                border: '1px solid #eaeaea', display: 'flex', flexDirection: 'column',
                 justifyContent: 'center', alignItems: 'center', gap: '10px', padding: '30px', boxSizing: 'border-box'
               }}>
                 <span style={{ fontSize: '3rem', fontWeight: '800', color: theme.colors.primary }}>350+</span>
@@ -560,6 +563,29 @@ const HomePage: React.FC = () => {
               </Link>
             </div>
           </div>
+        </div>
+      </div>
+      <WaveDivider topColor="#fafafa" bottomColor={theme.colors.secondary} flip />
+      */}
+
+      <WaveDivider topColor="#F9F7F2" bottomColor={theme.colors.secondary} flip />
+
+      {/* 7. VOLUNTEER WORKSPACE ACTION PREVIEW */}
+      <div style={{ backgroundColor: theme.colors.secondary, color: 'white' }}>
+        <div style={{ ...sectionWrapperStyle, textAlign: 'center', padding: '70px 5%' }}>
+          <FaHandHoldingHeart size={40} color={theme.colors.primary} style={{ marginBottom: '15px' }} />
+          <h2 style={{ fontSize: '2.2rem', fontWeight: '800', margin: '0 0 15px 0', color: 'white' }}>
+            Your time is worth something here.
+          </h2>
+          <p style={{ color: '#bbb', fontSize: '1rem', maxWidth: '600px', margin: '0 auto 35px auto', lineHeight: '1.6' }}>
+            Our programs exist because 30 people showed up. A few hours or a full season — all of it moves things forward.
+          </p>
+          <Link to="/get-involved" style={{
+            display: 'inline-block', backgroundColor: 'white', color: 'black', textDecoration: 'none',
+            padding: '12px 35px', borderRadius: '50px', fontWeight: 'bold', fontSize: '0.9rem'
+          }} className="white-hover-btn">
+            Become a Volunteer
+          </Link>
         </div>
       </div>
 
@@ -619,7 +645,7 @@ const HomePage: React.FC = () => {
 
         .polaroid-frame {
           position: absolute;
-          background-color: #ffffff;
+          background-color: #F9F7F2;
           padding: 8px 8px 12px 8px; 
           box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
           border: 1px solid #e2e2e2;
@@ -706,8 +732,8 @@ const HomePage: React.FC = () => {
           }
 
           .map-split-container { flex-direction: column !important; }
-          .map-split-container > div { padding: 30px !important; text-align: center !important; }
-          .map-split-container > div:last-child { align-items: center !important; }
+          .map-split-container > div { padding: 24px !important; }
+          .map-split-container > div:last-child { text-align: left !important; align-items: flex-start !important; border-left: none !important; border-top: 1px solid #f0f0f0; }
           .redirect-btn { justify-content: center; }
         }
 

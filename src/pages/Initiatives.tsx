@@ -5,7 +5,7 @@ import { footprintRegions } from '../data/footprintRegions';
 import {
   FaGraduationCap, FaBriefcase, FaStethoscope, FaLeaf,
   FaUsers, FaGlobe, FaSearch, FaUserFriends, FaChartBar,
-  FaBookOpen, FaHeart, FaBolt, FaShieldAlt, FaHandshake
+  FaBookOpen, FaHeart, FaBolt, FaShieldAlt
 } from 'react-icons/fa';
 
 /* ─── Design tokens ──────────────────────────────────────────────────────────── */
@@ -85,14 +85,6 @@ const coreValuesData = [
   { title: 'Impact',          desc: 'Every rupee and every hour is evaluated against measurable community outcomes.',                    icon: <FaChartBar />    },
 ];
 
-const partnersData = [
-  { name: 'State Depts (JSLPS)' },
-  { name: 'Corporate CSR'       },
-  { name: 'NABARD Support'      },
-  { name: 'Local Collaborators' },
-  { name: 'Skill Partners'      },
-  { name: 'Academic Links'      },
-];
 
 /* ─── Component ──────────────────────────────────────────────────────────────── */
 const Initiatives: React.FC = () => {
@@ -174,7 +166,7 @@ const Initiatives: React.FC = () => {
             color: EARTH, lineHeight: 1.25, margin: '0 0 28px',
           }}>
             Our Work,<br />
-            <span style={{ color: CRIMSON }}>Our Programs.</span>
+            <span style={{ color: CRIMSON }}>Our Mission.</span>
           </h1>
           <p className="jwf-fade-in jwf-d2" style={{ fontSize: '1.15rem', lineHeight: 1.75, color: EARTH_MUTED, maxWidth: 540, margin: '0 auto 40px' }}>
             There are people in this country the system has never reached. Not because they don't exist, but because reaching them is hard. The Johar Foundation has been making that trip, again and again.
@@ -391,32 +383,6 @@ const Initiatives: React.FC = () => {
         </div>
       </section>
 
-      <WaveDivider topColor={BG} bottomColor={SECTION_ALT} />
-
-      {/* ── PARTNERS ──────────────────────────────────────────────────────────── */}
-      <section style={{ background: SECTION_ALT, padding: '80px 5%' }}>
-        <div style={{ maxWidth: 1200, margin: '0 auto' }}>
-          <SectionHeader
-            pill="Our Collaborators"
-            heading="Partners & Stakeholders"
-            sub="We work alongside state bodies, rural institutions, and corporate partners to build programs that last."
-          />
-          <div className="jwf-partners-grid">
-            {partnersData.map((p, i) => (
-              <div key={i} className="jwf-partner-card" style={{
-                background: WHITE, border: '1px solid #e8e0d8', borderRadius: 12,
-                padding: '22px 12px', display: 'flex', flexDirection: 'column',
-                alignItems: 'center', justifyContent: 'center', gap: 10,
-              }}>
-                <FaHandshake style={{ color: CRIMSON, fontSize: '1.3rem', opacity: 0.7 }} />
-                <span style={{ fontFamily: "'DM Sans', sans-serif", fontSize: '0.72rem', fontWeight: 700, color: EARTH, letterSpacing: '0.5px', textAlign: 'center' }}>
-                  {p.name}
-                </span>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
 
     </div>
   );

@@ -825,7 +825,7 @@ const WhoWeAre: React.FC = () => {
           alt="Women of Johar Foundation"
           style={{
             width: '100%',
-            height: 280,
+            height: 400,
             objectFit: 'cover',
             objectPosition: 'center',
             display: 'block',

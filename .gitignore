@@ -47,3 +47,18 @@ Desktop.ini
 
 # TypeScript Build & Incremental Compilation Cache
 *.tsbuildinfo
+
+# Claude Code
+.claude/
+
+# ESLint Cache
+.eslintcache
+
+# Test Coverage Output
+coverage/
+
+# Graphify Generated Output
+graphify-out/
+
+# Local SSL Certificates
+*.pem

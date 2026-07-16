@@ -16,11 +16,24 @@ export const ContactForm: React.FC = () => {
   const [errorMessage, setErrorMessage] = useState('');
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+    if (name === 'name' && /[^a-zA-Z ]/.test(value)) return;
+    if (name === 'phone') {
+      const digits = value.replace(/\D/g, '').slice(0, 10);
+      const formatted = digits.length > 5 ? `${digits.slice(0, 5)} ${digits.slice(5)}` : digits;
+      setFormData({ ...formData, phone: formatted });
+      return;
+    }
+    setFormData({ ...formData, [name]: value });
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (formData.phone.replace(/\s/g, '').length !== 10) {
+      setStatus('error');
+      setErrorMessage('Phone number must be exactly 10 digits after +91.');
+      return;
+    }
     setStatus('submitting');
     setErrorMessage('');
 
@@ -46,11 +59,11 @@ export const ContactForm: React.FC = () => {
 
   const inputStyle: React.CSSProperties = {
     width: '100%',
-    padding: '14px',
-    marginBottom: '20px',
+    padding: '10px 12px',
+    marginBottom: '12px',
     borderRadius: '6px',
     border: `1px solid rgba(0,0,0,0.1)`,
-    fontSize: '1rem',
+    fontSize: '0.9rem',
     fontFamily: 'inherit',
     boxSizing: 'border-box',
     outline: 'none',
@@ -88,38 +101,43 @@ export const ContactForm: React.FC = () => {
     );
   }
 
+  const req = <span style={{ color: '#e74c3c', marginLeft: 2 }}>*</span>;
+
   return (
     <form onSubmit={handleSubmit}>
       {/* Grid for Name, Email, and Phone */}
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0 20px' }}>
         <div style={{ gridColumn: 'span 2' }}>
-           <label style={labelStyle}>Full Name</label>
+           <label style={labelStyle}>Full Name {req}</label>
            <input type="text" name="name" required disabled={status === 'submitting'} value={formData.name} onChange={handleChange} style={inputStyle} placeholder="Mohit Singh" />
         </div>
-        
+
         <div>
-          <label style={labelStyle}>Email</label>
+          <label style={labelStyle}>Email {req}</label>
           <input type="email" name="email" required disabled={status === 'submitting'} value={formData.email} onChange={handleChange} style={inputStyle} placeholder="mohit@tmmt.in" />
         </div>
 
         <div>
-          <label style={labelStyle}>Phone Number <span style={{ fontWeight: 'normal', color: '#888' }}></span></label>
-          <input type="tel" name="phone" disabled={status === 'submitting'} value={formData.phone} onChange={handleChange} style={inputStyle} placeholder="+91 XXXXX XXXXX" />
+          <label style={labelStyle}>Phone Number {req}</label>
+          <div style={{ display: 'flex', alignItems: 'center', border: '1px solid rgba(0,0,0,0.1)', borderRadius: '6px', marginBottom: '12px', overflow: 'hidden', backgroundColor: '#fff' }}>
+            <span style={{ padding: '10px 10px', fontSize: '0.9rem', color: '#555', backgroundColor: '#f5f5f5', borderRight: '1px solid rgba(0,0,0,0.1)', whiteSpace: 'nowrap' }}>+91</span>
+            <input type="tel" name="phone" required disabled={status === 'submitting'} value={formData.phone} onChange={handleChange} style={{ ...inputStyle, marginBottom: 0, border: 'none', borderRadius: 0, flex: 1 }} placeholder="XXXXX XXXXX" maxLength={11} />
+          </div>
         </div>
       </div>
 
-      <label style={labelStyle}>Subject</label>
+      <label style={labelStyle}>Subject {req}</label>
       <input type="text" name="subject" required disabled={status === 'submitting'} value={formData.subject} onChange={handleChange} style={inputStyle} />
-      
-      <label style={labelStyle}>Message</label>
-      <textarea name="message" required disabled={status === 'submitting'} value={formData.message} onChange={handleChange} style={{ ...inputStyle, height: '120px', resize: 'none' }} />
+
+      <label style={labelStyle}>Message {req}</label>
+      <textarea name="message" required disabled={status === 'submitting'} value={formData.message} onChange={handleChange} style={{ ...inputStyle, height: '90px', resize: 'none' }} />
       
       <button 
         type="submit" 
         disabled={status === 'submitting'}
         style={{
           width: '100%',
-          padding: '15px',
+          padding: '12px',
           backgroundColor: theme.colors.primary,
           color: 'white',
           border: 'none',

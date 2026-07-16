@@ -14,9 +14,12 @@ export const Popup: React.FC<PopupProps> = ({ delay = 3000 }) => {
   const modalRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const isDismissed = localStorage.getItem('johar_popup_dismissed');
-    
+    const stored = localStorage.getItem('johar_popup_dismissed');
+    const TWENTY_FOUR_HOURS = 24 * 60 * 60 * 1000;
+    const isDismissed = stored && (Date.now() - parseInt(stored, 10)) < TWENTY_FOUR_HOURS;
+
     if (!isDismissed) {
+      if (stored) localStorage.removeItem('johar_popup_dismissed'); // expired — clean up
       const timer = setTimeout(() => {
         setIsVisible(true);
       }, delay);
@@ -26,7 +29,7 @@ export const Popup: React.FC<PopupProps> = ({ delay = 3000 }) => {
 
   const handleClose = () => {
     if (dontShowAgain) {
-      localStorage.setItem('johar_popup_dismissed', 'true');
+      localStorage.setItem('johar_popup_dismissed', Date.now().toString());
     }
     setIsVisible(false);
   };

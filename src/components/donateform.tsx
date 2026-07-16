@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { theme } from '../theme/styles';
 import { submitToWeb3Forms } from '../forms/formservice';
-import { FaUser, FaEnvelope, FaPhone, FaIdCard, FaIndianRupeeSign, FaSpinner } from 'react-icons/fa6';
+import { FaUser, FaEnvelope, FaIdCard, FaIndianRupeeSign, FaSpinner } from 'react-icons/fa6';
 import { FaCheckCircle } from 'react-icons/fa'; // FIXED: Pulling from standard 'fa' pack to prevent bundle crash
 
 export const DonateForm: React.FC = () => {
@@ -20,7 +20,20 @@ export const DonateForm: React.FC = () => {
   const presetAmounts = ['500', '1000', '2500', '5000'];
 
   const handleDonorChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setDonorData({ ...donorData, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+    if (name === 'fullName' && /[^a-zA-Z ]/.test(value)) return;
+    if (name === 'mobile') {
+      const digits = value.replace(/\D/g, '').slice(0, 10);
+      const formatted = digits.length > 5 ? `${digits.slice(0, 5)} ${digits.slice(5)}` : digits;
+      setDonorData({ ...donorData, mobile: formatted });
+      return;
+    }
+    if (name === 'panNumber') {
+      const pan = value.toUpperCase().slice(0, 10);
+      setDonorData({ ...donorData, panNumber: pan });
+      return;
+    }
+    setDonorData({ ...donorData, [name]: value });
   };
 
   const handleDonateSubmit = async (e: React.FormEvent) => {
@@ -28,6 +41,16 @@ export const DonateForm: React.FC = () => {
     if (!amount || parseFloat(amount) <= 0) {
       setStatus('error');
       setErrorMessage('Please specify a valid donation amount.');
+      return;
+    }
+    if (donorData.mobile.replace(/\s/g, '').length !== 10) {
+      setStatus('error');
+      setErrorMessage('Mobile number must be exactly 10 digits.');
+      return;
+    }
+    if (donorData.panNumber && !/^[A-Z]{5}[0-9]{4}[A-Z]{1}$/.test(donorData.panNumber)) {
+      setStatus('error');
+      setErrorMessage('Invalid PAN format. Expected: ABCDE1234F');
       return;
     }
 
@@ -55,16 +78,16 @@ export const DonateForm: React.FC = () => {
   };
 
   const fieldGroupStyle: React.CSSProperties = {
-    marginBottom: '24px',
+    marginBottom: '12px',
     textAlign: 'left'
   };
 
   const labelStyle: React.CSSProperties = {
     display: 'block',
-    fontSize: '0.8rem',
+    fontSize: '0.72rem',
     fontWeight: '700',
     color: theme.colors.secondary,
-    marginBottom: '10px',
+    marginBottom: '6px',
     textTransform: 'uppercase',
     letterSpacing: '0.5px'
   };
@@ -74,17 +97,17 @@ export const DonateForm: React.FC = () => {
     display: 'flex',
     alignItems: 'center',
     backgroundColor: '#f8f9fa',
-    borderRadius: '12px',
+    borderRadius: '10px',
     border: '1px solid #e9ecef',
     transition: 'all 0.2s ease',
   };
 
   const inputStyle: React.CSSProperties = {
     width: '100%',
-    padding: '14px 16px 14px 45px',
-    borderRadius: '12px',
+    padding: '10px 12px 10px 40px',
+    borderRadius: '10px',
     border: 'none',
-    fontSize: '1rem',
+    fontSize: '0.9rem',
     color: '#333',
     outline: 'none',
     backgroundColor: 'transparent',
@@ -93,23 +116,23 @@ export const DonateForm: React.FC = () => {
 
   const amountBtnStyle = (selected: boolean): React.CSSProperties => ({
     flex: '1 1 0',
-    padding: '14px 5px',
-    borderRadius: '10px',
+    padding: '10px 5px',
+    borderRadius: '8px',
     border: `2px solid ${selected ? theme.colors.primary : '#eee'}`,
     backgroundColor: selected ? theme.colors.primary : 'white',
     color: selected ? 'white' : '#555',
     fontWeight: '700',
     cursor: 'pointer',
     transition: 'all 0.2s cubic-bezier(0.4, 0, 0.2, 1)',
-    fontSize: '0.95rem',
+    fontSize: '0.88rem',
     boxShadow: selected ? `0 4px 12px ${theme.colors.primary}44` : 'none'
   });
 
   return (
-    <div style={{ 
-      backgroundColor: 'white', 
-      padding: '40px', 
-      borderRadius: '28px', 
+    <div style={{
+      backgroundColor: 'white',
+      padding: '24px 28px',
+      borderRadius: '28px',
       boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.1)',
       width: '100%',
       maxWidth: '550px',
@@ -117,11 +140,11 @@ export const DonateForm: React.FC = () => {
       boxSizing: 'border-box',
       border: '1px solid #f1f1f1'
     }}>
-      <div style={{ textAlign: 'center', marginBottom: '35px' }}>
-        <h3 style={{ color: theme.colors.secondary, fontSize: '1.8rem', fontWeight: '800', margin: '0 0 10px 0' }}>
+      <div style={{ textAlign: 'center', marginBottom: '16px' }}>
+        <h3 style={{ color: theme.colors.secondary, fontSize: '1.4rem', fontWeight: '800', margin: '0 0 4px 0' }}>
           Make an Impact
         </h3>
-        <p style={{ color: '#777', fontSize: '0.9rem', margin: 0 }}>Your contribution brings smiles to those in need.</p>
+        <p style={{ color: '#777', fontSize: '0.82rem', margin: 0 }}>Your contribution brings smiles to those in need.</p>
       </div>
 
       {status === 'success' ? (
@@ -146,7 +169,7 @@ export const DonateForm: React.FC = () => {
           {/* SECTION 1: AMOUNT */}
           <div style={fieldGroupStyle}>
             <label style={labelStyle}>Select Donation Amount</label>
-            <div style={{ display: 'flex', gap: '10px', marginBottom: '12px' }}>
+            <div style={{ display: 'flex', gap: '8px', marginBottom: '8px' }}>
               {presetAmounts.map((amt) => (
                 <button 
                   type="button"
@@ -163,11 +186,11 @@ export const DonateForm: React.FC = () => {
               type="button"
               disabled={status === 'submitting'}
               style={{
-                width: '100%', padding: '12px', borderRadius: '10px',
+                width: '100%', padding: '8px', borderRadius: '8px',
                 border: `2px dashed ${activePreset === 'custom' ? theme.colors.primary : '#ccc'}`,
                 backgroundColor: activePreset === 'custom' ? `${theme.colors.primary}08` : 'transparent',
                 color: activePreset === 'custom' ? theme.colors.primary : '#777',
-                fontWeight: '600', fontSize: '0.9rem', cursor: 'pointer', marginBottom: '15px'
+                fontWeight: '600', fontSize: '0.85rem', cursor: 'pointer', marginBottom: '8px'
               }}
               onClick={() => { setActivePreset('custom'); setAmount(''); }}
             >
@@ -176,37 +199,59 @@ export const DonateForm: React.FC = () => {
 
             <div style={{ ...inputContainerStyle, border: `1px solid ${activePreset === 'custom' ? theme.colors.primary : '#e9ecef'}` }}>
               <FaIndianRupeeSign style={{ position: 'absolute', left: '18px', color: theme.colors.primary }} />
-              <input 
-                type="number" 
+              <input
+                type="number"
                 required
                 disabled={status === 'submitting'}
                 value={amount}
-                placeholder="0.00" 
-                style={{ ...inputStyle, fontWeight: '800', fontSize: '1.3rem', color: theme.colors.primary }}
-                onChange={(e) => {
-                  setAmount(e.target.value);
-                  setActivePreset('custom');
-                }}
+                placeholder="0.00"
+                className="donate-amount-input"
+                style={{ ...inputStyle, fontWeight: '800', fontSize: '1.3rem', color: theme.colors.primary, MozAppearance: 'textfield' } as React.CSSProperties}
+                onChange={(e) => { setAmount(e.target.value); setActivePreset('custom'); }}
               />
+              <div style={{ display: 'flex', flexDirection: 'column', position: 'absolute', right: '10px', gap: '2px' }}>
+                {[1, -1].map((dir) => (
+                  <button
+                    key={dir}
+                    type="button"
+                    disabled={status === 'submitting'}
+                    onClick={() => {
+                      const cur = parseFloat(amount) || 0;
+                      const step = cur >= 10000 ? 1000 : 100;
+                      const next = Math.max(0, cur + dir * step);
+                      setAmount(String(next));
+                      setActivePreset('custom');
+                    }}
+                    style={{
+                      width: '22px', height: '18px', border: '1px solid #e0d8d0',
+                      borderRadius: '4px', background: '#f5f2ee',
+                      color: theme.colors.primary, cursor: 'pointer',
+                      fontSize: '0.65rem', display: 'flex', alignItems: 'center', justifyContent: 'center',
+                      padding: 0, lineHeight: 1,
+                    }}
+                  >{dir === 1 ? '▲' : '▼'}</button>
+                ))}
+              </div>
             </div>
+            <style>{`.donate-amount-input::-webkit-inner-spin-button,.donate-amount-input::-webkit-outer-spin-button{-webkit-appearance:none;margin:0}`}</style>
           </div>
 
           {/* SECTION 2: DONOR DETAILS */}
-          <div style={{ ...fieldGroupStyle, padding: '20px', backgroundColor: '#fcfcfc', borderRadius: '15px', border: '1px solid #f1f1f1' }}>
+          <div style={{ ...fieldGroupStyle, padding: '12px', backgroundColor: '#fcfcfc', borderRadius: '12px', border: '1px solid #f1f1f1' }}>
             <label style={labelStyle}>Donor Information</label>
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '15px', marginBottom: '15px' }}>
-                <div style={inputContainerStyle}>
-                  <FaUser style={{ position: 'absolute', left: '18px', color: '#adb5bd', fontSize: '0.9rem' }} />
-                  <input type="text" name="fullName" required placeholder="Full Name" disabled={status === 'submitting'} value={donorData.fullName} onChange={handleDonorChange} style={{ ...inputStyle, paddingLeft: '40px' }} />
-                </div>
-                <div style={inputContainerStyle}>
-                  <FaPhone style={{ position: 'absolute', left: '18px', color: '#adb5bd', fontSize: '0.9rem' }} />
-                  <input type="tel" name="mobile" required placeholder="Mobile" disabled={status === 'submitting'} value={donorData.mobile} onChange={handleDonorChange} style={{ ...inputStyle, paddingLeft: '40px' }} />
-                </div>
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px', marginBottom: '10px' }}>
+              <div style={inputContainerStyle}>
+                <FaUser style={{ position: 'absolute', left: '18px', color: '#adb5bd', fontSize: '0.9rem' }} />
+                <input type="text" name="fullName" required placeholder="Full Name *" disabled={status === 'submitting'} value={donorData.fullName} onChange={handleDonorChange} style={{ ...inputStyle, paddingLeft: '40px' }} />
+              </div>
+              <div style={{ ...inputContainerStyle, overflow: 'hidden' }}>
+                <span style={{ paddingLeft: '12px', paddingRight: '6px', fontSize: '0.85rem', color: '#555', whiteSpace: 'nowrap', flexShrink: 0 }}>+91</span>
+                <input type="tel" name="mobile" required placeholder="XXXXX XXXXX *" disabled={status === 'submitting'} value={donorData.mobile} onChange={handleDonorChange} maxLength={11} style={{ ...inputStyle, paddingLeft: '4px' }} />
+              </div>
             </div>
             <div style={inputContainerStyle}>
               <FaEnvelope style={{ position: 'absolute', left: '18px', color: '#adb5bd', fontSize: '0.9rem' }} />
-              <input type="email" name="email" required placeholder="Email Address" disabled={status === 'submitting'} value={donorData.email} onChange={handleDonorChange} style={{ ...inputStyle, paddingLeft: '40px' }} />
+              <input type="email" name="email" required placeholder="Email Address *" disabled={status === 'submitting'} value={donorData.email} onChange={handleDonorChange} style={{ ...inputStyle, paddingLeft: '40px' }} />
             </div>
           </div>
 
@@ -215,9 +260,9 @@ export const DonateForm: React.FC = () => {
             <label style={labelStyle}>Tax Benefit (Section 80G)</label>
             <div style={inputContainerStyle}>
               <FaIdCard style={{ position: 'absolute', left: '18px', color: '#adb5bd', fontSize: '0.9rem' }} />
-              <input type="text" name="panNumber" required placeholder="PAN Card Number" disabled={status === 'submitting'} value={donorData.panNumber} onChange={handleDonorChange} style={{ ...inputStyle, paddingLeft: '40px' }} />
+              <input type="text" name="panNumber" placeholder="PAN Card Number (optional)" disabled={status === 'submitting'} value={donorData.panNumber} onChange={handleDonorChange} style={{ ...inputStyle, paddingLeft: '40px' }} />
             </div>
-            <p style={{ fontSize: '0.75rem', color: '#888', marginTop: '10px', lineHeight: '1.4' }}>
+            <p style={{ fontSize: '0.72rem', color: '#888', marginTop: '6px', lineHeight: '1.4' }}>
               * PAN is mandatory for donations to claim tax exemption features under registered acts.
             </p>
           </div>
@@ -226,9 +271,9 @@ export const DonateForm: React.FC = () => {
             type="submit"
             disabled={status === 'submitting'}
             style={{
-              width: '100%', padding: '20px', backgroundColor: theme.colors.primary, color: 'white',
-              border: 'none', borderRadius: '15px', fontWeight: '800', fontSize: '1.1rem',
-              cursor: 'pointer', marginTop: '10px', boxShadow: `0 12px 24px -6px ${theme.colors.primary}66`,
+              width: '100%', padding: '14px', backgroundColor: theme.colors.primary, color: 'white',
+              border: 'none', borderRadius: '12px', fontWeight: '800', fontSize: '1rem',
+              cursor: 'pointer', marginTop: '6px', boxShadow: `0 8px 18px -6px ${theme.colors.primary}66`,
               display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '10px',
               transition: 'opacity 0.2s'
             }}

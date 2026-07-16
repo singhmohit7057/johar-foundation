@@ -177,14 +177,14 @@ export const Footer: React.FC = () => {
       <style>{`
         @media (max-width: 992px) {
           .footer-grid-container {
-            grid-template-columns: repeat(3, 1fr) !important;
+            grid-template-columns: repeat(2, 1fr) !important;
             gap: 30px !important;
           }
         }
-        @media (max-width: 768px) {
+        @media (max-width: 600px) {
           .footer-grid-container {
             grid-template-columns: 1fr !important;
-            gap: 35px !important;
+            gap: 28px !important;
           }
           .footer-grid-container > div {
             align-items: center !important;
