@@ -59,18 +59,39 @@ const polaroidCards = [
 const HeroCopyContent = ({ size }: { size: 'mobile' | 'tablet' | 'desktop' }) => (
   <>
     <h1 style={{
+      fontFamily: "'Lora', Georgia, serif",
       fontSize:
-        size === 'mobile'  ? 'clamp(1.3rem, 5vw, 1.7rem)' :
-        size === 'tablet'  ? 'clamp(1.3rem, 2.8vw, 1.8rem)' :
-                             'clamp(1.6rem, 2.5vw, 2.4rem)',
-      fontWeight: 500, lineHeight: 1.25, color: theme.colors.secondary,
-      letterSpacing: '-0.02em', margin: 0,
+        size === 'mobile'  ? 'clamp(1.8rem, 7vw, 2.4rem)' :
+        size === 'tablet'  ? 'clamp(2rem, 4vw, 2.6rem)' :
+                             'clamp(3rem, 3.8vw, 4.6rem)',
+      fontWeight: 600, fontStyle: 'italic',
+      lineHeight: 1.2, color: theme.colors.secondary,
+      letterSpacing: '-0.01em', margin: 0,
     }}>
-      Together, we're not just reaching lives —<br />
-      we're <span>transforming them.</span>
+      {size === 'desktop' ? <>लोकाः समस्ताः<br />सुखिनो भवन्तु</> : 'लोकाः समस्ताः सुखिनो भवन्तु'}
     </h1>
+    <div style={{
+      display: 'flex', alignItems: 'center',
+      gap: '10px',
+      margin: size === 'mobile' ? '10px 0 0' : '12px 0 0',
+      justifyContent: size === 'desktop' ? 'flex-start' : 'center',
+    }}>
+      {size === 'desktop' && <span style={{ display: 'block', width: '28px', height: '1px', background: '#A62639', flexShrink: 0 }} />}
+      <p style={{
+        margin: 0,
+        fontSize: size === 'mobile' ? '0.97rem' : '1rem',
+        fontStyle: 'italic',
+        color: '#A62639',
+        letterSpacing: '0.04em',
+        lineHeight: 1.5,
+        fontWeight: 400,
+        whiteSpace: size === 'desktop' ? 'nowrap' : 'normal',
+      }}>
+        May all beings everywhere be happy.
+      </p>
+    </div>
 
-    <div style={{ height: 28 }} />
+    <div style={{ height: size === 'desktop' ? 20 : 28 }} />
 
     <Link to="/donate" style={{
       display: 'inline-flex', alignItems: 'center', gap: '6px',
@@ -308,7 +329,7 @@ export const HeroBackgroundSliderAsymmetric: React.FC = () => {
           backgroundImage: `repeating-linear-gradient(118deg,transparent,transparent 38px,rgba(166,38,57,0.028) 38px,rgba(166,38,57,0.028) 39px)`,
           overflow: 'hidden', height: heroHeight, maxHeight: '920px',
         }}>
-          <div style={{ display: 'grid', gridTemplateColumns: '39fr 61fr', maxWidth: '1400px', margin: '0 auto', height: '100%', alignItems: 'stretch' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: '44fr 56fr', maxWidth: '1400px', margin: '0 auto', height: '100%', alignItems: 'stretch' }}>
             {CopyPanel}
             {ScatterPanel}
           </div>

@@ -271,16 +271,25 @@ const WhoWeAre: React.FC = () => {
             color: EARTH, lineHeight: 1.25, margin: '0 0 28px',
           }}>
             Our Story,<br />
-            <span style={{ color: CRIMSON }}>Our People.</span>
+            <span style={{ color: CRIMSON }}>Our Purpose.</span>
           </h1>
 
           <p className="d4b-fade-in d4b-d2" style={{
             fontSize: '1.15rem', lineHeight: 1.75, color: EARTH_MUTED,
-            maxWidth: 540, margin: '0 auto 40px',
+            maxWidth: 580, margin: '0 auto 48px',
           }}>
-            Across India's most underserved communities, the Johar Foundation
-            has spent over fifteen years nurturing dignity, lifting voices,
-            and weaving a fabric of enduring change — one person at a time.
+            Inspired by the spirit of "Jo Hare Na" — meaning those who never give up — our foundation
+            believes that every individual deserves the opportunity to learn, grow, and build a life of dignity.
+          </p>
+
+          <p className="d4b-fade-in d4b-d2" style={{
+            fontSize: '1.25rem', lineHeight: 1.8, color: EARTH,
+            maxWidth: 580, margin: '0 auto 40px',
+            fontFamily: "'Lora', serif", fontStyle: 'italic',
+            fontWeight: 400,
+          }}>
+            सर्वे भवन्तु सुखिनः । सर्वे सन्तु निरामयाः ॥<br />
+            <span style={{ fontSize: '0.92rem', letterSpacing: '0.03em', color: CRIMSON, fontWeight: 400 }}>"May all be happy. May all be healthy."</span>
           </p>
 
           <div className="d4b-fade-in d4b-d3" style={{ display: 'flex', justifyContent: 'center' }}>
@@ -364,32 +373,43 @@ const WhoWeAre: React.FC = () => {
               lineHeight: 1.2,
               marginBottom: 28,
             }}>
-              Rooted in Community,<br />
-              <span style={{ color: CRIMSON }}>Built to Last.</span>
+              Rooted in India,<br />
+              <span style={{ color: CRIMSON }}>Driven by Purpose.</span>
             </h2>
 
             <p style={{
-              fontSize: '1.05rem',
-              lineHeight: 1.88,
+              fontSize: '0.95rem',
+              lineHeight: 1.8,
               color: EARTH_MUTED,
-              marginBottom: 20,
+              marginBottom: 18,
               maxWidth: 520,
             }}>
-              The Johar Foundation is a registered non-governmental organisation
-              working across India. Founded on the conviction that every family
-              deserves dignity, livelihood, and agency — we partner with women,
-              youth, and marginalised communities in the country's most underserved regions.
+              India is a land rich in culture, heritage, natural resources, and resilient
+              communities. Yet many children remain out of school, women lack economic
+              opportunities, youth struggle to find employment, and rural communities continue
+              to face challenges in accessing quality education, healthcare, and sustainable livelihoods.
             </p>
             <p style={{
-              fontSize: '1.05rem',
-              lineHeight: 1.88,
+              fontSize: '0.95rem',
+              lineHeight: 1.8,
+              color: EARTH_MUTED,
+              marginBottom: 18,
+              maxWidth: 520,
+            }}>
+              Johar Foundation was established to bridge these gaps through community-led
+              development — focusing on long-term opportunities that empower individuals to
+              become self-reliant, confident, and capable of transforming their own communities.
+            </p>
+            <p style={{
+              fontSize: '0.95rem',
+              lineHeight: 1.8,
               color: EARTH_MUTED,
               marginBottom: 36,
               maxWidth: 520,
             }}>
-              Our work spans Self-Help Group formation, sustainable livelihoods,
-              skill development, and rights-based advocacy. We believe in solutions
-              led by the very people they serve: bottom-up, people-powered, and built to last.
+              We believe that real development begins at the grassroots. Every village, every
+              family, and every individual has the potential to create change when given the
+              right support, knowledge, and opportunities.
             </p>
 
             {/* Tag pills */}
