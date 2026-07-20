@@ -43,8 +43,12 @@ export const Footer: React.FC = () => {
       >
         {/* 1. About Column */}
         <div style={columnStyle}>
-          {/* RED & WHITE: Strong Red Heading */}
-          <h4 style={{ color: '#D32F2F', marginBottom: '20px', fontSize: '1rem', fontWeight: 'bold' }}>JOHAR FOUNDATION</h4>
+          <img
+            src="/logo.webp"
+            alt="Johar Foundation"
+            style={{ height: '52px', width: 'auto', marginBottom: '14px', objectFit: 'contain' }}
+          />
+          <h4 style={{ color: '#D32F2F', marginBottom: '12px', fontSize: '0.82rem', fontWeight: 'bold', letterSpacing: '0.03em' }}>JOHAR WELFARE FOUNDATION</h4>
           <p style={{ fontSize: '0.85rem', lineHeight: '1.6', color: '#555555', margin: 0 }}>
             "Jo Hare Na" — Dedicated to the resilience and empowerment of underserved communities.
           </p>
@@ -154,11 +158,37 @@ export const Footer: React.FC = () => {
         {/* 5. Contact Column */}
         <div style={columnStyle}>
           <h4 style={{ marginBottom: '20px', color: '#111111', fontSize: '1rem', fontWeight: 'bold' }}>Contact Us</h4>
-          <p style={{ fontSize: '0.85rem', color: '#555555', lineHeight: '1.8', margin: 0 }}>
-            Email: info@joharfoundation.org<br/>
-            Phone: +91 9117115050<br/>
-            Location: Jharkhand, India
-          </p>
+          <div style={{ fontSize: '0.85rem', color: '#555555', lineHeight: '1.8' }}>
+            <a
+              href="mailto:info@joharfoundation.org"
+              style={{ display: 'flex', alignItems: 'center', gap: '8px', color: hoveredLink === 'email' ? '#D32F2F' : '#555555', textDecoration: 'none', marginBottom: '10px', transition: 'color 0.3s ease' }}
+              onMouseEnter={() => setHoveredLink('email')}
+              onMouseLeave={() => setHoveredLink(null)}
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0 }}><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+              info@joharfoundation.org
+            </a>
+            <a
+              href="tel:+919117115050"
+              style={{ display: 'flex', alignItems: 'center', gap: '8px', color: hoveredLink === 'phone' ? '#D32F2F' : '#555555', textDecoration: 'none', marginBottom: '10px', transition: 'color 0.3s ease' }}
+              onMouseEnter={() => setHoveredLink('phone')}
+              onMouseLeave={() => setHoveredLink(null)}
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0 }}><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.18h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.8a16 16 0 0 0 6 6l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+              +91 9117115050
+            </a>
+            <a
+              href="https://maps.google.com/?q=Jharkhand,India"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{ display: 'flex', alignItems: 'center', gap: '8px', color: hoveredLink === 'location' ? '#D32F2F' : '#555555', textDecoration: 'none', transition: 'color 0.3s ease' }}
+              onMouseEnter={() => setHoveredLink('location')}
+              onMouseLeave={() => setHoveredLink(null)}
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0 }}><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+              Jharkhand, India
+            </a>
+          </div>
         </div>
       </div>
 
@@ -171,7 +201,7 @@ export const Footer: React.FC = () => {
           color: '#D32F2F', // Changed to matching red color
           fontWeight: '500'  // Optional: added slight weight for better readability in red
         }}>
-          © {new Date().getFullYear()} Johar Foundation. All Rights Reserved.
+          © {new Date().getFullYear()} Johar Welfare Foundation. All Rights Reserved.
         </div>
 
       <style>{`

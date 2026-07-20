@@ -135,7 +135,16 @@ export const GetInvolved: React.FC = () => {
             margin: '0 auto 40px',
             lineHeight: 1.75,
           }}>
-            You don't need a resume or a plan. Just show up.
+            You don't need a resume or a plan. People across India don't need your credentials — they need you to show up. That's what our volunteers do.
+          </p>
+          <p className="gi-fade-in gi-d2" style={{
+            fontSize: 'clamp(1.1rem, 2vw, 1.35rem)', lineHeight: 1.6,
+            maxWidth: 580, margin: '0 auto 40px',
+            fontFamily: "'Lora', serif", fontStyle: 'italic', fontWeight: 400,
+            color: EARTH_MUTED,
+          }}>
+            उत्तिष्ठत जाग्रत प्राप्य वरान्निबोधत<br />
+            <span style={{ fontSize: '0.92rem', letterSpacing: '0.03em', color: CRIMSON, fontWeight: 400 }}>"Arise, awake, and stop not till the goal is reached."</span>
           </p>
           <div className="gi-fade-in gi-d3" style={{
             width: 1, height: 56,

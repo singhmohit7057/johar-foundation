@@ -28,7 +28,7 @@ export const BackToTop: React.FC = () => {
   const buttonStyle: React.CSSProperties = {
     position: 'fixed',
     bottom: '30px',
-    left: '30px', // Changed from right to left to anchor on the left side of any screen
+    right: '30px',
     width: '56px',
     height: '56px',
     backgroundColor: '#A62639', // Johar Crimson red

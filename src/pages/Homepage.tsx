@@ -58,40 +58,49 @@ const polaroidCards = [
 
 const HeroCopyContent = ({ size }: { size: 'mobile' | 'tablet' | 'desktop' }) => (
   <>
-    <h1 style={{
+    {/* Sanskrit shloka */}
+    <p style={{
       fontFamily: "'Lora', Georgia, serif",
       fontSize:
-        size === 'mobile'  ? 'clamp(1.8rem, 7vw, 2.4rem)' :
-        size === 'tablet'  ? 'clamp(2rem, 4vw, 2.6rem)' :
-                             'clamp(3rem, 3.8vw, 4.6rem)',
-      fontWeight: 600, fontStyle: 'italic',
-      lineHeight: 1.2, color: theme.colors.secondary,
-      letterSpacing: '-0.01em', margin: 0,
+        size === 'mobile'  ? '1.05rem' :
+        size === 'tablet'  ? 'clamp(1.1rem, 2vw, 1.4rem)' :
+                             'clamp(1.3rem, 1.6vw, 1.7rem)',
+      fontWeight: 500, fontStyle: 'italic',
+      lineHeight: 1.35, color: theme.colors.secondary,
+      margin: 0, opacity: 0.78,
     }}>
-      {size === 'desktop' ? <>लोकाः समस्ताः<br />सुखिनो भवन्तु</> : 'लोकाः समस्ताः सुखिनो भवन्तु'}
-    </h1>
-    <div style={{
-      display: 'flex', alignItems: 'center',
-      gap: '10px',
-      margin: size === 'mobile' ? '10px 0 0' : '12px 0 0',
-      justifyContent: size === 'desktop' ? 'flex-start' : 'center',
-    }}>
-      {size === 'desktop' && <span style={{ display: 'block', width: '28px', height: '1px', background: '#A62639', flexShrink: 0 }} />}
-      <p style={{
-        margin: 0,
-        fontSize: size === 'mobile' ? '0.97rem' : '1rem',
-        fontStyle: 'italic',
-        color: '#A62639',
-        letterSpacing: '0.04em',
-        lineHeight: 1.5,
-        fontWeight: 400,
-        whiteSpace: size === 'desktop' ? 'nowrap' : 'normal',
-      }}>
-        May all beings everywhere be happy.
-      </p>
-    </div>
+      लोकाः समस्ताः सुखिनो भवन्तु
+    </p>
 
-    <div style={{ height: size === 'desktop' ? 20 : 28 }} />
+    {/* Main tagline */}
+    <h1 style={{
+      fontSize:
+        size === 'mobile'  ? 'clamp(1.2rem, 4.5vw, 1.5rem)' :
+        size === 'tablet'  ? 'clamp(1.4rem, 2.8vw, 1.9rem)' :
+                             'clamp(1.8rem, 2.4vw, 2.4rem)',
+      fontWeight: 500, lineHeight: 1.25, color: theme.colors.secondary,
+      letterSpacing: '-0.02em',
+      margin: size === 'mobile' ? '7px 0 0' : size === 'tablet' ? '8px 0 0' : '10px 0 0',
+    }}>
+      {size === 'mobile'
+        ? <>Together, we're not just reaching lives — we're <span>transforming them.</span></>
+        : <>Together, we're not just reaching lives —<br />we're <span>transforming them.</span></>}
+    </h1>
+
+    {/* English translation */}
+    <p style={{
+      margin: size === 'mobile' ? '7px 0 0' : '9px 0 0',
+      fontSize: size === 'mobile' ? '0.77rem' : '0.82rem',
+      fontStyle: 'italic',
+      color: '#C4A882',
+      letterSpacing: '0.03em',
+      lineHeight: 1.5,
+      fontWeight: 400,
+    }}>
+      May all beings everywhere be happy.
+    </p>
+
+    <div style={{ height: size === 'mobile' ? 20 : 22 }} />
 
     <Link to="/donate" style={{
       display: 'inline-flex', alignItems: 'center', gap: '6px',
@@ -131,7 +140,7 @@ export const HeroBackgroundSliderAsymmetric: React.FC = () => {
       if (lyt === 'mobile') {
         setHeroHeight('auto');
         const scaleByW = (vw - 32) / 700;
-        const scaleByH = (vh * 0.42) / 580;
+        const scaleByH = (vh * 0.32) / 580;
         setScatterScale(Math.max(Math.min(scaleByW, scaleByH), 0.25));
       } else if (lyt === 'tablet') {
         setHeroHeight('auto');
@@ -263,7 +272,7 @@ export const HeroBackgroundSliderAsymmetric: React.FC = () => {
       display: 'flex', flexDirection: 'column',
       alignItems: layout === 'desktop' ? 'flex-start' : 'center',
       textAlign: layout === 'desktop' ? 'left' : 'center',
-      gap: layout === 'desktop' ? '24px' : '16px',
+      gap: 0,
       justifyContent: 'center',
       height: layout === 'desktop' ? '100%' : 'auto',
       boxSizing: 'border-box',
@@ -413,6 +422,53 @@ const HomePage: React.FC = () => {
         </div>
       </div>
 
+      {/* WHY JOHAR FOUNDATION */}
+      <div style={{ backgroundColor: '#F9F7F2' }}>
+        <div style={{ ...sectionWrapperStyle }}>
+          <div style={{ display: 'flex', gap: '80px', alignItems: 'center' }} className="split-layout">
+            {/* Left: heading + shloka */}
+            <div style={{ flex: '1', minWidth: 0 }}>
+              <h2 style={{ fontSize: '2.2rem', color: theme.colors.secondary, fontWeight: '800', margin: '0 0 10px 0' }}>
+                Why Johar Foundation?
+              </h2>
+              <p style={{ color: '#999', fontSize: '0.95rem', marginBottom: '36px', fontStyle: 'italic' }}>Because we believe...</p>
+              <div style={{ borderLeft: `3px solid ${theme.colors.primary}`, paddingLeft: '18px', marginBottom: '20px' }}>
+                <p style={{
+                  fontFamily: "'Lora', serif", fontStyle: 'italic', fontWeight: 400,
+                  fontSize: '1.15rem', color: theme.colors.secondary, margin: '0 0 6px',
+                }}>
+                  उद्यमेन हि सिद्ध्यन्ति कार्याणि न मनोरथैः।
+                </p>
+                <p style={{ fontStyle: 'italic', color: theme.colors.primary, fontSize: '0.88rem', margin: 0 }}>
+                  "Success comes through effort, not merely by wishes."
+                </p>
+              </div>
+              <p style={{ color: '#777', fontSize: '0.88rem', lineHeight: 1.7, margin: 0 }}>
+                This principle inspires us to move beyond intentions and create meaningful action.
+              </p>
+            </div>
+            {/* Right: belief lines */}
+            <div style={{ flex: '1', minWidth: 0, display: 'flex', flexDirection: 'column', gap: '18px' }}>
+              {[
+                'A child deserves education.',
+                'A woman deserves opportunity.',
+                'A youth deserves employment.',
+                'A family deserves dignity.',
+                'A community deserves hope.',
+              ].map((line) => (
+                <div key={line} style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
+                  <span style={{ width: 8, height: 8, borderRadius: '50%', backgroundColor: theme.colors.primary, flexShrink: 0 }} />
+                  <span style={{ fontSize: '1.1rem', fontWeight: '600', color: theme.colors.secondary }}>{line}</span>
+                </div>
+              ))}
+              <p style={{ color: '#888', fontSize: '0.95rem', marginTop: '8px', paddingLeft: '22px', fontStyle: 'italic' }}>
+                And together, we can make that possible.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <WaveDivider topColor="#F9F7F2" bottomColor="#fafafa" />
 
       {/* 4. MAIN PROGRAMMATIC INITIATIVES PREVIEW TRACK */}
@@ -425,33 +481,27 @@ const HomePage: React.FC = () => {
           </div>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '25px', marginBottom: '40px' }} className="grid-layout-3x">
             <div className="preview-card">
-              <FaUsers size={24} color={theme.colors.primary} />
-              <h4>Tribal Affairs & Advocacy</h4>
+              <div className="preview-card-header"><FaUsers size={24} color={theme.colors.primary} /><h4>Tribal Affairs & Advocacy</h4></div>
               <p>Working with tribal communities on forest rights, land mapping, and getting their claims on record before someone else decides.</p>
             </div>
             <div className="preview-card">
-              <FaGraduationCap size={24} color={theme.colors.primary} />
-              <h4>Skill Development</h4>
+              <div className="preview-card-header"><FaGraduationCap size={24} color={theme.colors.primary} /><h4>Skill Development</h4></div>
               <p>Vocational training and digital classrooms for rural youth — tailoring, computing, and trades that actually lead somewhere.</p>
             </div>
             <div className="preview-card">
-              <FaHeartPulse size={24} color={theme.colors.primary} />
-              <h4>Health & Family Welfare</h4>
+              <div className="preview-card-header"><FaHeartPulse size={24} color={theme.colors.primary} /><h4>Health & Family Welfare</h4></div>
               <p>Free health camps, child nutrition tracking, and maternal care in villages where the nearest clinic is more than a walk away.</p>
             </div>
             <div className="preview-card">
-              <FaVenus size={24} color={theme.colors.primary} />
-              <h4>Women's Empowerment</h4>
+              <div className="preview-card-header"><FaVenus size={24} color={theme.colors.primary} /><h4>Women's Empowerment</h4></div>
               <p>SHGs, legal literacy, and livelihood training. Women in the program have opened bank accounts and started small businesses.</p>
             </div>
             <div className="preview-card">
-              <FaBookOpen size={24} color={theme.colors.primary} />
-              <h4>Education & Literacy</h4>
+              <div className="preview-card-header"><FaBookOpen size={24} color={theme.colors.primary} /><h4>Education & Literacy</h4></div>
               <p>Tuition centres and digital classrooms in areas where the nearest school is a long walk. Someone who shows up changes things.</p>
             </div>
             <div className="preview-card">
-              <FaUserShield size={24} color={theme.colors.primary} />
-              <h4>Child Protection & Rights</h4>
+              <div className="preview-card-header"><FaUserShield size={24} color={theme.colors.primary} /><h4>Child Protection & Rights</h4></div>
               <p>Village-level work on birth registration, child labour, and school re-enrollment. Getting children on record and back in a classroom.</p>
             </div>
           </div>
@@ -620,8 +670,11 @@ const HomePage: React.FC = () => {
           box-shadow: 0 4px 15px rgba(0,0,0,0.01);
         }
         
+        .preview-card-header {
+          display: flex; align-items: center; gap: 12px; margin-bottom: 12px;
+        }
         .preview-card h4 {
-          font-size: 1.05rem; color: ${theme.colors.secondary}; margin: 15px 0 8px 0; font-weight: 700;
+          font-size: 1.05rem; color: ${theme.colors.secondary}; margin: 0; font-weight: 700;
         }
 
         .preview-card p {

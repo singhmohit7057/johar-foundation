@@ -97,7 +97,16 @@ const DonatePage: React.FC = () => {
             margin: '0 auto 40px',
             lineHeight: 1.75,
           }}>
-            A child in Jharkhand doesn't know your name. But your donation will reach them.
+            Every rupee you give reaches someone who needs it. We work across health, education, livelihoods, and child welfare. Your support keeps that work going.
+          </p>
+          <p className="dn-fade-in dn-d2" style={{
+            fontSize: 'clamp(1.1rem, 2vw, 1.35rem)', lineHeight: 1.6,
+            maxWidth: 580, margin: '0 auto 40px',
+            fontFamily: "'Lora', serif", fontStyle: 'italic', fontWeight: 400,
+            color: EARTH_MUTED,
+          }}>
+            दातव्यमिति यद्दानम्<br />
+            <span style={{ fontSize: '0.92rem', letterSpacing: '0.03em', color: CRIMSON, fontWeight: 400 }}>"Give because it must be given."</span>
           </p>
           <div className="dn-fade-in dn-d3" style={{
             width: 1, height: 56,

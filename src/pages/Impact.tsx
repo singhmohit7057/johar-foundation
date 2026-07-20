@@ -142,6 +142,15 @@ const Impact: React.FC = () => {
           }}>
             Behind every number in our reports is a name. The women who started cooperatives. A teenager who ran barefoot and won silver. A man who taught his village to sell online.
           </p>
+          <p className="imp-fade-in imp-d3" style={{
+            fontSize: 'clamp(1.1rem, 2vw, 1.35rem)', lineHeight: 1.6,
+            maxWidth: 580, margin: '0 auto 40px',
+            fontFamily: "'Lora', serif", fontStyle: 'italic', fontWeight: 400,
+            color: EARTH_MUTED,
+          }}>
+            परोपकाराय फलन्ति वृक्षाः<br />
+            <span style={{ fontSize: '0.92rem', letterSpacing: '0.03em', color: CRIMSON, fontWeight: 400 }}>"Trees bear fruit for others, not themselves."</span>
+          </p>
           <div className="imp-fade-in imp-d4" style={{
             width: 1, height: 56,
             background: `linear-gradient(to bottom, ${WARM_TAN}, transparent)`,

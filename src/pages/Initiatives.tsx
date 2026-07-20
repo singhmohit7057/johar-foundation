@@ -169,7 +169,16 @@ const Initiatives: React.FC = () => {
             <span style={{ color: CRIMSON }}>Our Mission.</span>
           </h1>
           <p className="jwf-fade-in jwf-d2" style={{ fontSize: '1.15rem', lineHeight: 1.75, color: EARTH_MUTED, maxWidth: 540, margin: '0 auto 40px' }}>
-            There are people in this country the system has never reached. Not because they don't exist, but because reaching them is hard. The Johar Foundation has been making that trip, again and again.
+            There are people this system has never reached — not because they don't exist, but because reaching them is hard. The Johar Foundation has been making that trip, again and again.
+          </p>
+          <p className="jwf-fade-in jwf-d2" style={{
+            fontSize: 'clamp(1.1rem, 2vw, 1.35rem)', lineHeight: 1.6,
+            maxWidth: 580, margin: '0 auto 40px',
+            fontFamily: "'Lora', serif", fontStyle: 'italic', fontWeight: 400,
+            color: EARTH_MUTED,
+          }}>
+            सेवा परमो धर्मः<br />
+            <span style={{ fontSize: '0.92rem', letterSpacing: '0.03em', color: CRIMSON, fontWeight: 400 }}>"Service is the Highest Duty."</span>
           </p>
           <div className="jwf-fade-in jwf-d3" style={{ display: 'flex', justifyContent: 'center' }}>
             <div style={{ width: 1, height: 56, background: `linear-gradient(to bottom, ${WARM_TAN}, transparent)`, borderRadius: 1 }} />
