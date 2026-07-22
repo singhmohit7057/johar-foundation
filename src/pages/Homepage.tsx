@@ -69,7 +69,7 @@ const HeroCopyContent = ({ size }: { size: 'mobile' | 'tablet' | 'desktop' }) =>
       lineHeight: 1.35, color: theme.colors.secondary,
       margin: 0, opacity: 0.78,
     }}>
-      लोकाः समस्ताः सुखिनो भवन्तु
+      सेवा परमो धर्मः
     </p>
 
     {/* Main tagline */}
@@ -97,7 +97,7 @@ const HeroCopyContent = ({ size }: { size: 'mobile' | 'tablet' | 'desktop' }) =>
       lineHeight: 1.5,
       fontWeight: 400,
     }}>
-      May all beings everywhere be happy.
+      "Service is the Highest Duty."
     </p>
 
     <div style={{ height: size === 'mobile' ? 20 : 22 }} />
