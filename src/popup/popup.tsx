@@ -15,8 +15,13 @@ export const Popup: React.FC<PopupProps> = ({ delay = 3000 }) => {
 
   useEffect(() => {
     const stored = localStorage.getItem('johar_popup_dismissed');
-    const TWENTY_FOUR_HOURS = 24 * 60 * 60 * 1000;
-    const isDismissed = stored && (Date.now() - parseInt(stored, 10)) < TWENTY_FOUR_HOURS;
+    // Dismissed if stored timestamp is from today (IST, UTC+5:30) — resets at midnight IST
+    const isDismissed = (() => {
+      if (!stored) return false;
+      const IST_OFFSET = 5.5 * 60 * 60 * 1000;
+      const toISTDay = (ms: number) => Math.floor((ms + IST_OFFSET) / (24 * 60 * 60 * 1000));
+      return toISTDay(parseInt(stored, 10)) === toISTDay(Date.now());
+    })();
 
     if (!isDismissed) {
       if (stored) localStorage.removeItem('johar_popup_dismissed'); // expired — clean up
@@ -177,7 +182,7 @@ export const Popup: React.FC<PopupProps> = ({ delay = 3000 }) => {
               onChange={(e) => setDontShowAgain(e.target.checked)} 
             />
             <label htmlFor="dontShow" style={{ fontSize: '0.78rem', color: '#999', cursor: 'pointer' }}>
-              Don't show again
+              Don't show today
             </label>
           </div>
         </div>

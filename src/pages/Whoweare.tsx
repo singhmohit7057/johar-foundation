@@ -6,7 +6,6 @@ import {
   FaLeaf,
   FaUsers,
   FaGraduationCap,
-  FaAward,
 } from 'react-icons/fa';
 
 /* ─── Design Tokens ─────────────────────────────────────────────────────────── */
@@ -118,7 +117,7 @@ const WhoWeAre: React.FC = () => {
 
       <SEO
         title="Who We Are"
-        description="Johar Foundation — 15+ years, 350+ SHGs, 10,000+ lives transformed across India."
+        description="Johar Welfare Foundation — 15+ years, 350+ SHGs, 10,000+ lives transformed across India."
       />
 
       {/* ── Google Fonts + Animations ─────────────────────────────────────────── */}
@@ -183,14 +182,33 @@ const WhoWeAre: React.FC = () => {
         .d4b-d5 { animation-delay: 0.58s; }
         .d4b-d6 { animation-delay: 0.70s; }
 
-        /* MVV bordered card hover */
+        /* MVV flip card */
         .d4b-mvv-card {
-          transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+          perspective: 1000px;
+          cursor: default;
         }
-        .d4b-mvv-card:hover {
-          border-color: rgba(166,38,57,0.35) !important;
-          box-shadow: 0 8px 28px rgba(166,38,57,0.10) !important;
-          transform: translateY(-4px);
+        .d4b-mvv-inner {
+          position: relative;
+          width: 100%;
+          height: 100%;
+          transform-style: preserve-3d;
+          transition: transform 0.65s cubic-bezier(0.4, 0.2, 0.2, 1);
+          border-radius: 20px;
+        }
+        .d4b-mvv-card:hover .d4b-mvv-inner {
+          transform: rotateY(180deg);
+        }
+        .d4b-mvv-front,
+        .d4b-mvv-back {
+          position: absolute;
+          inset: 0;
+          backface-visibility: hidden;
+          -webkit-backface-visibility: hidden;
+          border-radius: 20px;
+          overflow: hidden;
+        }
+        .d4b-mvv-back {
+          transform: rotateY(180deg);
         }
 
         /* Approach step card hover */
@@ -235,6 +253,11 @@ const WhoWeAre: React.FC = () => {
           .d4b-mvv-grid { grid-template-columns: 1fr !important; }
           .d4b-approach-strip { grid-template-columns: repeat(2, 1fr) !important; }
           .d4b-who-grid { flex-direction: column !important; }
+          .wwa-split-layout { flex-direction: column !important; gap: 24px !important; }
+          .wwa-text-col { display: contents !important; }
+          .wwa-title { order: 1 !important; text-align: center !important; }
+          .wwa-img-col { order: 2 !important; width: 100% !important; }
+          .wwa-desc { order: 3 !important; text-align: center !important; }
           .d4b-photo-stack { flex-direction: row !important; }
           .d4b-stats-row { flex-direction: column !important; gap: 28px !important; }
           .d4b-cert-row { flex-wrap: wrap !important; }
@@ -313,230 +336,33 @@ const WhoWeAre: React.FC = () => {
       <div style={{ zoom: 0.9 }}>
       <WaveDivider topColor={BG} bottomColor={SECTION_ALT} />
 
-      {/* Mobile-only hero image */}
-      <div className="d4b-mobile-hero-img" style={{ background: SECTION_ALT }}>
-        <img
-          src="/whoweare.jpg"
-          alt="Johar Foundation community work"
-          style={{ width: '100%', height: 220, objectFit: 'cover', display: 'block' }}
-        />
-      </div>
-
       {/* ══════════════════════════════════════════════════════════════════════════
-          SECTION 2 — WHO WE ARE: 2-col + photo stack
+          SECTION 2 — WHO WE ARE (split layout)
       ══════════════════════════════════════════════════════════════════════════ */}
-      <section style={{
-        background: SECTION_ALT,
-        padding: '88px 5%',
-        position: 'relative',
-        overflow: 'hidden',
-      }}>
-        {/* Soft blob bg */}
-        <div aria-hidden style={{
-          position: 'absolute', top: -80, right: -80,
-          width: 360, height: 300,
-          background: WARM_TAN,
-          opacity: 0.10,
-          borderRadius: '62% 38% 55% 45% / 48% 52% 48% 52%',
-          filter: 'blur(44px)',
-          pointerEvents: 'none',
-        }} />
-
-        <div
-          className="d4b-who-grid"
-          style={{
-            display: 'flex',
-            gap: 64,
-            maxWidth: 1100,
-            margin: '0 auto',
-            alignItems: 'center',
-          }}
-        >
-          {/* Rotated vertical label */}
-          <div className="so-vertical-text" style={{
-            flexShrink: 0, writingMode: 'vertical-rl',
-            textOrientation: 'mixed', transform: 'rotate(180deg)',
-            fontFamily: "'DM Sans', sans-serif",
-            fontSize: '0.75rem', letterSpacing: '0.22em',
-            textTransform: 'uppercase', color: WARM_TAN,
-            fontWeight: 700, opacity: 0.7, userSelect: 'none',
-            paddingRight: 16, borderRight: `2px solid ${WARM_TAN}40`,
-          }}>Johar Foundation</div>
-
-          {/* Left — text */}
-          <div className="d4b-fade-in" style={{ flex: '1 1 52%' }}>
-            <h2 style={{
-              fontFamily: "'DM Sans', sans-serif",
-              fontSize: 'clamp(1.9rem, 3.2vw, 2.8rem)',
-              fontWeight: 800,
-              color: EARTH,
-              lineHeight: 1.2,
-              marginBottom: 28,
-            }}>
-              Rooted in India,<br />
-              <span style={{ color: CRIMSON }}>Driven by Purpose.</span>
-            </h2>
-
-            <p style={{
-              fontSize: '0.95rem',
-              lineHeight: 1.8,
-              color: EARTH_MUTED,
-              marginBottom: 18,
-              maxWidth: 520,
-            }}>
-              India is a land rich in culture, heritage, natural resources, and resilient
-              communities. Yet many children remain out of school, women lack economic
-              opportunities, youth struggle to find employment, and rural communities continue
-              to face challenges in accessing quality education, healthcare, and sustainable livelihoods.
-            </p>
-            <p style={{
-              fontSize: '0.95rem',
-              lineHeight: 1.8,
-              color: EARTH_MUTED,
-              marginBottom: 18,
-              maxWidth: 520,
-            }}>
-              Johar Foundation was established to bridge these gaps through community-led
-              development — focusing on long-term opportunities that empower individuals to
-              become self-reliant, confident, and capable of transforming their own communities.
-            </p>
-            <p style={{
-              fontSize: '0.95rem',
-              lineHeight: 1.8,
-              color: EARTH_MUTED,
-              marginBottom: 36,
-              maxWidth: 520,
-            }}>
-              We believe that real development begins at the grassroots. Every village, every
-              family, and every individual has the potential to create change when given the
-              right support, knowledge, and opportunities.
-            </p>
-
-            {/* Tag pills */}
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10 }}>
-              {[
-                'SHG Formation',
-                'Marginalised Communities',
-                'Gender Equity',
-                'Pan India',
-                'Livelihood',
-                'Rights-Based',
-              ].map((tag) => (
-                <span key={tag} style={{
-                  fontFamily: "'DM Sans', sans-serif",
-                  fontSize: '0.78rem',
-                  fontWeight: 600,
-                  letterSpacing: '0.06em',
-                  color: EARTH,
-                  background: SAND,
-                  border: `1.5px solid ${WARM_TAN}`,
-                  borderRadius: 24,
-                  padding: '5px 14px',
-                }}>
-                  {tag}
-                </span>
-              ))}
+      <section style={{ background: SECTION_ALT }}>
+        <div style={{ padding: '60px 5%', maxWidth: 1200, margin: '0 auto', boxSizing: 'border-box' }}>
+          <div style={{ display: 'flex', gap: 60, alignItems: 'center' }} className="wwa-split-layout">
+            <div style={{ flex: '1.2', textAlign: 'left' }} className="wwa-text-col">
+              <h2 style={{
+                fontFamily: "'DM Sans', sans-serif",
+                fontSize: '2.2rem', color: EARTH, fontWeight: 800, margin: '0 0 20px 0',
+              }} className="wwa-title">
+                Who We Are
+              </h2>
+              <p style={{ color: EARTH_MUTED, fontSize: '0.98rem', lineHeight: 1.7, marginBottom: 25 }} className="wwa-desc">
+                <strong>Johar Welfare Foundation</strong> is a registered non-profit organization committed to empowering underserved communities through sustainable development and inclusive social initiatives. We work across education, healthcare, women's empowerment, skill development, child welfare, and livelihood generation, partnering with communities to create meaningful opportunities, foster self-reliance, and build a future where every individual can live with dignity, hope, and purpose.
+              </p>
             </div>
-
-            {/* SVG hand-drawn wave line */}
-            <div style={{ marginTop: 32, display: 'flex', gap: 12, alignItems: 'center' }}>
-              <svg width="140" height="18" viewBox="0 0 140 18" aria-hidden>
-                <path
-                  d="M2,10 C20,4 35,16 55,8 C75,2 90,14 115,8 C125,5 132,10 138,8"
-                  stroke={WARM_TAN} strokeWidth="2.5" fill="none"
-                  strokeLinecap="round" strokeLinejoin="round"
-                  className="so-toc-line"
-                />
-              </svg>
-              <span style={{ fontFamily: "'Lora', serif", fontStyle: 'italic', fontSize: '0.9rem', color: WARM_TAN }}>
-                15+ years of service
-              </span>
-            </div>
-          </div>
-
-          {/* Right — stacked polaroid photos */}
-          <div
-            className="d4b-photo-stack"
-            style={{
-              flex: '1 1 44%',
-              position: 'relative',
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-              gap: 0,
-              paddingTop: 20,
-            }}
-          >
-            {/* Top photo */}
-            <div
-              className="d4b-fade-scale d4b-d1"
-              style={{
-                background: WHITE,
-                padding: '7px 7px 24px 7px',
-                borderRadius: 18,
-                boxShadow: '0 8px 32px rgba(60,53,48,0.16)',
-                transform: 'rotate(-2deg)',
-                zIndex: 2,
-                position: 'relative',
-                marginBottom: -36,
-                border: `6px solid ${WHITE}`,
-                width: 'min(340px, 90%)',
-              }}
-            >
-              <img
-                src="/whoweare.jpg"
-                alt="Johar Foundation community work"
-                style={{
-                  width: '100%',
-                  height: 220,
-                  objectFit: 'cover',
-                  borderRadius: 12,
-                  display: 'block',
-                }}
-              />
-            </div>
-
-            {/* Bottom photo */}
-            <div
-              className="d4b-fade-scale d4b-d2"
-              style={{
-                background: WHITE,
-                padding: '7px 7px 24px 7px',
-                borderRadius: 18,
-                boxShadow: '0 12px 40px rgba(60,53,48,0.20)',
-                transform: 'rotate(2deg)',
-                zIndex: 1,
-                border: `6px solid ${WHITE}`,
-                width: 'min(320px, 86%)',
-                marginLeft: 28,
-              }}
-            >
-              <img
-                src="/tribal.jpg"
-                alt="Tribal community in Jharkhand"
-                style={{
-                  width: '100%',
-                  height: 210,
-                  objectFit: 'cover',
-                  borderRadius: 12,
-                  display: 'block',
-                }}
-              />
+            <div style={{ flex: '0.8' }} className="wwa-img-col">
+              <div style={{
+                width: '100%', height: 300, backgroundColor: SECTION_ALT, borderRadius: 20,
+                backgroundImage: 'url("/whoweare.jpg")', backgroundSize: 'cover', backgroundPosition: 'center',
+                boxShadow: '0 10px 30px rgba(0,0,0,0.03)', border: `1px solid ${SAND}`,
+              }} />
             </div>
           </div>
         </div>
       </section>
-
-      {/* Mobile-only tribal image */}
-      <div className="d4b-mobile-tribal-img" style={{ background: SECTION_ALT }}>
-        <img
-          src="/tribal.jpg"
-          alt="Tribal community"
-          style={{ width: '100%', height: 220, objectFit: 'cover', display: 'block' }}
-        />
-      </div>
-
-      <WaveDivider topColor={SECTION_ALT} bottomColor={BG} />
 
       {/* ══════════════════════════════════════════════════════════════════════════
           SECTION 3 — MISSION / VISION / VALUES + OUR APPROACH step strip
@@ -551,19 +377,32 @@ const WhoWeAre: React.FC = () => {
         <div style={{ maxWidth: 1060, margin: '0 auto' }}>
 
           {/* ── MVV header ── */}
-          <div className="d4b-fade-in" style={{ textAlign: 'center', marginBottom: 56 }}>
-            <h2 style={{
+          <div className="d4b-fade-in" style={{ textAlign: 'center', marginBottom: 64 }}>
+            <p style={{
               fontFamily: "'DM Sans', sans-serif",
+              fontSize: '0.75rem',
+              fontWeight: 700,
+              letterSpacing: '0.2em',
+              textTransform: 'uppercase',
+              color: CRIMSON,
+              margin: '0 0 12px',
+            }}>Our Foundation</p>
+            <h2 style={{
+              fontFamily: "'Lora', serif",
+              fontStyle: 'italic',
               fontSize: 'clamp(1.9rem, 3vw, 2.6rem)',
-              fontWeight: 800,
+              fontWeight: 600,
               color: EARTH,
-              margin: 0,
+              margin: '0 0 16px',
             }}>
               Mission, Vision &amp; Values
             </h2>
+            <div style={{ display: 'flex', justifyContent: 'center' }}>
+              <div style={{ width: 48, height: 3, background: CRIMSON, borderRadius: 2 }} />
+            </div>
           </div>
 
-          {/* ── 3 bordered MVV cards ── */}
+          {/* ── 3 redesigned MVV cards ── */}
           <div
             className="d4b-mvv-grid"
             style={{
@@ -578,68 +417,110 @@ const WhoWeAre: React.FC = () => {
                 chipLabel: 'Mission',
                 heading: 'Mobilising Communities',
                 body: 'To improve lives by mobilising the caring power of communities around the country to advance the common good.',
+                accent: CRIMSON,
+                bg: `${CRIMSON}08`,
+                photo: '/helping-hands.jpg',
                 delay: 'd4b-d1',
               },
               {
+                letter: 'V',
                 chipLabel: 'Vision',
                 heading: 'Breaking Out of Poverty',
                 body: 'A world where people break out of poverty to lead fulfilling, rewarding lives and contribute positively to their communities.',
+                accent: '#7B4F2E',
+                bg: `${WARM_TAN}18`,
+                photo: '/human.jpg',
                 delay: 'd4b-d2',
               },
               {
+                letter: 'V',
                 chipLabel: 'Values',
                 heading: 'People Drive Change',
-                body: 'We believe that all people are capable of driving the change they need.',
+                body: 'We believe that all people are capable of driving the change they need — when given the right support and opportunity.',
+                accent: '#3C7A5A',
+                bg: `#3C7A5A0D`,
+                photo: '/tribal.jpg',
                 delay: 'd4b-d3',
               },
-            ].map(({ chipLabel, heading, body, delay }) => (
+            ].map(({ letter, chipLabel, heading, body, accent, bg, photo, delay }) => (
               <div
                 key={chipLabel}
                 className={`d4b-fade-in ${delay} d4b-mvv-card`}
-                style={{
-                  position: 'relative',
-                  background: WHITE,
-                  border: `1px solid #e8e0d8`,
-                  borderRadius: 16,
-                  padding: '36px 30px 32px',
-                  overflow: 'hidden',
-                }}
+                style={{ height: 340 }}
               >
-                {/* Label chip */}
-                <span style={{
-                  display: 'inline-block',
-                  fontFamily: "'DM Sans', sans-serif",
-                  fontSize: '0.7rem',
-                  fontWeight: 700,
-                  letterSpacing: '0.16em',
-                  textTransform: 'uppercase',
-                  color: WHITE,
-                  background: CRIMSON,
-                  borderRadius: 20,
-                  padding: '4px 12px',
-                  marginBottom: 18,
-                }}>
-                  {chipLabel}
-                </span>
+                <div className="d4b-mvv-inner">
 
-                <h3 style={{
-                  fontFamily: "'DM Sans', sans-serif",
-                  fontSize: '1.2rem',
-                  fontWeight: 700,
-                  color: EARTH,
-                  marginBottom: 14,
-                  lineHeight: 1.3,
-                }}>
-                  {heading}
-                </h3>
-                <p style={{
-                  fontSize: '0.97rem',
-                  lineHeight: 1.82,
-                  color: EARTH_MUTED,
-                  margin: 0,
-                }}>
-                  {body}
-                </p>
+                  {/* ── FRONT: photo + label overlay ── */}
+                  <div className="d4b-mvv-front" style={{ background: EARTH }}>
+                    <img
+                      src={photo}
+                      alt={chipLabel}
+                      style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block', opacity: 0.82 }}
+                    />
+                    {/* Gradient overlay */}
+                    <div style={{
+                      position: 'absolute', inset: 0,
+                      background: `linear-gradient(to top, ${EARTH}cc 0%, transparent 55%)`,
+                    }} />
+                    {/* Ghost letter */}
+                    <span aria-hidden style={{
+                      position: 'absolute', top: 16, right: 20,
+                      fontFamily: "'Lora', serif", fontStyle: 'italic',
+                      fontSize: '6rem', fontWeight: 700,
+                      color: WHITE, opacity: 0.12, lineHeight: 1,
+                      userSelect: 'none', pointerEvents: 'none',
+                    }}>{letter}</span>
+                    {/* Bottom text */}
+                    <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, padding: '20px 24px' }}>
+                      <span style={{
+                        display: 'inline-block',
+                        fontFamily: "'DM Sans', sans-serif",
+                        fontSize: '0.65rem', fontWeight: 700,
+                        letterSpacing: '0.18em', textTransform: 'uppercase',
+                        color: WHITE, background: accent,
+                        borderRadius: 20, padding: '3px 11px', marginBottom: 8,
+                      }}>{chipLabel}</span>
+                      <h3 style={{
+                        fontFamily: "'Lora', serif", fontStyle: 'italic',
+                        fontSize: '1.2rem', fontWeight: 600,
+                        color: WHITE, margin: 0, lineHeight: 1.3,
+                      }}>{heading}</h3>
+                    </div>
+                  </div>
+
+                  {/* ── BACK: text ── */}
+                  <div className="d4b-mvv-back" style={{
+                    background: bg,
+                    border: `1px solid ${accent}28`,
+                    display: 'flex', flexDirection: 'column', justifyContent: 'center',
+                    padding: '36px 30px',
+                  }}>
+                    <span aria-hidden style={{
+                      position: 'absolute', right: 12, bottom: -10,
+                      fontFamily: "'Lora', serif", fontStyle: 'italic',
+                      fontSize: '7rem', fontWeight: 700,
+                      color: accent, opacity: 0.07, lineHeight: 1,
+                      userSelect: 'none', pointerEvents: 'none',
+                    }}>{letter}</span>
+                    <span style={{
+                      display: 'inline-block',
+                      fontFamily: "'DM Sans', sans-serif",
+                      fontSize: '0.65rem', fontWeight: 700,
+                      letterSpacing: '0.18em', textTransform: 'uppercase',
+                      color: accent, background: `${accent}18`,
+                      border: `1px solid ${accent}30`,
+                      borderRadius: 20, padding: '3px 11px', marginBottom: 18,
+                    }}>{chipLabel}</span>
+                    <h3 style={{
+                      fontFamily: "'Lora', serif", fontStyle: 'italic',
+                      fontSize: '1.2rem', fontWeight: 600,
+                      color: EARTH, margin: '0 0 16px', lineHeight: 1.3,
+                    }}>{heading}</h3>
+                    <div style={{ width: 32, height: 3, background: accent, borderRadius: 2, marginBottom: 16, opacity: 0.7 }} />
+                    <p style={{ fontSize: '0.95rem', lineHeight: 1.8, color: EARTH_MUTED, margin: 0 }}>{body}</p>
+                  </div>
+
+                </div>
               </div>
             ))}
           </div>
@@ -669,7 +550,7 @@ const WhoWeAre: React.FC = () => {
               color: EARTH,
               margin: 0,
             }}>
-              Impact &amp; Methodology
+              Impact
             </h2>
           </div>
 
@@ -754,83 +635,84 @@ const WhoWeAre: React.FC = () => {
             ))}
           </div>
 
-          {/* How We Work — 4 principle rows */}
-          <div className="d4b-fade-in d4b-d2" style={{ marginBottom: 0 }}>
-
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
-              {[
-                {
-                  Icon: FaUsers,
-                  title: 'Community Mobilisation',
-                  body: 'We build Self-Help Groups as the foundation — women leading households, villages, and entire futures with collective power.',
-                },
-                {
-                  Icon: FaGraduationCap,
-                  title: 'Capacity Building',
-                  body: 'Training in agriculture, finance, health, and digital literacy — transferring skills that compound across generations.',
-                },
-                {
-                  Icon: FaHandshake,
-                  title: 'Government Convergence',
-                  body: 'Bridging communities to the entitlements they\'ve earned: MGNREGS, PDS, PMFBY, and many more.',
-                },
-                {
-                  Icon: FaBullhorn,
-                  title: 'Advocacy & Policy',
-                  body: 'Amplifying community voices at local, state, and national levels to shape policies that reflect real lives.',
-                },
-              ].map(({ Icon, title, body }) => (
-                <div
-                  key={title}
-                  className="d4b-work-row"
-                  style={{
-                    display: 'flex',
-                    alignItems: 'flex-start',
-                    gap: 20,
-                    padding: '20px 24px',
-                    borderRadius: 12,
-                    borderLeft: `4px solid ${CRIMSON}`,
-                    background: BG,
-                    cursor: 'default',
-                  }}
-                >
-                  <div style={{
-                    width: 44,
-                    height: 44,
-                    borderRadius: '50%',
-                    background: `${CRIMSON}14`,
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    flexShrink: 0,
-                    marginTop: 2,
-                  }}>
-                    <Icon size={18} color={CRIMSON} />
-                  </div>
-                  <div>
-                    <h4 style={{
-                      fontFamily: "'DM Sans', sans-serif",
-                      fontSize: '1.05rem',
-                      fontWeight: 700,
-                      color: EARTH,
-                      marginBottom: 6,
-                      lineHeight: 1.2,
+          {/* HOW WE WORK — methodology rows (commented out for future use) */}
+          {false && (
+            <div className="d4b-fade-in d4b-d2" style={{ marginBottom: 0 }}>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
+                {[
+                  {
+                    Icon: FaUsers,
+                    title: 'Community Mobilisation',
+                    body: 'We build Self-Help Groups as the foundation — women leading households, villages, and entire futures with collective power.',
+                  },
+                  {
+                    Icon: FaGraduationCap,
+                    title: 'Capacity Building',
+                    body: 'Training in agriculture, finance, health, and digital literacy — transferring skills that compound across generations.',
+                  },
+                  {
+                    Icon: FaHandshake,
+                    title: 'Government Convergence',
+                    body: 'Bridging communities to the entitlements they\'ve earned: MGNREGS, PDS, PMFBY, and many more.',
+                  },
+                  {
+                    Icon: FaBullhorn,
+                    title: 'Advocacy & Policy',
+                    body: 'Amplifying community voices at local, state, and national levels to shape policies that reflect real lives.',
+                  },
+                ].map(({ Icon, title, body }) => (
+                  <div
+                    key={title}
+                    className="d4b-work-row"
+                    style={{
+                      display: 'flex',
+                      alignItems: 'flex-start',
+                      gap: 20,
+                      padding: '20px 24px',
+                      borderRadius: 12,
+                      borderLeft: `4px solid ${CRIMSON}`,
+                      background: BG,
+                      cursor: 'default',
+                    }}
+                  >
+                    <div style={{
+                      width: 44,
+                      height: 44,
+                      borderRadius: '50%',
+                      background: `${CRIMSON}14`,
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      flexShrink: 0,
+                      marginTop: 2,
                     }}>
-                      {title}
-                    </h4>
-                    <p style={{
-                      fontSize: '0.95rem',
-                      lineHeight: 1.75,
-                      color: EARTH_MUTED,
-                      margin: 0,
-                    }}>
-                      {body}
-                    </p>
+                      <Icon size={18} color={CRIMSON} />
+                    </div>
+                    <div>
+                      <h4 style={{
+                        fontFamily: "'DM Sans', sans-serif",
+                        fontSize: '1.05rem',
+                        fontWeight: 700,
+                        color: EARTH,
+                        marginBottom: 6,
+                        lineHeight: 1.2,
+                      }}>
+                        {title}
+                      </h4>
+                      <p style={{
+                        fontSize: '0.95rem',
+                        lineHeight: 1.75,
+                        color: EARTH_MUTED,
+                        margin: 0,
+                      }}>
+                        {body}
+                      </p>
+                    </div>
                   </div>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
-          </div>
+          )}
         </div>
       </section>
 
@@ -842,7 +724,7 @@ const WhoWeAre: React.FC = () => {
       <div style={{ position: 'relative', lineHeight: 0 }}>
         <img
           src="/women.jpg"
-          alt="Women of Johar Foundation"
+          alt="Women of Johar Welfare Foundation"
           style={{
             width: '100%',
             height: 400,
@@ -947,15 +829,15 @@ const WhoWeAre: React.FC = () => {
                 delay: 'd4b-d2',
               },
               {
-                code: 'FCRA',
-                name: 'Foreign Contributions',
-                authority: 'Ministry of Home Affairs',
+                code: 'PAN',
+                name: 'Permanent Account Number',
+                authority: 'Income Tax Dept.',
                 year: '2013',
                 delay: 'd4b-d3',
               },
               {
-                code: 'CSR',
-                name: 'CSR Eligible',
+                code: 'COI',
+                name: 'Certificate of Incorporation',
                 authority: 'Min. of Corporate Affairs',
                 year: '2018',
                 delay: 'd4b-d4',
@@ -967,7 +849,7 @@ const WhoWeAre: React.FC = () => {
                 year: '2020',
                 delay: 'd4b-d5',
               },
-            ].map(({ code, name, authority, year, delay }) => (
+            ].map(({ code, name, authority, delay }) => (
               <div
                 key={code}
                 className={`d4b-fade-in ${delay} d4b-cert-stamp d4b-cert-circle`}
@@ -1028,22 +910,6 @@ const WhoWeAre: React.FC = () => {
                   maxWidth: 100,
                 }}>
                   {authority}
-                </div>
-                <div style={{
-                  marginTop: 5,
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: 4,
-                }}>
-                  <FaAward size={9} color={CRIMSON} />
-                  <span style={{
-                    fontSize: '0.6rem',
-                    fontWeight: 700,
-                    color: CRIMSON,
-                    fontFamily: "'DM Sans', sans-serif",
-                  }}>
-                    Since {year}
-                  </span>
                 </div>
               </div>
             ))}

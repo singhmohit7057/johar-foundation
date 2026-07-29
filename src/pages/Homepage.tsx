@@ -398,38 +398,44 @@ const HomePage: React.FC = () => {
         </div>
       </div>
 
+      <WaveDivider topColor={theme.colors.background} bottomColor="#fafafa" />
+
       {/* 3. WHO WE ARE INTRODUCTION SECTION PREVIEW */}
-      <div style={sectionWrapperStyle}>
-        <div style={{ display: 'flex', gap: '60px', alignItems: 'center' }} className="split-layout whoweare-layout">
-          <div style={{ flex: '1.2', textAlign: 'left' }} className="whoweare-text-col">
-            <h2 style={{ fontSize: '2.2rem', color: theme.colors.secondary, fontWeight: '800', margin: '0 0 20px 0' }} className="whoweare-title">
-              Who We Are
-            </h2>
-            <p style={{ color: '#555', fontSize: '0.98rem', lineHeight: '1.7', marginBottom: '25px' }} className="whoweare-desc">
-              <strong>Johar Foundation</strong> is a registered NGO based in Jamshedpur. We've spent 15 years working with tribal and rural communities across eastern India. <strong>"Jo Hare Na"</strong> means those who never give up. We didn't pick that by accident.
-            </p>
-            <Link to="/who-we-are" className="redirect-btn whoweare-btn">
-              Learn More <FaArrowRight size={12} />
-            </Link>
-          </div>
-          <div style={{ flex: '0.8' }} className="img-container whoweare-img-col">
-            <div style={{
-              width: '100%', height: '300px', backgroundColor: '#fafafa', borderRadius: '20px',
-              backgroundImage: 'url("/whoweare.jpg")', backgroundSize: 'cover', backgroundPosition: 'center',
-              boxShadow: '0 10px 30px rgba(0,0,0,0.03)', border: '1px solid #f0f0f0'
-            }} />
+      <div style={{ backgroundColor: '#fafafa' }}>
+        <div style={{ ...sectionWrapperStyle, padding: '60px 5%' }}>
+          <div style={{ display: 'flex', gap: '60px', alignItems: 'center' }} className="split-layout whoweare-layout">
+            <div style={{ flex: '1.2', textAlign: 'left' }} className="whoweare-text-col">
+              <h2 style={{ fontSize: '2.2rem', color: theme.colors.secondary, fontWeight: '800', margin: '0 0 20px 0' }} className="whoweare-title">
+                Who We Are
+              </h2>
+              <p style={{ color: '#555', fontSize: '0.98rem', lineHeight: '1.7', marginBottom: '25px' }} className="whoweare-desc">
+                <strong>Johar Welfare Foundation</strong> is a registered non-profit organization committed to empowering underserved communities through sustainable development and inclusive social initiatives. We work across education, healthcare, women's empowerment, skill development, child welfare, and livelihood generation, partnering with communities to create meaningful opportunities, foster self-reliance, and build a future where every individual can live with dignity, hope, and purpose.
+              </p>
+              <Link to="/who-we-are" className="redirect-btn whoweare-btn">
+                Learn More <FaArrowRight size={12} />
+              </Link>
+            </div>
+            <div style={{ flex: '0.8' }} className="img-container whoweare-img-col">
+              <div style={{
+                width: '100%', height: '300px', backgroundColor: '#fafafa', borderRadius: '20px',
+                backgroundImage: 'url("/whoweare.jpg")', backgroundSize: 'cover', backgroundPosition: 'center',
+                boxShadow: '0 10px 30px rgba(0,0,0,0.03)', border: '1px solid #f0f0f0'
+              }} />
+            </div>
           </div>
         </div>
       </div>
 
+      <WaveDivider topColor="#fafafa" bottomColor={theme.colors.background} />
+
       {/* WHY JOHAR FOUNDATION */}
-      <div style={{ backgroundColor: '#F9F7F2' }}>
-        <div style={{ ...sectionWrapperStyle }}>
+      <div style={{ backgroundColor: theme.colors.background }}>
+        <div style={{ ...sectionWrapperStyle, padding: '60px 5%' }}>
           <div style={{ display: 'flex', gap: '80px', alignItems: 'center' }} className="split-layout">
             {/* Left: heading + shloka */}
             <div style={{ flex: '1', minWidth: 0 }}>
               <h2 style={{ fontSize: '2.2rem', color: theme.colors.secondary, fontWeight: '800', margin: '0 0 10px 0' }}>
-                Why Johar Foundation?
+                Why Johar Welfare Foundation?
               </h2>
               <p style={{ color: '#999', fontSize: '0.95rem', marginBottom: '36px', fontStyle: 'italic' }}>Because we believe...</p>
               <div style={{ borderLeft: `3px solid ${theme.colors.primary}`, paddingLeft: '18px', marginBottom: '20px' }}>
@@ -492,15 +498,15 @@ const HomePage: React.FC = () => {
               <div className="preview-card-header"><FaHeartPulse size={24} color={theme.colors.primary} /><h4>Health & Family Welfare</h4></div>
               <p>Free health camps, child nutrition tracking, and maternal care in villages where the nearest clinic is more than a walk away.</p>
             </div>
-            <div className="preview-card">
+            <div className="preview-card hide-mobile">
               <div className="preview-card-header"><FaVenus size={24} color={theme.colors.primary} /><h4>Women's Empowerment</h4></div>
               <p>SHGs, legal literacy, and livelihood training. Women in the program have opened bank accounts and started small businesses.</p>
             </div>
-            <div className="preview-card">
+            <div className="preview-card hide-mobile">
               <div className="preview-card-header"><FaBookOpen size={24} color={theme.colors.primary} /><h4>Education & Literacy</h4></div>
               <p>Tuition centres and digital classrooms in areas where the nearest school is a long walk. Someone who shows up changes things.</p>
             </div>
-            <div className="preview-card">
+            <div className="preview-card hide-mobile">
               <div className="preview-card-header"><FaUserShield size={24} color={theme.colors.primary} /><h4>Child Protection & Rights</h4></div>
               <p>Village-level work on birth registration, child labour, and school re-enrollment. Getting children on record and back in a classroom.</p>
             </div>
@@ -844,6 +850,7 @@ const HomePage: React.FC = () => {
 
         @media (max-width: 550px) {
           .grid-layout-3x { grid-template-columns: 1fr !important; }
+          .hide-mobile { display: none !important; }
         }
 
         @media (max-width: 480px) {
