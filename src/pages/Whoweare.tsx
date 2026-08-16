@@ -334,36 +334,6 @@ const WhoWeAre: React.FC = () => {
       </section>
 
       <div style={{ zoom: 0.9 }}>
-      <WaveDivider topColor={BG} bottomColor={SECTION_ALT} />
-
-      {/* ══════════════════════════════════════════════════════════════════════════
-          SECTION 2 — WHO WE ARE (split layout)
-      ══════════════════════════════════════════════════════════════════════════ */}
-      <section style={{ background: SECTION_ALT }}>
-        <div style={{ padding: '60px 5%', maxWidth: 1200, margin: '0 auto', boxSizing: 'border-box' }}>
-          <div style={{ display: 'flex', gap: 60, alignItems: 'center' }} className="wwa-split-layout">
-            <div style={{ flex: '1.2', textAlign: 'left' }} className="wwa-text-col">
-              <h2 style={{
-                fontFamily: "'DM Sans', sans-serif",
-                fontSize: '2.2rem', color: EARTH, fontWeight: 800, margin: '0 0 20px 0',
-              }} className="wwa-title">
-                Who We Are
-              </h2>
-              <p style={{ color: EARTH_MUTED, fontSize: '0.98rem', lineHeight: 1.7, marginBottom: 25 }} className="wwa-desc">
-                <strong>Johar Welfare Foundation</strong> is a registered non-profit organization committed to empowering underserved communities through sustainable development and inclusive social initiatives. We work across education, healthcare, women's empowerment, skill development, child welfare, and livelihood generation, partnering with communities to create meaningful opportunities, foster self-reliance, and build a future where every individual can live with dignity, hope, and purpose.
-              </p>
-            </div>
-            <div style={{ flex: '0.8' }} className="wwa-img-col">
-              <div style={{
-                width: '100%', height: 300, backgroundColor: SECTION_ALT, borderRadius: 20,
-                backgroundImage: 'url("/whoweare.jpg")', backgroundSize: 'cover', backgroundPosition: 'center',
-                boxShadow: '0 10px 30px rgba(0,0,0,0.03)', border: `1px solid ${SAND}`,
-              }} />
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* ══════════════════════════════════════════════════════════════════════════
           SECTION 3 — MISSION / VISION / VALUES + OUR APPROACH step strip
       ══════════════════════════════════════════════════════════════════════════ */}
