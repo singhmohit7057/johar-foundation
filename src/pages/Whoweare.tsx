@@ -182,33 +182,12 @@ const WhoWeAre: React.FC = () => {
         .d4b-d5 { animation-delay: 0.58s; }
         .d4b-d6 { animation-delay: 0.70s; }
 
-        /* MVV flip card */
+        /* MVV static card */
         .d4b-mvv-card {
-          perspective: 1000px;
           cursor: default;
-        }
-        .d4b-mvv-inner {
-          position: relative;
-          width: 100%;
-          height: 100%;
-          transform-style: preserve-3d;
-          transition: transform 0.65s cubic-bezier(0.4, 0.2, 0.2, 1);
-          border-radius: 20px;
-        }
-        .d4b-mvv-card:hover .d4b-mvv-inner {
-          transform: rotateY(180deg);
-        }
-        .d4b-mvv-front,
-        .d4b-mvv-back {
-          position: absolute;
-          inset: 0;
-          backface-visibility: hidden;
-          -webkit-backface-visibility: hidden;
           border-radius: 20px;
           overflow: hidden;
-        }
-        .d4b-mvv-back {
-          transform: rotateY(180deg);
+          position: relative;
         }
 
         /* Approach step card hover */
@@ -383,114 +362,64 @@ const WhoWeAre: React.FC = () => {
           >
             {[
               {
-                letter: 'M',
                 chipLabel: 'Mission',
                 heading: 'Mobilising Communities',
                 body: 'To improve lives by mobilising the caring power of communities around the country to advance the common good.',
                 accent: CRIMSON,
-                bg: `${CRIMSON}08`,
                 photo: '/helping-hands.jpg',
                 delay: 'd4b-d1',
               },
               {
-                letter: 'V',
                 chipLabel: 'Vision',
                 heading: 'Breaking Out of Poverty',
                 body: 'A world where people break out of poverty to lead fulfilling, rewarding lives and contribute positively to their communities.',
-                accent: '#7B4F2E',
-                bg: `${WARM_TAN}18`,
+                accent: CRIMSON,
                 photo: '/human.jpg',
                 delay: 'd4b-d2',
               },
               {
-                letter: 'V',
                 chipLabel: 'Values',
                 heading: 'People Drive Change',
                 body: 'We believe that all people are capable of driving the change they need — when given the right support and opportunity.',
-                accent: '#3C7A5A',
-                bg: `#3C7A5A0D`,
+                accent: CRIMSON,
                 photo: '/tribal.jpg',
                 delay: 'd4b-d3',
               },
-            ].map(({ letter, chipLabel, heading, body, accent, bg, photo, delay }) => (
+            ].map(({ chipLabel, heading, body, accent, photo, delay }) => (
               <div
                 key={chipLabel}
-                className={`d4b-fade-in ${delay} d4b-mvv-card`}
-                style={{ height: 340 }}
+                className={`d4b-fade-in ${delay}`}
               >
-                <div className="d4b-mvv-inner">
-
-                  {/* ── FRONT: photo + label overlay ── */}
-                  <div className="d4b-mvv-front" style={{ background: EARTH }}>
-                    <img
-                      src={photo}
-                      alt={chipLabel}
-                      style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block', opacity: 0.82 }}
-                    />
-                    {/* Gradient overlay */}
-                    <div style={{
-                      position: 'absolute', inset: 0,
-                      background: `linear-gradient(to top, ${EARTH}cc 0%, transparent 55%)`,
-                    }} />
-                    {/* Ghost letter */}
-                    <span aria-hidden style={{
-                      position: 'absolute', top: 16, right: 20,
-                      fontFamily: "'Lora', serif", fontStyle: 'italic',
-                      fontSize: '6rem', fontWeight: 700,
-                      color: WHITE, opacity: 0.12, lineHeight: 1,
-                      userSelect: 'none', pointerEvents: 'none',
-                    }}>{letter}</span>
-                    {/* Bottom text */}
-                    <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, padding: '20px 24px' }}>
-                      <span style={{
-                        display: 'inline-block',
-                        fontFamily: "'DM Sans', sans-serif",
-                        fontSize: '0.65rem', fontWeight: 700,
-                        letterSpacing: '0.18em', textTransform: 'uppercase',
-                        color: WHITE, background: accent,
-                        borderRadius: 20, padding: '3px 11px', marginBottom: 8,
-                      }}>{chipLabel}</span>
-                      <h3 style={{
-                        fontFamily: "'Lora', serif", fontStyle: 'italic',
-                        fontSize: '1.2rem', fontWeight: 600,
-                        color: WHITE, margin: 0, lineHeight: 1.3,
-                      }}>{heading}</h3>
-                    </div>
-                  </div>
-
-                  {/* ── BACK: text ── */}
-                  <div className="d4b-mvv-back" style={{
-                    background: bg,
-                    border: `1px solid ${accent}28`,
-                    display: 'flex', flexDirection: 'column', justifyContent: 'center',
-                    padding: '36px 30px',
-                  }}>
-                    <span aria-hidden style={{
-                      position: 'absolute', right: 12, bottom: -10,
-                      fontFamily: "'Lora', serif", fontStyle: 'italic',
-                      fontSize: '7rem', fontWeight: 700,
-                      color: accent, opacity: 0.07, lineHeight: 1,
-                      userSelect: 'none', pointerEvents: 'none',
-                    }}>{letter}</span>
+                <div className="d4b-mvv-card" style={{ height: 340 }}>
+                  <img
+                    src={photo}
+                    alt={chipLabel}
+                    style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+                  />
+                  <div style={{
+                    position: 'absolute', inset: 0,
+                    background: `linear-gradient(to top, ${EARTH}cc 0%, transparent 50%)`,
+                  }} />
+                  <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, padding: '20px 24px' }}>
                     <span style={{
                       display: 'inline-block',
                       fontFamily: "'DM Sans', sans-serif",
                       fontSize: '0.65rem', fontWeight: 700,
                       letterSpacing: '0.18em', textTransform: 'uppercase',
-                      color: accent, background: `${accent}18`,
-                      border: `1px solid ${accent}30`,
-                      borderRadius: 20, padding: '3px 11px', marginBottom: 18,
+                      color: WHITE, background: accent,
+                      borderRadius: 20, padding: '3px 11px', marginBottom: 8,
                     }}>{chipLabel}</span>
                     <h3 style={{
                       fontFamily: "'Lora', serif", fontStyle: 'italic',
                       fontSize: '1.2rem', fontWeight: 600,
-                      color: EARTH, margin: '0 0 16px', lineHeight: 1.3,
+                      color: WHITE, margin: 0, lineHeight: 1.3,
                     }}>{heading}</h3>
-                    <div style={{ width: 32, height: 3, background: accent, borderRadius: 2, marginBottom: 16, opacity: 0.7 }} />
-                    <p style={{ fontSize: '0.95rem', lineHeight: 1.8, color: EARTH_MUTED, margin: 0 }}>{body}</p>
                   </div>
-
                 </div>
+                <p style={{
+                  fontSize: '0.92rem', lineHeight: 1.75, color: EARTH_MUTED,
+                  margin: '16px 0 0', textAlign: 'center', padding: '0 8px',
+                }}>{body}</p>
               </div>
             ))}
           </div>
