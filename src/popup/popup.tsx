@@ -149,7 +149,7 @@ export const Popup: React.FC<PopupProps> = ({ delay = 3000 }) => {
           </h3>
 
           <p style={{ color: theme.colors.text, fontSize: '0.88rem', lineHeight: '1.5', marginBottom: '25px' }}>
-            Over <strong>5 Thousand Smiles</strong> and counting in 2026. Your small contribution helps us reach the underserved communities of Jharkhand and beyond.
+            Your small contribution helps us reach the underserved communities of India and beyond.
           </p>
 
           <Link to="/donate" onClick={handleClose} style={{ textDecoration: 'none', display: 'block', width: '100%' }}>
