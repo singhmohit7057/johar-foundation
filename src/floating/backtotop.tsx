@@ -31,8 +31,8 @@ export const BackToTop: React.FC = () => {
     right: '30px',
     width: '56px',
     height: '56px',
-    backgroundColor: '#A62639', // Johar Crimson red
-    color: 'white',
+    backgroundColor: '#fff',
+    color: '#A62639',
     borderRadius: '50%',
     display: 'flex',
     justifyContent: 'center',
@@ -46,7 +46,7 @@ export const BackToTop: React.FC = () => {
     transform: isVisible ? 'translateY(0) scale(1)' : 'translateY(20px) scale(0.8)',
     pointerEvents: isVisible ? 'all' : 'none',
     transition: 'all 0.4s cubic-bezier(0.16, 1, 0.3, 1)',
-    boxShadow: '0 12px 24px -4px rgba(166, 38, 57, 0.45), 0 4px 12px -2px rgba(166, 38, 57, 0.2)',
+    boxShadow: '0 8px 24px rgba(0,0,0,0.15), 0 2px 8px rgba(0,0,0,0.1)',
   };
 
   return (

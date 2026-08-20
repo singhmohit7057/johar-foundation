@@ -362,7 +362,7 @@ const HomePage: React.FC = () => {
   };
 
   return (
-    <div style={{ backgroundColor: theme.colors.background, overflowX: 'hidden' }}>
+    <div className="jwf-snap-container" style={{ backgroundColor: theme.colors.background, overflowX: 'hidden' }}>
       <SEO title="Home" description="Welcome to Johar Welfare Foundation (Jo Hare Na). Dedicated to sustainable development and community empowerment." />
 
       {/* 1. MOUNTED ACTIVE HERO BLOCK */}
@@ -401,35 +401,66 @@ const HomePage: React.FC = () => {
       <WaveDivider topColor={theme.colors.background} bottomColor="#fafafa" />
 
       {/* 3. WHO WE ARE INTRODUCTION SECTION PREVIEW */}
-      <div style={{ backgroundColor: '#fafafa' }}>
-        <div style={{ ...sectionWrapperStyle, padding: '60px 5%' }}>
-          <div style={{ display: 'flex', gap: '60px', alignItems: 'center' }} className="split-layout whoweare-layout">
-            <div style={{ flex: '1.2', textAlign: 'left' }} className="whoweare-text-col">
-              <h2 style={{ fontSize: '2.2rem', color: theme.colors.secondary, fontWeight: '800', margin: '0 0 20px 0' }} className="whoweare-title">
-                Who We Are
-              </h2>
-              <p style={{ color: '#555', fontSize: '0.98rem', lineHeight: '1.7', marginBottom: '25px' }} className="whoweare-desc">
-                <strong>Johar Welfare Foundation</strong> is a registered non-profit organization committed to empowering underserved communities through sustainable development and inclusive social initiatives. We work across education, healthcare, women's empowerment, skill development, child welfare, and livelihood generation, partnering with communities to create meaningful opportunities, foster self-reliance, and build a future where every individual can live with dignity, hope, and purpose.
-              </p>
-              <Link to="/who-we-are" className="redirect-btn whoweare-btn">
-                Learn More <FaArrowRight size={12} />
-              </Link>
-            </div>
-            <div style={{ flex: '0.8' }} className="img-container whoweare-img-col">
-              <div style={{
-                width: '100%', height: '300px', backgroundColor: '#fafafa', borderRadius: '20px',
-                backgroundImage: 'url("/whoweare.jpg")', backgroundSize: 'cover', backgroundPosition: 'center',
-                boxShadow: '0 10px 30px rgba(0,0,0,0.03)', border: '1px solid #f0f0f0'
-              }} />
-            </div>
+      <div className="jwf-snap-section" style={{ backgroundColor: theme.colors.primary, position: 'relative' }}>
+        {/* Decorative leaf shapes */}
+        <div aria-hidden className="wwa-leaf" style={{ position: 'absolute', top: '15%', left: '-40px', width: 120, height: 120, background: 'rgba(255,255,255,0.06)', borderRadius: '50% 0 50% 50%', transform: 'rotate(-20deg)' }} />
+        <div aria-hidden className="wwa-leaf" style={{ position: 'absolute', top: '60%', right: '-30px', width: 100, height: 100, background: 'rgba(255,255,255,0.05)', borderRadius: '50% 50% 0 50%', transform: 'rotate(15deg)' }} />
+        <div aria-hidden className="wwa-leaf" style={{ position: 'absolute', bottom: '10%', left: '12%', width: 80, height: 80, background: 'rgba(255,255,255,0.04)', borderRadius: '50% 0 50% 50%', transform: 'rotate(40deg)' }} />
+        <div aria-hidden className="wwa-leaf" style={{ position: 'absolute', top: '8%', right: '15%', width: 60, height: 60, background: 'rgba(255,255,255,0.05)', borderRadius: '0 50% 50% 50%', transform: 'rotate(-10deg)' }} />
+        <div aria-hidden className="wwa-leaf" style={{ position: 'absolute', top: '35%', left: '8%', width: 90, height: 90, background: 'rgba(255,255,255,0.04)', borderRadius: '50% 50% 0 50%', transform: 'rotate(25deg)' }} />
+        <div aria-hidden className="wwa-leaf" style={{ position: 'absolute', bottom: '25%', right: '10%', width: 70, height: 70, background: 'rgba(255,255,255,0.05)', borderRadius: '50% 0 50% 50%', transform: 'rotate(-35deg)' }} />
+        <div aria-hidden className="wwa-leaf" style={{ position: 'absolute', top: '5%', left: '35%', width: 50, height: 50, background: 'rgba(255,255,255,0.04)', borderRadius: '0 50% 50% 50%', transform: 'rotate(55deg)' }} />
+        <div aria-hidden className="wwa-leaf" style={{ position: 'absolute', bottom: '5%', right: '30%', width: 55, height: 55, background: 'rgba(255,255,255,0.05)', borderRadius: '50% 0 50% 50%', transform: 'rotate(-45deg)' }} />
+        <div aria-hidden className="wwa-leaf" style={{ position: 'absolute', top: '50%', left: '25%', width: 40, height: 40, background: 'rgba(255,255,255,0.035)', borderRadius: '50% 50% 0 50%', transform: 'rotate(70deg)' }} />
+        <div aria-hidden className="wwa-leaf" style={{ position: 'absolute', top: '75%', right: '25%', width: 45, height: 45, background: 'rgba(255,255,255,0.04)', borderRadius: '0 50% 50% 50%', transform: 'rotate(-60deg)' }} />
+        <div style={{ ...sectionWrapperStyle, padding: '72px 5%', textAlign: 'center', position: 'relative', zIndex: 1 }}>
+
+          {/* Heading */}
+          <h2 style={{
+            fontFamily: "'DM Sans', sans-serif",
+            fontSize: 'clamp(2.6rem, 6vw, 5rem)',
+            fontWeight: 900, lineHeight: 1.1,
+            color: '#fff', margin: '0 0 20px',
+            letterSpacing: '-0.02em',
+          }}>
+            <span style={{ fontWeight: 900 }}>Who</span>
+            <span style={{ fontWeight: 300 }}> we are?</span>
+          </h2>
+
+          {/* Gold divider */}
+          <div style={{ width: 48, height: 3, background: '#C4A882', borderRadius: 2, margin: '0 auto 32px' }} />
+
+          {/* Paragraphs */}
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 18, maxWidth: 620, margin: '0 auto 36px' }}>
+            <p style={{ color: 'rgba(255,255,255,0.88)', fontSize: '1.08rem', fontWeight: 450, lineHeight: 1.8, margin: 0 }}>
+              We are <strong style={{ color: '#fff' }}>Johar Welfare Foundation</strong>, a registered non-profit working towards community development and social welfare.
+            </p>
+            <p style={{ color: 'rgba(255,255,255,0.88)', fontSize: '1.08rem', fontWeight: 450, lineHeight: 1.8, margin: 0 }}>
+              Founded in <span style={{ color: '#C4A882', fontWeight: 600 }}>2026</span>, we are at the beginning of our journey — focused on education, livelihoods, women's empowerment, and access to basic rights.
+            </p>
           </div>
+
+          <p style={{ color: 'rgba(255,255,255,0.88)', fontSize: '1.08rem', fontWeight: 450, lineHeight: 1.8, maxWidth: 620, margin: '0 auto 36px' }}>
+            And yes, we are a registered non-profit in India — 12A, 80G, PAN, and NITI Aayog DARPAN certified.
+          </p>
+
+          {/* CTA */}
+          <Link to="/who-we-are" className="whoweare-learn-btn" style={{
+            display: 'inline-block', backgroundColor: '#fff',
+            color: theme.colors.primary, textDecoration: 'none',
+            padding: '12px 35px', borderRadius: '50px',
+            fontWeight: 'bold', fontSize: '0.9rem',
+          }}>
+            Learn More
+          </Link>
+
         </div>
       </div>
 
-      <WaveDivider topColor="#fafafa" bottomColor={theme.colors.background} />
+      <WaveDivider topColor={theme.colors.primary} bottomColor={theme.colors.background} />
 
       {/* WHY JOHAR FOUNDATION */}
-      <div style={{ backgroundColor: theme.colors.background }}>
+      <div className="jwf-snap-section" style={{ backgroundColor: theme.colors.background }}>
         <div style={{ ...sectionWrapperStyle, padding: '60px 5%' }}>
           <div style={{ display: 'flex', gap: '80px', alignItems: 'center' }} className="split-layout">
             {/* Left: heading + shloka */}
@@ -478,7 +509,7 @@ const HomePage: React.FC = () => {
       <WaveDivider topColor="#F9F7F2" bottomColor="#fafafa" />
 
       {/* 4. MAIN PROGRAMMATIC INITIATIVES PREVIEW TRACK */}
-      <div style={{ backgroundColor: '#fafafa' }}>
+      <div className="jwf-snap-section" style={{ backgroundColor: '#fafafa' }}>
         <div style={sectionWrapperStyle}>
           <div style={{ textAlign: 'center', marginBottom: '50px' }}>
             <h2 style={{ fontSize: '2.2rem', color: theme.colors.secondary, fontWeight: '800', margin: 0 }}>
@@ -522,7 +553,7 @@ const HomePage: React.FC = () => {
       <WaveDivider topColor="#fafafa" bottomColor="#F9F7F2" flip />
 
       {/* 5. INTERACTIVE REGIONAL MAP FOOTPRINT PREVIEW */}
-      <div style={sectionWrapperStyle}>
+      <div className="jwf-snap-section" style={sectionWrapperStyle}>
         <div style={{ textAlign: 'center', marginBottom: '45px' }}>
           <h2 style={{ fontSize: '2.2rem', color: theme.colors.secondary, fontWeight: '800', margin: '0 0 10px 0' }}>
             States We Serve
@@ -648,8 +679,15 @@ const HomePage: React.FC = () => {
       <WaveDivider topColor="#F9F7F2" bottomColor={theme.colors.secondary} flip />
 
       {/* 7. VOLUNTEER WORKSPACE ACTION PREVIEW */}
-      <div style={{ backgroundColor: theme.colors.secondary, color: 'white' }}>
-        <div style={{ ...sectionWrapperStyle, textAlign: 'center', padding: '70px 5%' }}>
+      <div className="jwf-snap-section" style={{ backgroundColor: theme.colors.secondary, color: 'white', position: 'relative', overflow: 'hidden' }}>
+        {/* Decorative leaf shapes */}
+        <div aria-hidden className="wwa-leaf" style={{ position: 'absolute', top: '12%', left: '-30px', width: 110, height: 110, background: 'rgba(255,255,255,0.04)', borderRadius: '50% 0 50% 50%', transform: 'rotate(-25deg)' }} />
+        <div aria-hidden className="wwa-leaf" style={{ position: 'absolute', top: '55%', right: '-20px', width: 90, height: 90, background: 'rgba(255,255,255,0.035)', borderRadius: '50% 50% 0 50%', transform: 'rotate(20deg)' }} />
+        <div aria-hidden className="wwa-leaf" style={{ position: 'absolute', bottom: '15%', left: '10%', width: 70, height: 70, background: 'rgba(255,255,255,0.03)', borderRadius: '0 50% 50% 50%', transform: 'rotate(45deg)' }} />
+        <div aria-hidden className="wwa-leaf" style={{ position: 'absolute', top: '10%', right: '12%', width: 55, height: 55, background: 'rgba(255,255,255,0.04)', borderRadius: '50% 0 50% 50%', transform: 'rotate(-15deg)' }} />
+        <div aria-hidden className="wwa-leaf" style={{ position: 'absolute', bottom: '20%', right: '20%', width: 65, height: 65, background: 'rgba(255,255,255,0.03)', borderRadius: '50% 50% 0 50%', transform: 'rotate(-40deg)' }} />
+        <div aria-hidden className="wwa-leaf" style={{ position: 'absolute', top: '40%', left: '20%', width: 45, height: 45, background: 'rgba(255,255,255,0.035)', borderRadius: '0 50% 50% 50%', transform: 'rotate(60deg)' }} />
+        <div style={{ ...sectionWrapperStyle, textAlign: 'center', padding: '70px 5%', position: 'relative', zIndex: 1 }}>
           <FaHandHoldingHeart size={40} color={theme.colors.primary} style={{ marginBottom: '15px' }} />
           <h2 style={{ fontSize: '2.2rem', fontWeight: '800', margin: '0 0 15px 0', color: 'white' }}>
             Your time is worth something here.
@@ -695,6 +733,30 @@ const HomePage: React.FC = () => {
         .redirect-btn:hover { gap: 10px; }
 
         .white-hover-btn:hover { opacity: 0.95; }
+
+        .whoweare-learn-btn {
+          transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease, color 0.2s ease;
+        }
+        .whoweare-learn-btn:hover {
+          transform: translateY(-2px) scale(1.03);
+          box-shadow: 0 8px 24px rgba(0,0,0,0.18);
+          background-color: #f5ede0 !important;
+        }
+        @media (max-width: 1024px) {
+          .wwa-leaf:nth-child(n+5) { display: none !important; }
+        }
+        @media (max-width: 768px) {
+          .wwa-leaf:nth-child(n+3) { display: none !important; }
+        }
+
+        @media (min-width: 1025px) {
+          html {
+            scroll-snap-type: y proximity;
+          }
+          .jwf-snap-section {
+            scroll-snap-align: start;
+          }
+        }
 
         .marquee-track {
           animation: infiniteScrollMarquee 32s linear infinite;

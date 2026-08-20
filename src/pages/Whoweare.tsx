@@ -182,12 +182,102 @@ const WhoWeAre: React.FC = () => {
         .d4b-d5 { animation-delay: 0.58s; }
         .d4b-d6 { animation-delay: 0.70s; }
 
-        /* MVV static card */
+        /* MVV card — illustration overlays content; content always at top */
         .d4b-mvv-card {
-          cursor: default;
+          background: #fff;
           border-radius: 20px;
+          box-shadow: 0 2px 16px rgba(0,0,0,0.06);
           overflow: hidden;
           position: relative;
+          cursor: default;
+          transition: transform 0.3s ease, box-shadow 0.3s ease;
+          border: 1.5px solid rgba(0,0,0,0.05);
+          height: 380px;
+        }
+        .d4b-mvv-card:hover {
+          transform: translateY(-6px);
+          box-shadow: 0 16px 40px rgba(0,0,0,0.12);
+        }
+        /* content sits below illustration by default; rises to top on hover */
+        .d4b-mvv-content {
+          position: absolute;
+          inset: 0 0 5px 0;
+          padding: 258px 28px 20px;
+          text-align: center;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: flex-start;
+          z-index: 1;
+          transition: padding-top 0.38s cubic-bezier(0.4,0,0.2,1);
+        }
+        .d4b-mvv-card:hover .d4b-mvv-content {
+          padding-top: 80px;
+        }
+        /* illustration overlays the content from top; fades out on hover */
+        .d4b-mvv-img {
+          position: absolute;
+          top: 0; left: 0; right: 0;
+          height: 230px;
+          overflow: hidden;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          padding: 28px 24px 20px;
+          z-index: 2;
+          transition: opacity 0.35s ease, transform 0.4s cubic-bezier(0.4,0,0.2,1);
+        }
+        .d4b-mvv-card:hover .d4b-mvv-img {
+          opacity: 0;
+          transform: translateY(-16px);
+          pointer-events: none;
+        }
+        .d4b-mvv-chip {
+          font-size: 0.67rem;
+          font-weight: 700;
+          letter-spacing: 0.1em;
+          text-transform: uppercase;
+          padding: 4px 12px;
+          border-radius: 50px;
+          margin-bottom: 14px;
+          flex-shrink: 0;
+        }
+        .d4b-mvv-icon-wrap {
+          width: 84px;
+          height: 84px;
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          background: rgba(255,255,255,0.6);
+          flex-shrink: 0;
+        }
+        /* body text hidden until hover */
+        .d4b-mvv-body {
+          max-height: 0;
+          overflow: hidden;
+          opacity: 0;
+          transition: max-height 0.4s ease 0.15s, opacity 0.3s ease 0.18s;
+        }
+        .d4b-mvv-card:hover .d4b-mvv-body {
+          max-height: 220px;
+          opacity: 1;
+        }
+        .d4b-mvv-hint {
+          font-size: 0.7rem;
+          letter-spacing: 0.06em;
+          text-transform: uppercase;
+          font-weight: 600;
+          opacity: 0.32;
+          margin-top: 10px;
+          transition: opacity 0.2s ease;
+        }
+        .d4b-mvv-card:hover .d4b-mvv-hint {
+          opacity: 0;
+        }
+        @media (max-width: 768px) {
+          .d4b-mvv-grid { grid-template-columns: 1fr !important; max-width: 380px; margin: 0 auto; }
         }
 
         /* Approach step card hover */
@@ -326,16 +416,7 @@ const WhoWeAre: React.FC = () => {
         <div style={{ maxWidth: 1060, margin: '0 auto' }}>
 
           {/* ── MVV header ── */}
-          <div className="d4b-fade-in" style={{ textAlign: 'center', marginBottom: 64 }}>
-            <p style={{
-              fontFamily: "'DM Sans', sans-serif",
-              fontSize: '0.75rem',
-              fontWeight: 700,
-              letterSpacing: '0.2em',
-              textTransform: 'uppercase',
-              color: CRIMSON,
-              margin: '0 0 12px',
-            }}>Our Foundation</p>
+          <div className="d4b-fade-in" style={{ textAlign: 'center', marginBottom: 56 }}>
             <h2 style={{
               fontFamily: "'Lora', serif",
               fontStyle: 'italic',
@@ -351,75 +432,72 @@ const WhoWeAre: React.FC = () => {
             </div>
           </div>
 
-          {/* ── 3 redesigned MVV cards ── */}
+          {/* ── MVV cards ── */}
           <div
             className="d4b-mvv-grid"
-            style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(3, 1fr)',
-              gap: 28,
-            }}
+            style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 28 }}
           >
             {[
               {
                 chipLabel: 'Mission',
-                heading: 'Mobilising Communities',
-                body: 'To improve lives by mobilising the caring power of communities around the country to advance the common good.',
+                heading: 'Empowering Lives',
+                body: 'We work to empower underprivileged children, youth, and women through practical education, accessible healthcare, and livelihood programmes that create real, measurable impact in everyday lives.',
                 accent: CRIMSON,
-                photo: '/helping-hands.jpg',
+                bgGradient: 'linear-gradient(140deg, #fdf1f3 0%, #f3ccd3 100%)',
+                Icon: FaHandshake,
                 delay: 'd4b-d1',
               },
               {
                 chipLabel: 'Vision',
-                heading: 'Breaking Out of Poverty',
-                body: 'A world where people break out of poverty to lead fulfilling, rewarding lives and contribute positively to their communities.',
-                accent: CRIMSON,
-                photo: '/human.jpg',
+                heading: 'Communities That Lead',
+                body: 'A future where every Indian community can voice its aspirations, access quality education and a clean environment — built not by charity, but by the collective strength of its own people.',
+                accent: '#2196a0',
+                bgGradient: 'linear-gradient(140deg, #e6f6f7 0%, #b8e0e4 100%)',
+                Icon: FaLeaf,
                 delay: 'd4b-d2',
               },
               {
                 chipLabel: 'Values',
-                heading: 'People Drive Change',
-                body: 'We believe that all people are capable of driving the change they need — when given the right support and opportunity.',
-                accent: CRIMSON,
-                photo: '/tribal.jpg',
+                heading: 'Action Over Words',
+                body: 'We believe in good governance, honest effort, and putting resources where they matter most. Every rupee, every hour, every decision is guided by what actually works — not what looks good on paper.',
+                accent: '#7B4F2E',
+                bgGradient: 'linear-gradient(140deg, #f8f0ea 0%, #e5ccb5 100%)',
+                Icon: FaUsers,
                 delay: 'd4b-d3',
               },
-            ].map(({ chipLabel, heading, body, accent, photo, delay }) => (
-              <div
-                key={chipLabel}
-                className={`d4b-fade-in ${delay}`}
-              >
-                <div className="d4b-mvv-card" style={{ height: 340 }}>
-                  <img
-                    src={photo}
-                    alt={chipLabel}
-                    style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
-                  />
-                  <div style={{
-                    position: 'absolute', inset: 0,
-                    background: `linear-gradient(to top, ${EARTH}cc 0%, transparent 50%)`,
-                  }} />
-                  <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, padding: '20px 24px' }}>
-                    <span style={{
-                      display: 'inline-block',
-                      fontFamily: "'DM Sans', sans-serif",
-                      fontSize: '0.65rem', fontWeight: 700,
-                      letterSpacing: '0.18em', textTransform: 'uppercase',
-                      color: WHITE, background: accent,
-                      borderRadius: 20, padding: '3px 11px', marginBottom: 8,
-                    }}>{chipLabel}</span>
-                    <h3 style={{
-                      fontFamily: "'Lora', serif", fontStyle: 'italic',
-                      fontSize: '1.2rem', fontWeight: 600,
-                      color: WHITE, margin: 0, lineHeight: 1.3,
-                    }}>{heading}</h3>
+            ].map(({ chipLabel, heading, body, accent, bgGradient, Icon, delay }) => (
+              <div key={chipLabel} className={`d4b-fade-in ${delay} d4b-mvv-card`}>
+
+                {/* Illustration area */}
+                <div className="d4b-mvv-img" style={{ background: bgGradient, minHeight: 200 }}>
+                  <span className="d4b-mvv-chip" style={{ background: `${accent}22`, color: accent }}>
+                    {chipLabel}
+                  </span>
+                  <div className="d4b-mvv-icon-wrap" style={{ boxShadow: `0 4px 20px ${accent}30` }}>
+                    <Icon style={{ fontSize: 40, color: accent }} />
                   </div>
                 </div>
-                <p style={{
-                  fontSize: '0.92rem', lineHeight: 1.75, color: EARTH_MUTED,
-                  margin: '16px 0 0', textAlign: 'center', padding: '0 8px',
-                }}>{body}</p>
+
+                {/* Content */}
+                <div className="d4b-mvv-content">
+                  <h3 style={{
+                    fontFamily: "'Lora', serif",
+                    fontStyle: 'italic',
+                    fontSize: '1.18rem',
+                    fontWeight: 600,
+                    color: EARTH,
+                    margin: '0 0 12px',
+                    lineHeight: 1.3,
+                  }}>{heading}</h3>
+                  <div className="d4b-mvv-divider" style={{ width: 36, height: 3, background: accent, borderRadius: 2, marginBottom: 14 }} />
+                  <div className="d4b-mvv-body">
+                    <p style={{ fontSize: '0.93rem', lineHeight: 1.8, color: EARTH_MUTED, margin: 0 }}>{body}</p>
+                  </div>
+                  <span className="d4b-mvv-hint" style={{ color: accent }}>hover to read ↑</span>
+                </div>
+
+                {/* Colored bottom accent */}
+                <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, height: 5, background: accent, zIndex: 3 }} />
               </div>
             ))}
           </div>
@@ -427,11 +505,8 @@ const WhoWeAre: React.FC = () => {
         </div>
       </section>
 
-      <WaveDivider topColor={BG} bottomColor={SECTION_ALT} />
-
-      {/* ══════════════════════════════════════════════════════════════════════════
-          SECTION 4 (formerly 5) — STATS + HOW WE WORK
-      ══════════════════════════════════════════════════════════════════════════ */}
+      {/* Impact section commented out — foundation is new (2026), stats not yet applicable */}
+      {false && (
       <section style={{
         background: SECTION_ALT,
         padding: '88px 5%',
@@ -614,6 +689,7 @@ const WhoWeAre: React.FC = () => {
           )}
         </div>
       </section>
+      )}
 
       </div>{/* end zoom wrapper */}
 
