@@ -425,7 +425,7 @@ const WhoWeAre: React.FC = () => {
               color: EARTH,
               margin: '0 0 16px',
             }}>
-              Mission, Vision &amp; Values
+              Our Mission
             </h2>
             <div style={{ display: 'flex', justifyContent: 'center' }}>
               <div style={{ width: 48, height: 3, background: CRIMSON, borderRadius: 2 }} />
@@ -439,27 +439,27 @@ const WhoWeAre: React.FC = () => {
           >
             {[
               {
-                chipLabel: 'Mission',
-                heading: 'Empowering Lives',
-                body: 'We work to empower underprivileged children, youth, and women through practical education, accessible healthcare, and livelihood programmes that create real, measurable impact in everyday lives.',
+                chipLabel: 'Skill Development',
+                heading: 'Skill Development',
+                body: 'We train youth and women in practical, market-relevant skills — from agriculture and digital literacy to finance and vocational trades — so they can earn, grow, and lead independently.',
                 accent: CRIMSON,
                 bgGradient: 'linear-gradient(140deg, #fdf1f3 0%, #f3ccd3 100%)',
                 Icon: FaHandshake,
                 delay: 'd4b-d1',
               },
               {
-                chipLabel: 'Vision',
-                heading: 'Communities That Lead',
-                body: 'A future where every Indian community can voice its aspirations, access quality education and a clean environment — built not by charity, but by the collective strength of its own people.',
+                chipLabel: 'Education',
+                heading: 'Education',
+                body: 'Quality education changes everything. We work to ensure children and young adults in underserved communities have access to learning that is relevant, accessible, and empowering.',
                 accent: '#2196a0',
                 bgGradient: 'linear-gradient(140deg, #e6f6f7 0%, #b8e0e4 100%)',
-                Icon: FaLeaf,
+                Icon: FaGraduationCap,
                 delay: 'd4b-d2',
               },
               {
-                chipLabel: 'Values',
-                heading: 'Action Over Words',
-                body: 'We believe in good governance, honest effort, and putting resources where they matter most. Every rupee, every hour, every decision is guided by what actually works — not what looks good on paper.',
+                chipLabel: 'Employment',
+                heading: 'Employment',
+                body: 'A job is more than income — it is dignity. We connect trained individuals to livelihood opportunities, self-employment pathways, and market networks that create lasting financial independence.',
                 accent: '#7B4F2E',
                 bgGradient: 'linear-gradient(140deg, #f8f0ea 0%, #e5ccb5 100%)',
                 Icon: FaUsers,
@@ -470,9 +470,6 @@ const WhoWeAre: React.FC = () => {
 
                 {/* Illustration area */}
                 <div className="d4b-mvv-img" style={{ background: bgGradient, minHeight: 200 }}>
-                  <span className="d4b-mvv-chip" style={{ background: `${accent}22`, color: accent }}>
-                    {chipLabel}
-                  </span>
                   <div className="d4b-mvv-icon-wrap" style={{ boxShadow: `0 4px 20px ${accent}30` }}>
                     <Icon style={{ fontSize: 40, color: accent }} />
                   </div>
