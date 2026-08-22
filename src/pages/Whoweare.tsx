@@ -6,6 +6,7 @@ import {
   FaLeaf,
   FaUsers,
   FaGraduationCap,
+  FaBriefcase,
 } from 'react-icons/fa';
 
 /* ─── Design Tokens ─────────────────────────────────────────────────────────── */
@@ -355,7 +356,6 @@ const WhoWeAre: React.FC = () => {
       }}>
         <HeroBlob />
 
-
 <div style={{ position: 'relative', zIndex: 2, textAlign: 'center', maxWidth: 720 }}>
           <h1 className="d4b-fade-in d4b-d1" style={{
             fontFamily: "'Lora', serif", fontStyle: 'italic',
@@ -462,7 +462,7 @@ const WhoWeAre: React.FC = () => {
                 body: 'A job is more than income — it is dignity. We connect trained individuals to livelihood opportunities, self-employment pathways, and market networks that create lasting financial independence.',
                 accent: '#7B4F2E',
                 bgGradient: 'linear-gradient(140deg, #f8f0ea 0%, #e5ccb5 100%)',
-                Icon: FaUsers,
+                Icon: FaBriefcase,
                 delay: 'd4b-d3',
               },
             ].map(({ chipLabel, heading, body, accent, bgGradient, Icon, delay }) => (
@@ -490,7 +490,6 @@ const WhoWeAre: React.FC = () => {
                   <div className="d4b-mvv-body">
                     <p style={{ fontSize: '0.93rem', lineHeight: 1.8, color: EARTH_MUTED, margin: 0 }}>{body}</p>
                   </div>
-                  <span className="d4b-mvv-hint" style={{ color: accent }}>hover to read ↑</span>
                 </div>
 
                 {/* Colored bottom accent */}

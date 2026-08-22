@@ -402,17 +402,29 @@ const HomePage: React.FC = () => {
 
       {/* 3. WHO WE ARE INTRODUCTION SECTION PREVIEW */}
       <div className="jwf-snap-section" style={{ backgroundColor: theme.colors.primary, position: 'relative' }}>
-        {/* Decorative leaf shapes */}
-        <div aria-hidden className="wwa-leaf" style={{ position: 'absolute', top: '15%', left: '-40px', width: 120, height: 120, background: 'rgba(255,255,255,0.06)', borderRadius: '50% 0 50% 50%', transform: 'rotate(-20deg)' }} />
-        <div aria-hidden className="wwa-leaf" style={{ position: 'absolute', top: '60%', right: '-30px', width: 100, height: 100, background: 'rgba(255,255,255,0.05)', borderRadius: '50% 50% 0 50%', transform: 'rotate(15deg)' }} />
-        <div aria-hidden className="wwa-leaf" style={{ position: 'absolute', bottom: '10%', left: '12%', width: 80, height: 80, background: 'rgba(255,255,255,0.04)', borderRadius: '50% 0 50% 50%', transform: 'rotate(40deg)' }} />
-        <div aria-hidden className="wwa-leaf" style={{ position: 'absolute', top: '8%', right: '15%', width: 60, height: 60, background: 'rgba(255,255,255,0.05)', borderRadius: '0 50% 50% 50%', transform: 'rotate(-10deg)' }} />
-        <div aria-hidden className="wwa-leaf" style={{ position: 'absolute', top: '35%', left: '8%', width: 90, height: 90, background: 'rgba(255,255,255,0.04)', borderRadius: '50% 50% 0 50%', transform: 'rotate(25deg)' }} />
-        <div aria-hidden className="wwa-leaf" style={{ position: 'absolute', bottom: '25%', right: '10%', width: 70, height: 70, background: 'rgba(255,255,255,0.05)', borderRadius: '50% 0 50% 50%', transform: 'rotate(-35deg)' }} />
-        <div aria-hidden className="wwa-leaf" style={{ position: 'absolute', top: '5%', left: '35%', width: 50, height: 50, background: 'rgba(255,255,255,0.04)', borderRadius: '0 50% 50% 50%', transform: 'rotate(55deg)' }} />
-        <div aria-hidden className="wwa-leaf" style={{ position: 'absolute', bottom: '5%', right: '30%', width: 55, height: 55, background: 'rgba(255,255,255,0.05)', borderRadius: '50% 0 50% 50%', transform: 'rotate(-45deg)' }} />
-        <div aria-hidden className="wwa-leaf" style={{ position: 'absolute', top: '50%', left: '25%', width: 40, height: 40, background: 'rgba(255,255,255,0.035)', borderRadius: '50% 50% 0 50%', transform: 'rotate(70deg)' }} />
-        <div aria-hidden className="wwa-leaf" style={{ position: 'absolute', top: '75%', right: '25%', width: 45, height: 45, background: 'rgba(255,255,255,0.04)', borderRadius: '0 50% 50% 50%', transform: 'rotate(-60deg)' }} />
+        {/* Decorative thematic icon stamps */}
+        {[
+          { Icon: FaGraduationCap, top: '10%',   left: '3%',   size: 44, circle: 90,  rotate: -12 },
+          { Icon: FaVenus,         top: '6%',    right: '6%',  size: 38, circle: 78,  rotate: 8   },
+          { Icon: FaUsers,         bottom: '8%', left: '4%',   size: 40, circle: 82,  rotate: -6  },
+          { Icon: FaBriefcase,     bottom: '10%',right: '4%',  size: 38, circle: 78,  rotate: 10  },
+          { Icon: FaBookOpen,      top: '48%',   left: '1%',   size: 30, circle: 62,  rotate: -18 },
+          { Icon: FaHandHoldingHeart, top: '42%',right: '2%',  size: 30, circle: 62,  rotate: 14  },
+          { Icon: FaStethoscope,   bottom: '30%',left: '14%',  size: 26, circle: 54,  rotate: -8  },
+          { Icon: FaGlobe,         top: '22%',   right: '14%', size: 26, circle: 54,  rotate: 5   },
+        ].map(({ Icon, size, circle, rotate, ...pos }, i) => (
+          <div key={i} aria-hidden className="wwa-leaf" style={{
+            position: 'absolute', ...pos,
+            width: circle, height: circle,
+            borderRadius: '50%',
+            background: 'rgba(255,255,255,0.06)',
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
+            transform: `rotate(${rotate}deg)`,
+            backdropFilter: 'blur(1px)',
+          }}>
+            <Icon style={{ fontSize: size, color: 'rgba(255,255,255,0.55)' }} />
+          </div>
+        ))}
         <div style={{ ...sectionWrapperStyle, padding: '72px 5%', textAlign: 'center', position: 'relative', zIndex: 1 }}>
 
           {/* Heading */}
@@ -680,13 +692,26 @@ const HomePage: React.FC = () => {
 
       {/* 7. VOLUNTEER WORKSPACE ACTION PREVIEW */}
       <div className="jwf-snap-section" style={{ backgroundColor: theme.colors.secondary, color: 'white', position: 'relative', overflow: 'hidden' }}>
-        {/* Decorative leaf shapes */}
-        <div aria-hidden className="wwa-leaf" style={{ position: 'absolute', top: '12%', left: '-30px', width: 110, height: 110, background: 'rgba(255,255,255,0.04)', borderRadius: '50% 0 50% 50%', transform: 'rotate(-25deg)' }} />
-        <div aria-hidden className="wwa-leaf" style={{ position: 'absolute', top: '55%', right: '-20px', width: 90, height: 90, background: 'rgba(255,255,255,0.035)', borderRadius: '50% 50% 0 50%', transform: 'rotate(20deg)' }} />
-        <div aria-hidden className="wwa-leaf" style={{ position: 'absolute', bottom: '15%', left: '10%', width: 70, height: 70, background: 'rgba(255,255,255,0.03)', borderRadius: '0 50% 50% 50%', transform: 'rotate(45deg)' }} />
-        <div aria-hidden className="wwa-leaf" style={{ position: 'absolute', top: '10%', right: '12%', width: 55, height: 55, background: 'rgba(255,255,255,0.04)', borderRadius: '50% 0 50% 50%', transform: 'rotate(-15deg)' }} />
-        <div aria-hidden className="wwa-leaf" style={{ position: 'absolute', bottom: '20%', right: '20%', width: 65, height: 65, background: 'rgba(255,255,255,0.03)', borderRadius: '50% 50% 0 50%', transform: 'rotate(-40deg)' }} />
-        <div aria-hidden className="wwa-leaf" style={{ position: 'absolute', top: '40%', left: '20%', width: 45, height: 45, background: 'rgba(255,255,255,0.035)', borderRadius: '0 50% 50% 50%', transform: 'rotate(60deg)' }} />
+        {/* Decorative thematic icon stamps */}
+        {[
+          { Icon: FaUsers,           top: '10%',    left: '3%',   size: 40, circle: 82,  rotate: -10 },
+          { Icon: FaHandHoldingHeart,bottom: '10%', right: '4%',  size: 36, circle: 74,  rotate: 8   },
+          { Icon: FaVenus,           top: '8%',     right: '7%',  size: 34, circle: 70,  rotate: 6   },
+          { Icon: FaGraduationCap,   bottom: '12%', left: '5%',   size: 36, circle: 74,  rotate: -7  },
+          { Icon: FaGlobe,           top: '45%',    left: '1%',   size: 28, circle: 58,  rotate: -15 },
+          { Icon: FaBriefcase,       top: '40%',    right: '2%',  size: 28, circle: 58,  rotate: 12  },
+        ].map(({ Icon, size, circle, rotate, ...pos }, i) => (
+          <div key={i} aria-hidden className="wwa-leaf" style={{
+            position: 'absolute', ...pos,
+            width: circle, height: circle,
+            borderRadius: '50%',
+            background: 'rgba(255,255,255,0.06)',
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
+            transform: `rotate(${rotate}deg)`,
+          }}>
+            <Icon style={{ fontSize: size, color: 'rgba(255,255,255,0.5)' }} />
+          </div>
+        ))}
         <div style={{ ...sectionWrapperStyle, textAlign: 'center', padding: '70px 5%', position: 'relative', zIndex: 1 }}>
           <FaHandHoldingHeart size={40} color={theme.colors.primary} style={{ marginBottom: '15px' }} />
           <h2 style={{ fontSize: '2.2rem', fontWeight: '800', margin: '0 0 15px 0', color: 'white' }}>
@@ -742,11 +767,8 @@ const HomePage: React.FC = () => {
           box-shadow: 0 8px 24px rgba(0,0,0,0.18);
           background-color: #f5ede0 !important;
         }
-        @media (max-width: 1024px) {
-          .wwa-leaf:nth-child(n+5) { display: none !important; }
-        }
         @media (max-width: 768px) {
-          .wwa-leaf:nth-child(n+3) { display: none !important; }
+          .wwa-leaf { display: none !important; }
         }
 
         @media (min-width: 1025px) {

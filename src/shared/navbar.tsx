@@ -113,7 +113,7 @@ export const Navbar: React.FC = () => {
     <>
     <nav style={navContainerStyle}>
       {/* Brand Logo */}
-      <Link to="/" style={{ display: 'flex', alignItems: 'center' }}>
+      <Link to="/" onClick={() => setIsMenuOpen(false)} style={{ display: 'flex', alignItems: 'center' }}>
         <img src="/logo.webp" alt="Logo" style={{ height: isMobile ? '36px' : '44px', width: 'auto' }} />
       </Link>
 
