@@ -5,9 +5,8 @@ import { theme } from '../theme/styles';
 export const Footer: React.FC = () => {
   const [hoveredLink, setHoveredLink] = useState<string | null>(null);
 
-  // RED & WHITE: Base links are dark gray, turning Red on hover
   const linkStyle = (id: string): React.CSSProperties => ({
-    color: hoveredLink === id ? '#D32F2F' : '#555555', // Red accent on hover, dark gray idle
+    color: hoveredLink === id ? '#fff' : 'rgba(255,255,255,0.75)',
     textDecoration: 'none',
     transition: theme.utils.transition || 'color 0.3s ease',
     display: 'block',
@@ -24,13 +23,12 @@ export const Footer: React.FC = () => {
   };
 
   return (
-    <footer style={{ 
-      backgroundColor: '#FFFFFF', // RED & WHITE: Pure white background
-      color: '#333333',           // Primary dark text color
+    <footer style={{
+      backgroundColor: '#8B1A2B',
+      color: '#fff',
       padding: '60px 5% 20px',
-      width: '100%',        
+      width: '100%',
       boxSizing: 'border-box',
-      borderTop: '2px solid #D32F2F' // RED & WHITE: Bold red top border accent
     }}>
       <div 
         className="footer-grid-container"
@@ -46,17 +44,17 @@ export const Footer: React.FC = () => {
           <img
             src="/logo.webp"
             alt="Johar Foundation"
-            style={{ height: '52px', width: 'auto', marginBottom: '14px', objectFit: 'contain' }}
+            style={{ height: '52px', width: 'auto', marginBottom: '14px', objectFit: 'contain', borderRadius: 8, padding: 6, background: '#fff' }}
           />
-          <h4 style={{ color: '#D32F2F', marginBottom: '12px', fontSize: '0.82rem', fontWeight: 'bold', letterSpacing: '0.03em' }}>JOHAR WELFARE FOUNDATION</h4>
-          <p style={{ fontSize: '0.85rem', lineHeight: '1.6', color: '#555555', margin: 0 }}>
+          <h4 style={{ color: '#fff', marginBottom: '12px', fontSize: '0.82rem', fontWeight: 'bold', letterSpacing: '0.03em' }}>JOHAR WELFARE FOUNDATION</h4>
+          <p style={{ fontSize: '0.85rem', lineHeight: '1.6', color: 'rgba(255,255,255,0.75)', margin: 0 }}>
             "Jo Hare Na" — Dedicated to the resilience and empowerment of underserved communities.
           </p>
         </div>
 
         {/* 2. Quick Links */}
         <div style={columnStyle}>
-          <h4 style={{ marginBottom: '20px', color: '#111111', fontSize: '1rem', fontWeight: 'bold' }}>Quick Link</h4>
+          <h4 style={{ marginBottom: '20px', color: '#fff', fontSize: '1rem', fontWeight: 'bold' }}>Quick Link</h4>
           <div style={{ fontSize: '0.85rem' }}>
             <Link 
               to="/who-we-are" 
@@ -95,7 +93,7 @@ export const Footer: React.FC = () => {
 
         {/* 3. Take Action */}
         <div style={columnStyle}>
-          <h4 style={{ marginBottom: '20px', color: '#111111', fontSize: '1rem', fontWeight: 'bold' }}>Take Action</h4>
+          <h4 style={{ marginBottom: '20px', color: '#fff', fontSize: '1rem', fontWeight: 'bold' }}>Take Action</h4>
           <div style={{ fontSize: '0.85rem' }}>
             <Link 
               to="/contact" 
@@ -126,7 +124,7 @@ export const Footer: React.FC = () => {
 
         {/* 4. Legal Column */}
         <div style={columnStyle}>
-          <h4 style={{ marginBottom: '20px', color: '#111111', fontSize: '1rem', fontWeight: 'bold' }}>Legal</h4>
+          <h4 style={{ marginBottom: '20px', color: '#fff', fontSize: '1rem', fontWeight: 'bold' }}>Legal</h4>
           <div style={{ fontSize: '0.85rem' }}>
             <Link 
               to="/privacy-policy" 
@@ -157,11 +155,11 @@ export const Footer: React.FC = () => {
 
         {/* 5. Contact Column */}
         <div style={columnStyle}>
-          <h4 style={{ marginBottom: '20px', color: '#111111', fontSize: '1rem', fontWeight: 'bold' }}>Contact Us</h4>
-          <div style={{ fontSize: '0.85rem', color: '#555555', lineHeight: '1.8' }}>
+          <h4 style={{ marginBottom: '20px', color: '#fff', fontSize: '1rem', fontWeight: 'bold' }}>Contact Us</h4>
+          <div style={{ fontSize: '0.85rem', color: 'rgba(255,255,255,0.75)', lineHeight: '1.8' }}>
             <a
               href="mailto:info@joharfoundation.org"
-              style={{ display: 'flex', alignItems: 'center', gap: '8px', color: hoveredLink === 'email' ? '#D32F2F' : '#555555', textDecoration: 'none', marginBottom: '10px', transition: 'color 0.3s ease' }}
+              style={{ display: 'flex', alignItems: 'center', gap: '8px', color: hoveredLink === 'email' ? '#fff' : 'rgba(255,255,255,0.75)', textDecoration: 'none', marginBottom: '10px', transition: 'color 0.3s ease' }}
               onMouseEnter={() => setHoveredLink('email')}
               onMouseLeave={() => setHoveredLink(null)}
             >
@@ -170,7 +168,7 @@ export const Footer: React.FC = () => {
             </a>
             <a
               href="tel:+919117115050"
-              style={{ display: 'flex', alignItems: 'center', gap: '8px', color: hoveredLink === 'phone' ? '#D32F2F' : '#555555', textDecoration: 'none', marginBottom: '10px', transition: 'color 0.3s ease' }}
+              style={{ display: 'flex', alignItems: 'center', gap: '8px', color: hoveredLink === 'phone' ? '#fff' : 'rgba(255,255,255,0.75)', textDecoration: 'none', marginBottom: '10px', transition: 'color 0.3s ease' }}
               onMouseEnter={() => setHoveredLink('phone')}
               onMouseLeave={() => setHoveredLink(null)}
             >
@@ -181,7 +179,7 @@ export const Footer: React.FC = () => {
               href="https://maps.google.com/?q=Jharkhand,India"
               target="_blank"
               rel="noopener noreferrer"
-              style={{ display: 'flex', alignItems: 'center', gap: '8px', color: hoveredLink === 'location' ? '#D32F2F' : '#555555', textDecoration: 'none', transition: 'color 0.3s ease' }}
+              style={{ display: 'flex', alignItems: 'center', gap: '8px', color: hoveredLink === 'location' ? '#fff' : 'rgba(255,255,255,0.75)', textDecoration: 'none', transition: 'color 0.3s ease' }}
               onMouseEnter={() => setHoveredLink('location')}
               onMouseLeave={() => setHoveredLink(null)}
             >
@@ -192,14 +190,13 @@ export const Footer: React.FC = () => {
         </div>
       </div>
 
-      {/* RED & WHITE: Light divider line with text in Red color */}
-        <div style={{ 
-          borderTop: '1px solid #E0E0E0', 
-          paddingTop: '20px', 
-          textAlign: 'center', 
-          fontSize: '0.8rem', 
-          color: '#D32F2F', // Changed to matching red color
-          fontWeight: '500'  // Optional: added slight weight for better readability in red
+        <div style={{
+          borderTop: '1px solid rgba(255,255,255,0.2)',
+          paddingTop: '20px',
+          textAlign: 'center',
+          fontSize: '0.8rem',
+          color: 'rgba(255,255,255,0.6)',
+          fontWeight: '500'
         }}>
           © {new Date().getFullYear()} Johar Welfare Foundation. All Rights Reserved.
         </div>

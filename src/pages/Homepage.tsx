@@ -530,27 +530,27 @@ const HomePage: React.FC = () => {
           </div>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '25px', marginBottom: '40px' }} className="grid-layout-3x">
             <div className="preview-card">
-              <div className="preview-card-header"><FaUsers size={24} color={theme.colors.primary} /><h4>Tribal Affairs & Advocacy</h4></div>
+              <div className="preview-card-header"><FaUsers size={24} color="#fff" /><h4>Tribal Affairs & Advocacy</h4></div>
               <p>Working with tribal communities on forest rights, land mapping, and getting their claims on record before someone else decides.</p>
             </div>
             <div className="preview-card">
-              <div className="preview-card-header"><FaGraduationCap size={24} color={theme.colors.primary} /><h4>Skill Development</h4></div>
+              <div className="preview-card-header"><FaGraduationCap size={24} color="#fff" /><h4>Skill Development</h4></div>
               <p>Vocational training and digital classrooms for rural youth — tailoring, computing, and trades that actually lead somewhere.</p>
             </div>
             <div className="preview-card">
-              <div className="preview-card-header"><FaHeartPulse size={24} color={theme.colors.primary} /><h4>Health & Family Welfare</h4></div>
+              <div className="preview-card-header"><FaHeartPulse size={24} color="#fff" /><h4>Health & Family Welfare</h4></div>
               <p>Free health camps, child nutrition tracking, and maternal care in villages where the nearest clinic is more than a walk away.</p>
             </div>
             <div className="preview-card hide-mobile">
-              <div className="preview-card-header"><FaVenus size={24} color={theme.colors.primary} /><h4>Women's Empowerment</h4></div>
+              <div className="preview-card-header"><FaVenus size={24} color="#fff" /><h4>Women's Empowerment</h4></div>
               <p>SHGs, legal literacy, and livelihood training. Women in the program have opened bank accounts and started small businesses.</p>
             </div>
             <div className="preview-card hide-mobile">
-              <div className="preview-card-header"><FaBookOpen size={24} color={theme.colors.primary} /><h4>Education & Literacy</h4></div>
+              <div className="preview-card-header"><FaBookOpen size={24} color="#fff" /><h4>Education & Literacy</h4></div>
               <p>Tuition centres and digital classrooms in areas where the nearest school is a long walk. Someone who shows up changes things.</p>
             </div>
             <div className="preview-card hide-mobile">
-              <div className="preview-card-header"><FaUserShield size={24} color={theme.colors.primary} /><h4>Child Protection & Rights</h4></div>
+              <div className="preview-card-header"><FaUserShield size={24} color="#fff" /><h4>Child Protection & Rights</h4></div>
               <p>Village-level work on birth registration, child labour, and school re-enrollment. Getting children on record and back in a classroom.</p>
             </div>
           </div>
@@ -732,22 +732,24 @@ const HomePage: React.FC = () => {
       {/* Scoped CSS Rules System Framework */}
       <style>{`
         .preview-card {
-          background-color: white;
-          border: 1px solid #eaeaea;
+          background-color: ${theme.colors.primary};
+          border: none;
           border-radius: 16px;
           padding: 30px 24px;
-          box-shadow: 0 4px 15px rgba(0,0,0,0.01);
+          box-shadow: 0 4px 15px rgba(166,38,57,0.15);
         }
-        
+
         .preview-card-header {
           display: flex; align-items: center; gap: 12px; margin-bottom: 12px;
+          padding-bottom: 10px;
+          border-bottom: 2px solid rgba(255,255,255,0.3);
         }
         .preview-card h4 {
-          font-size: 1.05rem; color: ${theme.colors.secondary}; margin: 0; font-weight: 700;
+          font-size: 1.05rem; color: #fff; margin: 0; font-weight: 700;
         }
 
         .preview-card p {
-          color: #666; font-size: 0.82rem; line-height: 1.6; margin: 0;
+          color: rgba(255,255,255,0.85); font-size: 0.82rem; line-height: 1.6; margin: 0;
         }
 
         .redirect-btn {
