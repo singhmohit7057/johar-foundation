@@ -287,9 +287,11 @@ export const GetInvolved: React.FC = () => {
         </div>
       </section>
 
+      {/* Partner and FAQ sections hidden for now */}
+      {false && (
       <WaveDivider topColor={BG} bottomColor={SECTION_ALT} />
-
-      {/* ── Partner Section ──────────────────────────────────────────────────── */}
+      )}
+      {false && (
       <section style={{ background: SECTION_ALT, padding: '60px 5%' }}>
         <div style={{ maxWidth: '1200px', margin: '0 auto', textAlign: 'center' }}>
           <FaHandshake size={50} color={CRIMSON} style={{ marginBottom: '20px' }} />
@@ -314,10 +316,13 @@ export const GetInvolved: React.FC = () => {
           </a>
         </div>
       </section>
+      )}
 
+      {false && (
       <WaveDivider topColor={SECTION_ALT} bottomColor={BG} />
+      )}
 
-      {/* ── FAQ Section ──────────────────────────────────────────────────────── */}
+      {false && (
       <section style={{ background: BG, padding: '60px 5%' }}>
         <div style={{ maxWidth: '800px', margin: '0 auto' }}>
           <div style={{ textAlign: 'center', marginBottom: '40px' }}>
@@ -341,6 +346,7 @@ export const GetInvolved: React.FC = () => {
           ))}
         </div>
       </section>
+      )}
 
       {/* ── CSS ──────────────────────────────────────────────────────────────── */}
       <style>{`

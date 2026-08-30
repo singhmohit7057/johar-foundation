@@ -116,7 +116,7 @@ const Contact: React.FC = () => {
             margin: '0 auto 32px',
             lineHeight: 1.75,
           }}>
-            We're based in Jamshedpur. Write to us, call us, or just show up.
+            We're based in Jharkhand. Write to us, call us, or just show up.
           </p>
 
           {/* Legal Identity — merged into hero */}

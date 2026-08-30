@@ -255,7 +255,6 @@ export const HeroBackgroundSliderAsymmetric: React.FC = () => {
               }} />
               <img src={card.src} alt={card.caption} loading="eager" decoding="async"
                 style={{ width: '100%', aspectRatio: '1/1', objectFit: 'cover', display: 'block', borderRadius: '2px' }} />
-              <p className="jwf-polaroid__caption">{card.caption}</p>
             </div>
           ))}
         </div>

@@ -152,7 +152,7 @@ export const Popup: React.FC<PopupProps> = ({ delay = 3000 }) => {
             fontSize: '0.88rem', lineHeight: 1.6,
             color: '#555', margin: '0 0 18px',
           }}>
-            Your small contribution helps us reach the underserved communities of India and beyond.
+            Your small contribution helps us reach the underserved communities of Jharkhand and beyond.
           </p>
 
           {/* CTA */}

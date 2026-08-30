@@ -41,11 +41,6 @@ export const Footer: React.FC = () => {
       >
         {/* 1. About Column */}
         <div style={columnStyle}>
-          <img
-            src="/logo.webp"
-            alt="Johar Foundation"
-            style={{ height: '52px', width: 'auto', marginBottom: '14px', objectFit: 'contain', borderRadius: 8, padding: 6, background: '#fff' }}
-          />
           <h4 style={{ color: '#fff', marginBottom: '12px', fontSize: '0.82rem', fontWeight: 'bold', letterSpacing: '0.03em' }}>JOHAR WELFARE FOUNDATION</h4>
           <p style={{ fontSize: '0.85rem', lineHeight: '1.6', color: 'rgba(255,255,255,0.75)', margin: 0 }}>
             "Jo Hare Na" — Dedicated to the resilience and empowerment of underserved communities.
