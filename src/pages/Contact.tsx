@@ -119,31 +119,6 @@ const Contact: React.FC = () => {
             We're based in Jharkhand. Write to us, call us, or just show up.
           </p>
 
-          {/* Legal Identity — merged into hero */}
-          <div className="ct-fade-in ct-d3" style={{ marginBottom: '16px' }}>
-            <p style={{ color: EARTH_MUTED, fontSize: '0.82rem', marginBottom: '14px' }}>
-              Registered as a <strong style={{ color: EARTH }}>Section 8 Company</strong> &nbsp;•&nbsp; Incorporated 6 March 2026
-            </p>
-            <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '10px', fontSize: '0.8rem' }}>
-              {[
-                { label: 'CIN', value: 'U88900JH2026NPL027286' },
-                { label: 'PAN', value: 'AAHCJ3084H' },
-                { label: 'TAN', value: 'RCHJ02452C' },
-              ].map(({ label, value }) => (
-                <div key={label} style={{
-                  border: `1px solid ${WARM_TAN}80`,
-                  padding: '8px 18px',
-                  borderRadius: '8px',
-                  background: `${WHITE}cc`,
-                  color: EARTH,
-                  backdropFilter: 'blur(4px)',
-                }}>
-                  <span style={{ color: EARTH_MUTED, marginRight: 5 }}>{label}:</span>
-                  <strong>{value}</strong>
-                </div>
-              ))}
-            </div>
-          </div>
 
           <div style={{
             width: 1, height: 40,

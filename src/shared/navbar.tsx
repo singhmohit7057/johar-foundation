@@ -125,8 +125,6 @@ export const Navbar: React.FC = () => {
           <>
             <Link to="/" style={getLinkStyle('/')}>Home</Link>
             <Link to="/who-we-are" style={getLinkStyle('/who-we-are')}>Who We Are</Link>
-            <Link to="/initiatives" style={getLinkStyle('/initiatives')}>Initiatives</Link>
-            <Link to="/impact" style={getLinkStyle('/impact')}>Impact</Link>
             <Link to="/get-involved" style={getLinkStyle('/get-involved')}>Volunteer</Link>
             <Link to="/contact" style={getLinkStyle('/contact')}>Contact</Link>
           </>
@@ -183,8 +181,6 @@ export const Navbar: React.FC = () => {
           <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
             <Link to="/" onClick={() => setIsMenuOpen(false)} style={getLinkStyle('/')}>Home</Link>
             <Link to="/who-we-are" onClick={() => setIsMenuOpen(false)} style={getLinkStyle('/who-we-are')}>Who We Are</Link>
-            <Link to="/initiatives" onClick={() => setIsMenuOpen(false)} style={getLinkStyle('/initiatives')}>Initiatives</Link>
-            <Link to="/impact" onClick={() => setIsMenuOpen(false)} style={getLinkStyle('/impact')}>Impact</Link>
             <Link to="/get-involved" onClick={() => setIsMenuOpen(false)} style={getLinkStyle('/get-involved')}>Volunteer</Link>
             <Link to="/contact" onClick={() => setIsMenuOpen(false)} style={getLinkStyle('/contact')}>Contact</Link>
           </div>

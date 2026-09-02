@@ -139,8 +139,8 @@ export const TopHeader: React.FC = () => {
       {/* Hidden container node required by Google initialization script */}
       <div id="google_translate_element" style={{ display: 'none', visibility: 'hidden' }} />
 
-      <div className="top-header-wrapper">
-      <div style={containerStyle} className="top-header">
+      <div className="top-header-wrapper" translate="no">
+      <div style={containerStyle} className="top-header notranslate">
         {/* Left Side: Contact */}
         <div style={{ display: 'flex', gap: '20px', alignItems: 'center' }} className="contact-info">
           <a href="tel:+919117115050" style={{ color: 'inherit', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '8px' }}>
