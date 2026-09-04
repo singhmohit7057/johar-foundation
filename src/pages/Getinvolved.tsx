@@ -1,10 +1,8 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
 import { SEO } from '../shared/seo';
 import { VolunteerForm } from '../components/volunteerform';
 import {
-  FaHandshake, FaUsers, FaChevronDown, FaChevronUp,
-  FaHandHoldingDollar, FaBullhorn, FaGift
+  FaHandshake, FaChevronDown, FaChevronUp,
 } from 'react-icons/fa6';
 
 const CRIMSON     = '#A62639';
@@ -42,35 +40,6 @@ export const GetInvolved: React.FC = () => {
     { q: "Can I volunteer remotely?", a: "Yes! Our Digital Advocacy and Content Creation teams work entirely remotely." },
     { q: "How do organizations partner with you?", a: "Corporates and NGOs can reach out via the 'Partner With Us' section for CSR collaborations." }
   ];
-
-  const impactBoxStyle = (color: string): React.CSSProperties => ({
-    backgroundColor: color,
-    color: WHITE,
-    padding: '30px 20px',
-    borderRadius: '16px',
-    textAlign: 'center',
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    gap: '15px',
-    flex: '1 1 300px',
-    boxShadow: '0 8px 15px rgba(0,0,0,0.08)',
-    transition: 'transform 0.3s ease'
-  });
-
-  const whiteBtnStyle: React.CSSProperties = {
-    background: WHITE,
-    color: 'black',
-    border: 'none',
-    padding: '10px 25px',
-    borderRadius: '50px',
-    fontWeight: 'bold',
-    fontSize: '0.85rem',
-    cursor: 'pointer',
-    marginTop: '10px',
-    textDecoration: 'none',
-    display: 'inline-block'
-  };
 
   return (
     <div style={{ overflowX: 'hidden' }}>
@@ -154,134 +123,61 @@ export const GetInvolved: React.FC = () => {
         </div>
       </section>
 
-      <WaveDivider topColor={BG} bottomColor={SECTION_ALT} />
 
-      {/* ── Impact Options ───────────────────────────────────────────────────── */}
-      <section style={{ background: SECTION_ALT, padding: '60px 5%' }}>
-        <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
-          <div style={{ textAlign: 'center', marginBottom: '40px' }}>
-            <h2 className="section-title">CREATE A LASTING IMPACT</h2>
-            <p className="section-subtitle">Explore the ways in which you can support children in need.</p>
-          </div>
-
-          <div className="impact-grid">
-            <div style={impactBoxStyle('#A62639')}>
-              <FaHandHoldingDollar size={35} />
-              <h3 className="card-h3">MAKE A DONATION</h3>
-              <p className="card-p">
-                Every small contribution helps provide essential nutrition and education to children in remote clusters.
-              </p>
-              <Link to="/donate" style={whiteBtnStyle}>Donate Now</Link>
-            </div>
-
-            <div style={impactBoxStyle('#1abc9c')}>
-              <FaGift size={35} />
-              <h3 className="card-h3">HIGH VALUE GIVING</h3>
-              <p className="card-p">
-                To make a customized or high-value donation for specific school or health projects, please contact our team.
-              </p>
-              <Link to="/contact" style={whiteBtnStyle}>Contact Us</Link>
-            </div>
-
-            <div style={impactBoxStyle('#9b59b6')}>
-              <FaBullhorn size={35} />
-              <h3 className="card-h3">SUPPORT A CAMPAIGN</h3>
-              <p className="card-p">
-                Become an advocate. Sign up for our advocacy initiatives and help us voice the issues of underprivileged children.
-              </p>
-              <Link to="/initiatives" style={whiteBtnStyle}>View Campaigns</Link>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <WaveDivider topColor={SECTION_ALT} bottomColor={BG} />
-
-      {/* ── Volunteer Workspace ──────────────────────────────────────────────── */}
-      <section style={{ background: BG, padding: '40px 5%' }}>
-        <div className="vol-split-wrapper" style={{
-          maxWidth: '1200px',
-          margin: '0 auto',
-          boxShadow: '0 24px 80px rgba(60,53,48,0.14)',
-          borderRadius: '4px',
-          overflow: 'hidden',
-          display: 'flex',
-          minHeight: 'calc(100vh - 160px)',
+      {/* ── Volunteer Section ──────────────────────────────────────────────── */}
+      <section style={{ background: BG, padding: '40px 5%', minHeight: '100vh', display: 'flex', alignItems: 'center' }}>
+        <div className="vol-ursha-wrapper" style={{
+          maxWidth: '1200px', margin: '0 auto', width: '100%',
+          display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 48, alignItems: 'center',
         }}>
 
-          {/* LEFT PANEL — crimson */}
-          <div className="vol-left-panel" style={{
-            flex: '0 0 42%',
-            background: CRIMSON,
-            padding: '64px 52px',
-            display: 'flex',
-            flexDirection: 'column',
-            justifyContent: 'center',
-            boxSizing: 'border-box',
-            position: 'relative',
-            overflow: 'hidden',
-          }}>
-            {/* decorative circles */}
-            <div aria-hidden style={{ position: 'absolute', bottom: -90, right: -90, width: 300, height: 300, borderRadius: '50%', border: `1px solid ${WARM_TAN}22`, pointerEvents: 'none' }} />
-            <div aria-hidden style={{ position: 'absolute', bottom: -36, right: -36, width: 170, height: 170, borderRadius: '50%', border: `1px solid ${WARM_TAN}33`, pointerEvents: 'none' }} />
-            <div aria-hidden style={{ position: 'absolute', top: -70, left: -70, width: 220, height: 220, borderRadius: '50%', border: `1px solid ${WARM_TAN}14`, pointerEvents: 'none' }} />
-
-            <div style={{ position: 'relative', zIndex: 1 }}>
-              <p style={{ color: WARM_TAN, fontSize: '0.65rem', letterSpacing: '4px', textTransform: 'uppercase', fontWeight: 700, margin: '0 0 22px 0' }}>Join Us</p>
-
-              <h2 style={{
-                color: WHITE,
-                fontFamily: "'Lora', serif",
-                fontStyle: 'italic',
-                fontSize: 'clamp(2rem, 3.5vw, 3rem)',
-                fontWeight: 700,
-                lineHeight: 1.1,
-                margin: '0 0 20px 0',
-              }}>
-                Become a<br />Volunteer
-              </h2>
-
-              <p style={{ color: `${WHITE}d9`, fontSize: '0.95rem', lineHeight: 1.75, margin: '0 0 28px 0', maxWidth: 340 }}>
-                Be the change Jamshedpur needs — one act of service at a time.
-              </p>
-
-              <div style={{ width: 44, height: 2, background: WARM_TAN, marginBottom: 28 }} />
-
+          {/* LEFT — overlapping polaroids + text */}
+          <div>
+            {/* 2×2 polaroid grid with overlap */}
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 0, marginBottom: 28, padding: '10px' }}>
               {[
-                'Work on grassroots projects that create real, lasting impact across communities in Jharkhand.',
-                'Gain hands-on experience in education, health, and livelihood programmes.',
-                'Join a passionate network of changemakers rooted in the spirit of Jamshedpur.',
-              ].map((point, i) => (
-                <div key={i} style={{ display: 'flex', alignItems: 'flex-start', gap: 14, marginBottom: i < 2 ? 18 : 0 }}>
-                  <span style={{ color: WARM_TAN, fontSize: '0.9rem', fontWeight: 700, flexShrink: 0, lineHeight: 1.7 }}>✓</span>
-                  <span style={{ color: `${WHITE}e6`, fontSize: '0.9rem', lineHeight: 1.7 }}>{point}</span>
+                { src: 'https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=400&q=80', rot: '-4deg', x: 8, y: 0 },
+                { src: 'https://images.unsplash.com/photo-1509099836639-18ba1795216d?w=400&q=80', rot: '3deg', x: -8, y: 10 },
+                { src: 'https://images.unsplash.com/photo-1469571486292-0ba58a3f068b?w=400&q=80', rot: '2deg', x: 12, y: -10 },
+                { src: 'https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=400&q=80', rot: '-3deg', x: -6, y: -4 },
+              ].map(({ src, rot, x, y }, i) => (
+                <div key={i} className="gi-polaroid" style={{
+                  background: '#fff',
+                  padding: '6px 6px 24px',
+                  borderRadius: 3,
+                  boxShadow: '0 6px 20px rgba(0,0,0,0.14)',
+                  transform: `rotate(${rot}) translate(${x}px, ${y}px)`,
+                  zIndex: i === 2 ? 3 : i,
+                  position: 'relative',
+                  animation: `gi-floatY ${3 + i * 0.8}s ease-in-out infinite ${i * 0.5}s`,
+                }}>
+                  <img src={src} alt="volunteer" style={{ width: '100%', height: 140, objectFit: 'cover', display: 'block', borderRadius: 2 }} />
                 </div>
               ))}
-
-              <div style={{ marginTop: 44, paddingTop: 20, borderTop: `1px solid ${WARM_TAN}33`, display: 'flex', alignItems: 'center', gap: 10 }}>
-                <FaUsers size={14} color={WARM_TAN} />
-                <span style={{ color: WARM_TAN, fontSize: '0.65rem', letterSpacing: '2.5px', textTransform: 'uppercase', fontWeight: 600 }}>Johar Foundation &nbsp;·&nbsp; Jamshedpur</span>
-              </div>
             </div>
+            <h2 style={{ fontFamily: "'Georgia', serif", fontSize: 'clamp(1.6rem, 2.5vw, 2.2rem)', fontWeight: 800, color: EARTH, margin: '0 0 12px' }}>
+              Be Part of the Mission
+            </h2>
+            <p style={{ fontSize: '0.92rem', color: EARTH_MUTED, lineHeight: 1.75, margin: '0 0 20px' }}>
+              Johar Welfare Foundation works at the grassroots — in classrooms, health camps, and self-help groups. Our volunteers are not helpers; they are the mission.
+            </p>
+            {[
+              'Education, livelihoods, and women\'s empowerment — pick your ground.',
+              'Work alongside experienced field teams making real, measurable impact.',
+              'Your skills find their highest purpose here.',
+            ].map((text, i) => (
+              <div key={i} style={{ display: 'flex', alignItems: 'flex-start', gap: 10, marginBottom: 10 }}>
+                <span style={{ color: CRIMSON, fontWeight: 700, fontSize: '0.95rem', lineHeight: 1.6 }}>✦</span>
+                <span style={{ fontSize: '0.88rem', color: EARTH, lineHeight: 1.6, fontWeight: 600 }}>{text}</span>
+              </div>
+            ))}
           </div>
 
-          {/* RIGHT PANEL — form */}
-          <div className="vol-right-panel" style={{
-            flex: '1',
-            background: WHITE,
-            padding: '40px 48px',
-            display: 'flex',
-            flexDirection: 'column',
-            justifyContent: 'center',
-            boxSizing: 'border-box',
-            overflowY: 'auto',
-          }}>
-            <p style={{ color: EARTH, fontSize: '0.65rem', letterSpacing: '3.5px', textTransform: 'uppercase', fontWeight: 700, margin: '0 0 6px 0' }}>Volunteer Application</p>
-            <p style={{ color: WARM_TAN, fontSize: '0.75rem', margin: '0 0 28px 0', lineHeight: 1.5 }}>
-              Fields marked <span style={{ color: CRIMSON, fontWeight: 700 }}>*</span> are required
-            </p>
-
-            <VolunteerForm />
+          {/* RIGHT — form centered */}
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <div style={{ background: WHITE, borderRadius: 10, padding: '32px 32px', boxShadow: '0 4px 24px rgba(0,0,0,0.07)', width: '100%', maxWidth: 480 }}>
+              <VolunteerForm />
+            </div>
           </div>
 
         </div>
@@ -351,6 +247,9 @@ export const GetInvolved: React.FC = () => {
       {/* ── CSS ──────────────────────────────────────────────────────────────── */}
       <style>{`
         .responsive-h1 { font-size: 2.8rem; }
+        @media (max-width: 768px) {
+          .vol-ursha-wrapper { grid-template-columns: 1fr !important; gap: 32px !important; }
+        }
         .section-title { font-size: 2rem; color: ${EARTH}; margin-bottom: 10px; }
         .section-subtitle { font-size: 0.95rem; color: ${EARTH_MUTED}; max-width: 700px; margin: 0 auto; }
         .impact-grid { display: flex; gap: 20px; flex-wrap: wrap; justify-content: center; margin-top: 30px; }

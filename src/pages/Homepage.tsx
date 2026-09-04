@@ -6,10 +6,9 @@ import { ComposableMap, Geographies, Geography } from 'react-simple-maps';
 import { footprintRegions } from '../data/footprintRegions';
 
 import {
-  FaArrowRight, FaUsers, FaGraduationCap,
-  FaHeartPulse, FaHandHoldingHeart,
-  FaGlobe, FaVenus, FaBookOpen, FaBriefcase, FaStethoscope, FaChartBar,
-  FaUserShield
+  FaUsers, FaGraduationCap,
+  FaHandHoldingHeart,
+  FaGlobe, FaVenus, FaBookOpen, FaBriefcase, FaStethoscope, FaChartBar
 } from 'react-icons/fa6';
 
 // Multi-Ticker Marquee Continuous Items Array Source
@@ -447,7 +446,7 @@ const HomePage: React.FC = () => {
               We are <strong style={{ color: '#fff' }}>Johar Welfare Foundation</strong>, a registered non-profit working towards community development and social welfare.
             </p>
             <p style={{ color: 'rgba(255,255,255,0.88)', fontSize: '1.08rem', fontWeight: 450, lineHeight: 1.8, margin: 0 }}>
-              Founded in <span style={{ color: '#C4A882', fontWeight: 600 }}>2026</span>, we are at the beginning of our journey — focused on education, livelihoods, women's empowerment, and access to basic rights.
+              Founded in <span style={{ color: '#C4A882', fontWeight: 600 }}>2026</span>, we are at the beginning of our journey — focused on education, livelihood, women empowerment and access to basic rights.
             </p>
           </div>
 
@@ -517,51 +516,6 @@ const HomePage: React.FC = () => {
         </div>
       </div>
 
-      <WaveDivider topColor="#F9F7F2" bottomColor="#fafafa" />
-
-      {/* 4. MAIN PROGRAMMATIC INITIATIVES PREVIEW TRACK */}
-      <div className="jwf-snap-section" style={{ backgroundColor: '#fafafa' }}>
-        <div style={sectionWrapperStyle}>
-          <div style={{ textAlign: 'center', marginBottom: '50px' }}>
-            <h2 style={{ fontSize: '2.2rem', color: theme.colors.secondary, fontWeight: '800', margin: 0 }}>
-              Our Core Initiatives
-            </h2>
-          </div>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '25px', marginBottom: '40px' }} className="grid-layout-3x">
-            <div className="preview-card">
-              <div className="preview-card-header"><FaUsers size={24} color="#fff" /><h4>Tribal Affairs & Advocacy</h4></div>
-              <p>Working with tribal communities on forest rights, land mapping, and getting their claims on record before someone else decides.</p>
-            </div>
-            <div className="preview-card">
-              <div className="preview-card-header"><FaGraduationCap size={24} color="#fff" /><h4>Skill Development</h4></div>
-              <p>Vocational training and digital classrooms for rural youth — tailoring, computing, and trades that actually lead somewhere.</p>
-            </div>
-            <div className="preview-card">
-              <div className="preview-card-header"><FaHeartPulse size={24} color="#fff" /><h4>Health & Family Welfare</h4></div>
-              <p>Free health camps, child nutrition tracking, and maternal care in villages where the nearest clinic is more than a walk away.</p>
-            </div>
-            <div className="preview-card hide-mobile">
-              <div className="preview-card-header"><FaVenus size={24} color="#fff" /><h4>Women's Empowerment</h4></div>
-              <p>SHGs, legal literacy, and livelihood training. Women in the program have opened bank accounts and started small businesses.</p>
-            </div>
-            <div className="preview-card hide-mobile">
-              <div className="preview-card-header"><FaBookOpen size={24} color="#fff" /><h4>Education & Literacy</h4></div>
-              <p>Tuition centres and digital classrooms in areas where the nearest school is a long walk. Someone who shows up changes things.</p>
-            </div>
-            <div className="preview-card hide-mobile">
-              <div className="preview-card-header"><FaUserShield size={24} color="#fff" /><h4>Child Protection & Rights</h4></div>
-              <p>Village-level work on birth registration, child labour, and school re-enrollment. Getting children on record and back in a classroom.</p>
-            </div>
-          </div>
-          <div style={{ textAlign: 'center' }}>
-            <Link to="/initiatives" className="redirect-btn inline">
-              Explore All Focus Sectors <FaArrowRight size={12} />
-            </Link>
-          </div>
-        </div>
-      </div>
-
-      <WaveDivider topColor="#fafafa" bottomColor="#F9F7F2" flip />
 
       {/* 5. INTERACTIVE REGIONAL MAP FOOTPRINT PREVIEW */}
       <div className="jwf-snap-section" style={sectionWrapperStyle}>
@@ -648,9 +602,6 @@ const HomePage: React.FC = () => {
                 </div>
               ))}
             </div>
-            <Link to="/initiatives" className="redirect-btn">
-              View Regional Operations <FaArrowRight size={12} />
-            </Link>
           </div>
         </div>
       </div>

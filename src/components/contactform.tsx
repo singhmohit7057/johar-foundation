@@ -7,6 +7,7 @@ export const ContactForm: React.FC = () => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
+    countryCode: '+91',
     phone: '',
     subject: '',
     message: ''
@@ -18,10 +19,15 @@ export const ContactForm: React.FC = () => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     if (name === 'name' && /[^a-zA-Z ]/.test(value)) return;
+    if (name === 'countryCode') {
+      const cleaned = value.startsWith('+') ? '+' + value.slice(1).replace(/\D/g, '').slice(0, 4) : '+' + value.replace(/\D/g, '').slice(0, 4);
+      setFormData({ ...formData, countryCode: cleaned });
+      return;
+    }
     if (name === 'phone') {
-      const digits = value.replace(/\D/g, '').slice(0, 10);
-      const formatted = digits.length > 5 ? `${digits.slice(0, 5)} ${digits.slice(5)}` : digits;
-      setFormData({ ...formData, phone: formatted });
+      const maxDigits = formData.countryCode === '+91' ? 10 : 13;
+      const digits = value.replace(/\D/g, '').slice(0, maxDigits);
+      setFormData({ ...formData, phone: digits });
       return;
     }
     setFormData({ ...formData, [name]: value });
@@ -29,28 +35,35 @@ export const ContactForm: React.FC = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (formData.phone.replace(/\s/g, '').length !== 10) {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (formData.email && !emailRegex.test(formData.email)) {
       setStatus('error');
-      setErrorMessage('Phone number must be exactly 10 digits after +91.');
+      setErrorMessage('Please enter a valid email address (e.g. name@example.com).');
+      return;
+    }
+    if (formData.phone.length < 7 || formData.phone.length > 13) {
+      setStatus('error');
+      setErrorMessage('Please enter a valid phone number (7-13 digits).');
       return;
     }
     setStatus('submitting');
     setErrorMessage('');
 
     // FIX: Extract raw subject field to prevent Web3Forms auto-override logic
-    const { subject, ...otherFields } = formData;
+    const { subject, countryCode, phone, ...otherFields } = formData;
 
     const submissionPayload = {
       ...otherFields,
-      "Message Subject": subject, // Saves user text securely under a safe label inside email body
-      subject: "New Submission: Contact Form" // Securely hard-locks the main email header title!
+      phone: `${countryCode} ${phone}`,
+      "Message Subject": subject,
+      subject: "New Submission: Contact Form"
     };
 
     const response = await submitToWeb3Forms('CONTACT', submissionPayload);
 
     if (response.success) {
       setStatus('success');
-      setFormData({ name: '', email: '', phone: '', subject: '', message: '' });
+      setFormData({ name: '', email: '', countryCode: '+91', phone: '', subject: '', message: '' });
     } else {
       setStatus('error');
       setErrorMessage(response.message || 'Failed to submit form data.');
@@ -59,23 +72,18 @@ export const ContactForm: React.FC = () => {
 
   const inputStyle: React.CSSProperties = {
     width: '100%',
-    padding: '10px 12px',
-    marginBottom: '12px',
-    borderRadius: '6px',
-    border: `1px solid rgba(0,0,0,0.1)`,
-    fontSize: '0.9rem',
+    padding: '14px 16px',
+    borderRadius: '8px',
+    border: '1.5px solid #e9ecef',
+    fontSize: '0.92rem',
     fontFamily: 'inherit',
     boxSizing: 'border-box',
     outline: 'none',
+    backgroundColor: '#f5f5f5',
+    color: '#333',
+    transition: 'border-color 0.2s',
   };
 
-  const labelStyle: React.CSSProperties = {
-    display: 'block',
-    marginBottom: '8px',
-    fontWeight: '600',
-    color: theme.colors.secondary,
-    fontSize: '0.85rem'
-  };
 
   if (status === 'success') {
     return (
@@ -101,63 +109,44 @@ export const ContactForm: React.FC = () => {
     );
   }
 
-  const req = <span style={{ color: '#e74c3c', marginLeft: 2 }}>*</span>;
+
+  const row2: React.CSSProperties = { display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16, marginBottom: 16 };
 
   return (
     <form onSubmit={handleSubmit}>
-      {/* Grid for Name, Email, and Phone */}
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0 20px' }}>
-        <div style={{ gridColumn: 'span 2' }}>
-           <label style={labelStyle}>Full Name {req}</label>
-           <input type="text" name="name" required disabled={status === 'submitting'} value={formData.name} onChange={handleChange} style={inputStyle} placeholder="Mohit Singh" />
-        </div>
-
-        <div>
-          <label style={labelStyle}>Email {req}</label>
-          <input type="email" name="email" required disabled={status === 'submitting'} value={formData.email} onChange={handleChange} style={inputStyle} placeholder="mohit@tmmt.in" />
-        </div>
-
-        <div>
-          <label style={labelStyle}>Phone Number {req}</label>
-          <div style={{ display: 'flex', alignItems: 'center', border: '1px solid rgba(0,0,0,0.1)', borderRadius: '6px', marginBottom: '12px', overflow: 'hidden', backgroundColor: '#fff' }}>
-            <span style={{ padding: '10px 10px', fontSize: '0.9rem', color: '#555', backgroundColor: '#f5f5f5', borderRight: '1px solid rgba(0,0,0,0.1)', whiteSpace: 'nowrap' }}>+91</span>
-            <input type="tel" name="phone" required disabled={status === 'submitting'} value={formData.phone} onChange={handleChange} style={{ ...inputStyle, marginBottom: 0, border: 'none', borderRadius: 0, flex: 1 }} placeholder="XXXXX XXXXX" maxLength={11} />
-          </div>
-        </div>
+      {/* Row 1 — Name + Email */}
+      <div style={row2}>
+        <input type="text" name="name" placeholder="Your Name" required disabled={status === 'submitting'} value={formData.name} onChange={handleChange} style={inputStyle} />
+        <input type="email" name="email" placeholder="Email Address" disabled={status === 'submitting'} value={formData.email} onChange={handleChange} style={inputStyle} />
       </div>
 
-      <label style={labelStyle}>Subject {req}</label>
-      <input type="text" name="subject" required disabled={status === 'submitting'} value={formData.subject} onChange={handleChange} style={inputStyle} />
+      {/* Row 2 — Phone + Subject */}
+      <div style={row2}>
+        <div style={{ display: 'flex', alignItems: 'center', border: '1.5px solid #e9ecef', borderRadius: '8px', overflow: 'hidden', backgroundColor: '#f5f5f5' }}>
+          <input type="text" name="countryCode" value={formData.countryCode} onChange={handleChange} disabled={status === 'submitting'} style={{ width: 52, padding: '14px 6px', fontSize: '0.92rem', color: '#555', backgroundColor: '#eee', borderRight: '1.5px solid #e9ecef', border: 'none', outline: 'none', textAlign: 'center', fontFamily: 'inherit' }} />
+          <input type="tel" name="phone" placeholder="Phone" required disabled={status === 'submitting'} value={formData.phone} onChange={handleChange} style={{ ...inputStyle, border: 'none', borderRadius: 0, flex: 1 }} maxLength={formData.countryCode === '+91' ? 10 : 13} />
+        </div>
+        <input type="text" name="subject" placeholder="Subject" required disabled={status === 'submitting'} value={formData.subject} onChange={handleChange} style={inputStyle} />
+      </div>
 
-      <label style={labelStyle}>Message {req}</label>
-      <textarea name="message" required disabled={status === 'submitting'} value={formData.message} onChange={handleChange} style={{ ...inputStyle, height: '90px', resize: 'none' }} />
-      
-      <button 
-        type="submit" 
+      {/* Message */}
+      <textarea name="message" placeholder="Write Message" rows={5} required disabled={status === 'submitting'} value={formData.message} onChange={handleChange} style={{ ...inputStyle, resize: 'vertical', marginBottom: 16, minHeight: 120 }} />
+
+      <button
+        type="submit"
         disabled={status === 'submitting'}
         style={{
-          width: '100%',
-          padding: '12px',
-          backgroundColor: theme.colors.primary,
-          color: 'white',
-          border: 'none',
-          borderRadius: '6px',
-          fontWeight: 'bold',
-          cursor: 'pointer',
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          gap: '8px',
-          transition: theme.utils.transition
+          width: '100%', padding: '14px',
+          backgroundColor: theme.colors.primary, color: 'white',
+          border: 'none', borderRadius: '8px', fontWeight: 700,
+          cursor: 'pointer', fontSize: '1rem',
+          display: 'flex', justifyContent: 'center', alignItems: 'center', gap: 10,
+          transition: 'background-color 0.2s',
         }}
-        onMouseOver={(e) => { if (status !== 'submitting') e.currentTarget.style.backgroundColor = theme.colors.secondary; }}
-        onMouseOut={(e) => { if (status !== 'submitting') e.currentTarget.style.backgroundColor = theme.colors.primary; }}
+        onMouseOver={e => { if (status !== 'submitting') e.currentTarget.style.backgroundColor = '#8B1E2F'; }}
+        onMouseOut={e => { if (status !== 'submitting') e.currentTarget.style.backgroundColor = theme.colors.primary; }}
       >
-        {status === 'submitting' ? (
-          <>
-            <FaSpinner className="form-spinner" /> Sending...
-          </>
-        ) : 'Send Message'}
+        {status === 'submitting' ? <><FaSpinner className="form-spinner" /> Sending...</> : 'Send Message'}
       </button>
 
       {status === 'error' && (

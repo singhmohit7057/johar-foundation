@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { SEO } from '../shared/seo';
 import { ContactForm } from '../components/contactform';
-import { FaFacebookF, FaInstagram, FaTwitter } from 'react-icons/fa';
+import { FaFacebookF, FaInstagram, FaWhatsapp, FaGraduationCap, FaUsers, FaBriefcase, FaHandshake, FaLeaf, FaBookOpen, FaStethoscope, FaGlobe } from 'react-icons/fa';
 
 const CRIMSON     = '#A62639';
 const EARTH       = '#3C3530';
@@ -52,7 +52,7 @@ const Contact: React.FC = () => {
   const socialLinks = [
     { platform: 'facebook', icon: <FaFacebookF />, url: 'https://facebook.com/joharwelfarefoundation' },
     { platform: 'instagram', icon: <FaInstagram />, url: 'https://instagram.com/joharfoundation_' },
-    { platform: 'twitter', icon: <FaTwitter />, url: 'https://twitter.com/joharwelfarefoundation' },
+    { platform: 'whatsapp', icon: <FaWhatsapp />, url: 'https://wa.me/919117115050' },
   ];
 
   return (
@@ -131,7 +131,43 @@ const Contact: React.FC = () => {
       <WaveDivider topColor={BG} bottomColor={BG} />
 
       {/* ── Contact Cards ────────────────────────────────────────────────────── */}
-      <div style={{ padding: '40px 5%', background: BG }}>
+      <div style={{ padding: '40px 5%', background: BG, position: 'relative', overflow: 'hidden', minHeight: '100vh', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+        {/* Evenly distributed but randomized icons — grid with jitter */}
+        {(() => {
+          const icons = [FaGraduationCap, FaHandshake, FaUsers, FaGlobe, FaBriefcase, FaLeaf, FaHandshake, FaStethoscope, FaBookOpen];
+          const cols = 12;
+          const rows = 10;
+          const cellW = 100 / cols;
+          const cellH = 100 / rows;
+          const items: React.ReactNode[] = [];
+          let idx = 0;
+          for (let r = 0; r < rows; r++) {
+            for (let c = 0; c < cols; c++) {
+              const jx = ((idx * 17 + 7) % 11) - 5;
+              const jy = ((idx * 13 + 3) % 11) - 5;
+              const top = r * cellH + cellH / 2 + jy * 0.8;
+              const left = c * cellW + cellW / 2 + jx * 0.6;
+              const Icon = icons[((r * 7 + c * 3) + idx) % icons.length];
+              const size = 13 + (idx % 4) * 3;
+              const rot = ((idx * 23 + 11) % 60) - 30;
+              const dur = 5 + (idx % 3) * 2;
+              const delay = (idx % 5) * 0.8;
+              items.push(
+                <Icon key={idx} aria-hidden style={{
+                  position: 'absolute',
+                  top: `${Math.max(1, Math.min(97, top))}%`,
+                  left: `${Math.max(1, Math.min(97, left))}%`,
+                  fontSize: size,
+                  color: `${CRIMSON}14`,
+                  transform: `rotate(${rot}deg)`,
+                  animation: `ct-iconFloat ${dur}s ease-in-out infinite ${delay}s`,
+                }} />
+              );
+              idx++;
+            }
+          }
+          return items;
+        })()}
         <div style={{
           display: 'grid',
           gridTemplateColumns: 'repeat(auto-fit, minmax(min(350px, 100%), 1fr))',
@@ -139,77 +175,72 @@ const Contact: React.FC = () => {
           alignItems: 'stretch',
           maxWidth: '1200px',
           margin: '0 auto',
+          position: 'relative',
+          zIndex: 1,
         }}>
 
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', height: '100%' }}>
-            {/* Contact Details Card */}
-            <div style={cardStyle}>
-              <h3 style={{ color: CRIMSON, marginBottom: '12px', fontSize: '1.2rem' }}>Connect With Us</h3>
-
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
-                  <span style={{ fontSize: '1.2rem' }}>📍</span>
-                  <div>
-                    <div style={{ fontWeight: 'bold', color: EARTH }}>Jamshedpur HQ</div>
-                    <div style={{ fontSize: '0.9rem', color: EARTH_MUTED }}>Dream Height Building, Bistupur, Jharkhand</div>
-                  </div>
-                </div>
-
-                <div style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
-                  <span style={{ fontSize: '1.2rem' }}>📞</span>
-                  <div>
-                    <div style={{ fontWeight: 'bold', color: EARTH }}>Phone</div>
-                    <div style={{ fontSize: '0.9rem', color: EARTH_MUTED }}>+91 9117115050</div>
-                  </div>
-                </div>
-
-                <div style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
-                  <span style={{ fontSize: '1.2rem' }}>✉️</span>
-                  <div>
-                    <div style={{ fontWeight: 'bold', color: EARTH }}>Email</div>
-                    <div style={{ fontSize: '0.9rem', color: EARTH_MUTED }}>info@joharfoundation.com</div>
-                  </div>
-                </div>
+          <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
+            <div style={{
+              background: '#fff',
+              borderRadius: 16,
+              overflow: 'hidden',
+              border: '1px solid #eaeaea',
+              flex: 1,
+              display: 'flex',
+              flexDirection: 'column',
+            }}>
+              {/* Crimson header */}
+              <div style={{
+                background: CRIMSON,
+                padding: '22px 28px',
+                color: '#fff',
+              }}>
+                <h3 style={{ margin: 0, fontSize: '1.3rem', fontWeight: 800 }}>Connect With Us</h3>
+                <p style={{ margin: '6px 0 0', fontSize: '0.82rem', opacity: 0.8 }}>We'd love to hear from you</p>
               </div>
 
-              <hr style={{ margin: '16px 0', border: 'none', borderTop: '1px solid #e8e0d8' }} />
-
-              <h4 style={{ marginBottom: '10px', color: EARTH }}>Social Presence</h4>
-              <div style={{ display: 'flex', gap: '12px' }}>
-                {socialLinks.map(({ platform, icon, url }) => (
-                  <a
-                    key={platform}
-                    href={url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    onMouseEnter={() => setHoveredSocial(platform)}
-                    onMouseLeave={() => setHoveredSocial(null)}
-                    style={socialIconStyle(platform)}
-                  >
-                    {icon}
-                  </a>
+              {/* Contact details */}
+              <div style={{ padding: '28px 28px 20px', display: 'flex', flexDirection: 'column', gap: '22px', flex: 1, justifyContent: 'center' }}>
+                {[
+                  { icon: '📍', title: 'Office', detail: 'Dream Height Building, Bistupur, Jharkhand' },
+                  { icon: '📞', title: 'Phone', detail: '+91 9117115050' },
+                  { icon: '✉️', title: 'Email', detail: 'info@joharfoundation.com' },
+                ].map(({ icon, title, detail }) => (
+                  <div key={title} style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+                    <div style={{
+                      width: 44, height: 44, borderRadius: '50%',
+                      background: `${CRIMSON}10`, display: 'flex',
+                      alignItems: 'center', justifyContent: 'center',
+                      fontSize: '1.1rem', flexShrink: 0,
+                    }}>{icon}</div>
+                    <div>
+                      <div style={{ fontWeight: 700, color: EARTH, fontSize: '0.92rem' }}>{title}</div>
+                      <div style={{ fontSize: '0.85rem', color: EARTH_MUTED, lineHeight: 1.5 }}>{detail}</div>
+                    </div>
+                  </div>
                 ))}
               </div>
-            </div>
 
-            {/* Geographic Reach Card */}
-            <div style={{ ...cardStyle, background: CRIMSON, color: WHITE, border: 'none', flex: 1 }}>
-              <h3 style={{ marginBottom: '20px' }}>States We Serve</h3>
-              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '10px' }}>
-                {['Jharkhand', 'Bihar', 'Odisha', 'West Bengal', 'Chhattisgarh'].map(s => (
-                  <span key={s} style={{
-                    padding: '6px 15px',
-                    backgroundColor: 'rgba(255,255,255,0.2)',
-                    borderRadius: '20px',
-                    fontSize: '0.85rem',
-                  }}>
-                    {s}
-                  </span>
-                ))}
+              {/* Social footer */}
+              <div style={{ padding: '0 28px 24px' }}>
+                <hr style={{ margin: '0 0 16px', border: 'none', borderTop: `1px solid #e8e0d8` }} />
+                <h4 style={{ marginBottom: '12px', color: EARTH, fontSize: '0.88rem', fontWeight: 700 }}>Follow Us</h4>
+                <div style={{ display: 'flex', gap: '14px' }}>
+                  {socialLinks.map(({ platform, icon, url }) => (
+                    <a
+                      key={platform}
+                      href={url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onMouseEnter={() => setHoveredSocial(platform)}
+                      onMouseLeave={() => setHoveredSocial(null)}
+                      style={socialIconStyle(platform)}
+                    >
+                      {icon}
+                    </a>
+                  ))}
+                </div>
               </div>
-              <p style={{ marginTop: '20px', fontSize: '0.85rem', opacity: 0.8, lineHeight: '1.5' }}>
-                Expanding our footprint to ensure <strong>Jo Hare Na</strong> reaches every corner of Eastern India.
-              </p>
             </div>
           </div>
 
@@ -227,6 +258,10 @@ const Contact: React.FC = () => {
 
       {/* ── CSS ──────────────────────────────────────────────────────────────── */}
       <style>{`
+        @keyframes ct-iconFloat {
+          0%, 100% { transform: translateY(0px) rotate(var(--r, 0deg)); }
+          50%      { transform: translateY(-6px) rotate(var(--r, 0deg)); }
+        }
         @keyframes ct-blobMorph {
           0%,100% { border-radius: 62% 38% 55% 45% / 48% 52% 48% 52%; }
           25%      { border-radius: 45% 55% 38% 62% / 55% 45% 60% 40%; }
@@ -245,6 +280,9 @@ const Contact: React.FC = () => {
         .ct-d1 { animation-delay: 0.10s; }
         .ct-d2 { animation-delay: 0.22s; }
         .ct-d3 { animation-delay: 0.34s; }
+        @media (max-width: 600px) {
+          .ct-hero-title { font-size: 2rem !important; }
+        }
       `}</style>
     </div>
   );

@@ -96,49 +96,49 @@ export const DonateForm: React.FC = () => {
     position: 'relative',
     display: 'flex',
     alignItems: 'center',
-    backgroundColor: '#f8f9fa',
-    borderRadius: '10px',
-    border: '1px solid #e9ecef',
+    backgroundColor: '#f5f5f5',
+    borderRadius: '8px',
+    border: '1.5px solid #e9ecef',
     transition: 'all 0.2s ease',
   };
 
   const inputStyle: React.CSSProperties = {
     width: '100%',
-    padding: '10px 12px 10px 40px',
-    borderRadius: '10px',
+    padding: '14px 16px 14px 40px',
+    borderRadius: '8px',
     border: 'none',
-    fontSize: '0.9rem',
+    fontSize: '0.92rem',
     color: '#333',
     outline: 'none',
     backgroundColor: 'transparent',
     boxSizing: 'border-box',
+    fontFamily: 'inherit',
   };
 
   const amountBtnStyle = (selected: boolean): React.CSSProperties => ({
     flex: '1 1 0',
-    padding: '10px 5px',
+    padding: '12px 5px',
     borderRadius: '8px',
-    border: `2px solid ${selected ? theme.colors.primary : '#eee'}`,
-    backgroundColor: selected ? theme.colors.primary : 'white',
+    border: `1.5px solid ${selected ? theme.colors.primary : '#e9ecef'}`,
+    backgroundColor: selected ? theme.colors.primary : '#f5f5f5',
     color: selected ? 'white' : '#555',
     fontWeight: '700',
     cursor: 'pointer',
-    transition: 'all 0.2s cubic-bezier(0.4, 0, 0.2, 1)',
-    fontSize: '0.88rem',
-    boxShadow: selected ? `0 4px 12px ${theme.colors.primary}44` : 'none'
+    transition: 'all 0.2s ease',
+    fontSize: '0.92rem',
+    boxShadow: 'none',
   });
 
   return (
     <div style={{
       backgroundColor: 'white',
-      padding: '24px 28px',
-      borderRadius: '28px',
-      boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.1)',
+      padding: '28px 32px',
+      borderRadius: '10px',
+      boxShadow: '0 4px 24px rgba(0,0,0,0.07)',
       width: '100%',
       maxWidth: '550px',
       margin: '0 auto',
       boxSizing: 'border-box',
-      border: '1px solid #f1f1f1'
     }}>
       <div style={{ textAlign: 'center', marginBottom: '16px' }}>
         <h3 style={{ color: theme.colors.secondary, fontSize: '1.4rem', fontWeight: '800', margin: '0 0 4px 0' }}>
@@ -237,7 +237,7 @@ export const DonateForm: React.FC = () => {
           </div>
 
           {/* SECTION 2: DONOR DETAILS */}
-          <div style={{ ...fieldGroupStyle, padding: '12px', backgroundColor: '#fcfcfc', borderRadius: '12px', border: '1px solid #f1f1f1' }}>
+          <div style={{ ...fieldGroupStyle, padding: '16px', backgroundColor: '#fafafa', borderRadius: '8px', border: '1.5px solid #e9ecef' }}>
             <label style={labelStyle}>Donor Information</label>
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px', marginBottom: '10px' }}>
               <div style={inputContainerStyle}>
@@ -272,11 +272,13 @@ export const DonateForm: React.FC = () => {
             disabled={status === 'submitting'}
             style={{
               width: '100%', padding: '14px', backgroundColor: theme.colors.primary, color: 'white',
-              border: 'none', borderRadius: '12px', fontWeight: '800', fontSize: '1rem',
-              cursor: 'pointer', marginTop: '6px', boxShadow: `0 8px 18px -6px ${theme.colors.primary}66`,
+              border: 'none', borderRadius: '8px', fontWeight: 700, fontSize: '1rem',
+              cursor: 'pointer', marginTop: '6px',
               display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '10px',
-              transition: 'opacity 0.2s'
+              transition: 'background-color 0.2s',
             }}
+            onMouseOver={e => { if (status !== 'submitting') e.currentTarget.style.backgroundColor = '#8B1E2F'; }}
+            onMouseOut={e => { if (status !== 'submitting') e.currentTarget.style.backgroundColor = theme.colors.primary; }}
           >
             {status === 'submitting' ? (
               <FaSpinner className="donate-spin" />
