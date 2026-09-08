@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { theme } from '../theme/styles';
 import { submitToWeb3Forms } from '../forms/formservice';
-import { FaSpinner, FaRegCheckCircle } from 'react-icons/fa';
+import { FaSpinner, FaRegCheckCircle, FaChevronDown } from 'react-icons/fa';
+import { FaUser, FaEnvelope, FaPhone, FaLocationDot, FaBriefcase } from 'react-icons/fa6';
 
 export const VolunteerForm: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -12,11 +13,24 @@ export const VolunteerForm: React.FC = () => {
     occupation: '',
     interest: '',
     message: '',
-    updates: false,
   });
 
   const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
   const [errorMessage, setErrorMessage] = useState('');
+  const [interestOpen, setInterestOpen] = useState(false);
+  const interestRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleClick = (e: MouseEvent) => {
+      if (interestRef.current && !interestRef.current.contains(e.target as Node)) {
+        setInterestOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClick);
+    return () => document.removeEventListener('mousedown', handleClick);
+  }, []);
+
+  const interestOptions = ['Teaching', 'Skill Training', 'Fundraising & Events', 'Community Outreach', 'Health Support', 'Others'];
 
   const inputStyle: React.CSSProperties = {
     width: '100%',
@@ -27,17 +41,14 @@ export const VolunteerForm: React.FC = () => {
     outline: 'none',
     boxSizing: 'border-box',
     backgroundColor: '#f5f5f5',
-    fontFamily: 'inherit',
+    fontFamily: "'DM Sans', sans-serif",
+    fontWeight: 500,
     color: '#333',
     transition: 'border-color 0.2s, background 0.2s',
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
-    const { name, value, type } = e.target;
-    if (type === 'checkbox') {
-      setFormData({ ...formData, [name]: (e.target as HTMLInputElement).checked });
-      return;
-    }
+    const { name, value } = e.target;
     if (name === 'name' && /[^a-zA-Z ]/.test(value)) return;
     if (name === 'city' && /[^a-zA-Z ]/.test(value)) return;
     if (name === 'phone') {
@@ -67,13 +78,12 @@ export const VolunteerForm: React.FC = () => {
       occupation: formData.occupation,
       'Area of Interest': formData.interest,
       message: formData.message,
-      'Receive Updates': formData.updates ? 'Yes' : 'No',
-      subject: 'New Submission: Volunteer Application',
+subject: 'New Submission: Volunteer Application',
     });
 
     if (response.success) {
       setStatus('success');
-      setFormData({ name: '', email: '', phone: '', city: '', occupation: '', interest: '', message: '', updates: false });
+      setFormData({ name: '', email: '', phone: '', city: '', occupation: '', interest: '', message: '' });
     } else {
       setStatus('error');
       setErrorMessage(response.message || 'Submission failed. Please try again.');
@@ -100,58 +110,100 @@ export const VolunteerForm: React.FC = () => {
   }
 
   const row2: React.CSSProperties = { display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16, marginBottom: 16 };
+  const iconWrap: React.CSSProperties = { position: 'relative', display: 'flex', alignItems: 'center', backgroundColor: '#f5f5f5', borderRadius: '6px', border: '1px solid #e4e4e4' };
+  const iconStyle: React.CSSProperties = { position: 'absolute', left: 16, color: '#adb5bd', fontSize: '0.88rem', pointerEvents: 'none', flexShrink: 0 };
+  const iconInput: React.CSSProperties = { ...inputStyle, border: 'none', backgroundColor: 'transparent', paddingLeft: '40px' };
 
   return (
     <form onSubmit={handleSubmit} style={{ padding: 0 }}>
 
       {/* Row 1 */}
       <div style={row2}>
-        <input type="text" name="name" placeholder="Your Name" required disabled={status === 'submitting'}
-          value={formData.name} onChange={handleChange} style={inputStyle} />
-        <input type="email" name="email" placeholder="Email Address" required disabled={status === 'submitting'}
-          value={formData.email} onChange={handleChange} style={inputStyle} />
+        <div style={iconWrap}>
+          <FaUser style={iconStyle} />
+          <input type="text" name="name" placeholder="Full Name *" required disabled={status === 'submitting'}
+            value={formData.name} onChange={handleChange} style={iconInput} />
+        </div>
+        <div style={iconWrap}>
+          <FaEnvelope style={iconStyle} />
+          <input type="email" name="email" placeholder="Email Address *" required disabled={status === 'submitting'}
+            value={formData.email} onChange={handleChange} style={iconInput} />
+        </div>
       </div>
 
       {/* Row 2 */}
       <div style={row2}>
-        <input type="tel" name="phone" placeholder="Phone" required disabled={status === 'submitting'}
-          value={formData.phone} onChange={handleChange} maxLength={10} style={inputStyle} />
-        <input type="text" name="city" placeholder="City" required disabled={status === 'submitting'}
-          value={formData.city} onChange={handleChange} style={inputStyle} />
+        <div style={iconWrap}>
+          <FaPhone style={iconStyle} />
+          <input type="tel" name="phone" placeholder="Mobile Number *" required disabled={status === 'submitting'}
+            value={formData.phone} onChange={handleChange} maxLength={10} style={iconInput} />
+        </div>
+        <div style={iconWrap}>
+          <FaLocationDot style={iconStyle} />
+          <input type="text" name="city" placeholder="City *" required disabled={status === 'submitting'}
+            value={formData.city} onChange={handleChange} style={iconInput} />
+        </div>
       </div>
 
       {/* Row 3 */}
       <div style={row2}>
-        <input type="text" name="occupation" placeholder="Occupation" disabled={status === 'submitting'}
-          value={formData.occupation} onChange={handleChange} style={inputStyle} />
-        <select name="interest" required disabled={status === 'submitting'}
-          value={formData.interest} onChange={handleChange}
-          style={{ ...inputStyle, color: formData.interest ? '#333' : '#888' }}>
-          <option value="" disabled>Area Of Interest</option>
-          <option value="Teaching">Teaching</option>
-          <option value="Skill Training">Skill Training</option>
-          <option value="Fundraising & Events">Fundraising &amp; Events</option>
-          <option value="Community Outreach">Community Outreach</option>
-          <option value="Health Support">Health Support</option>
-          <option value="Others">Others</option>
-        </select>
+        <div style={iconWrap}>
+          <FaBriefcase style={iconStyle} />
+          <input type="text" name="occupation" placeholder="Occupation" disabled={status === 'submitting'}
+            value={formData.occupation} onChange={handleChange} style={iconInput} />
+        </div>
+        <div ref={interestRef} style={{ position: 'relative' }}>
+          <button type="button" disabled={status === 'submitting'}
+            onClick={() => setInterestOpen(o => !o)}
+            style={{
+              ...inputStyle,
+              display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+              cursor: 'pointer', textAlign: 'left',
+              color: formData.interest ? '#333' : '#888',
+              borderColor: interestOpen ? theme.colors.primary : '#e4e4e4',
+              marginBottom: 0,
+            }}>
+            <span>{formData.interest || 'Area Of Interest *'}</span>
+            <FaChevronDown size={12} style={{ transition: 'transform 0.2s', transform: interestOpen ? 'rotate(180deg)' : 'rotate(0deg)', flexShrink: 0, color: '#888' }} />
+          </button>
+          {interestOpen && (
+            <div style={{
+              position: 'absolute', top: 'calc(100% + 4px)', left: 0, right: 0, zIndex: 50,
+              background: '#fff', borderRadius: 8,
+              border: `1.5px solid ${theme.colors.primary}33`,
+              boxShadow: '0 8px 24px rgba(0,0,0,0.12)',
+              overflow: 'hidden',
+            }}>
+              {interestOptions.map(opt => (
+                <div key={opt}
+                  onMouseDown={() => { setFormData(f => ({ ...f, interest: opt })); setInterestOpen(false); }}
+                  style={{
+                    padding: '11px 16px', fontSize: '0.92rem', cursor: 'pointer',
+                    color: formData.interest === opt ? theme.colors.primary : '#333',
+                    background: formData.interest === opt ? `${theme.colors.primary}10` : 'transparent',
+                    fontWeight: formData.interest === opt ? 600 : 400,
+                    borderLeft: formData.interest === opt ? `3px solid ${theme.colors.primary}` : '3px solid transparent',
+                    transition: 'background 0.15s',
+                  }}
+                  onMouseEnter={e => { if (formData.interest !== opt) { (e.currentTarget as HTMLElement).style.background = 'rgba(166,38,57,0.82)'; (e.currentTarget as HTMLElement).style.color = '#fff'; } }}
+                  onMouseLeave={e => { if (formData.interest !== opt) { (e.currentTarget as HTMLElement).style.background = 'transparent'; (e.currentTarget as HTMLElement).style.color = '#333'; } }}
+                >
+                  {opt}
+                </div>
+              ))}
+            </div>
+          )}
+          {/* hidden input to satisfy form required validation */}
+          <input type="text" name="interest" required value={formData.interest}
+            onChange={() => {}} tabIndex={-1}
+            style={{ position: 'absolute', opacity: 0, width: 0, height: 0, pointerEvents: 'none' }} />
+        </div>
       </div>
 
       {/* Message */}
-      <textarea name="message" placeholder="Write Message" rows={5} disabled={status === 'submitting'}
+      <textarea name="message" placeholder="Write a Message (Optional)" rows={5} disabled={status === 'submitting'}
         value={formData.message} onChange={handleChange}
         style={{ ...inputStyle, resize: 'vertical', marginBottom: 16, minHeight: 120 }} />
-
-      {/* Checkbox */}
-      <div style={{ display: 'flex', alignItems: 'flex-start', gap: 10, marginBottom: 20 }}>
-        <input type="checkbox" name="updates" id="vol-updates"
-          checked={formData.updates} onChange={handleChange}
-          disabled={status === 'submitting'}
-          style={{ marginTop: 3, width: 16, height: 16, flexShrink: 0, cursor: 'pointer', accentColor: theme.colors.primary }} />
-        <label htmlFor="vol-updates" style={{ fontSize: '0.85rem', color: '#555', lineHeight: 1.5, cursor: 'pointer' }}>
-          "I would like to receive updates from Johar Welfare Foundation."
-        </label>
-      </div>
 
       <button type="submit" disabled={status === 'submitting'} style={{
         width: '100%', padding: '14px',

@@ -155,22 +155,12 @@ export const GetInvolved: React.FC = () => {
                 </div>
               ))}
             </div>
-            <h2 style={{ fontFamily: "'Georgia', serif", fontSize: 'clamp(1.6rem, 2.5vw, 2.2rem)', fontWeight: 800, color: EARTH, margin: '0 0 12px' }}>
+            <h2 style={{ fontFamily: "'Georgia', serif", fontSize: 'clamp(1.6rem, 2.5vw, 2.2rem)', fontWeight: 800, color: EARTH, margin: '0 0 12px', textAlign: 'center' }}>
               Be Part of the Mission
             </h2>
-            <p style={{ fontSize: '0.92rem', color: EARTH_MUTED, lineHeight: 1.75, margin: '0 0 20px' }}>
+            <p style={{ fontSize: '0.92rem', color: EARTH_MUTED, lineHeight: 1.75, margin: 0, textAlign: 'center' }}>
               Johar Welfare Foundation works at the grassroots — in classrooms, health camps, and self-help groups. Our volunteers are not helpers; they are the mission.
             </p>
-            {[
-              'Education, livelihoods, and women\'s empowerment — pick your ground.',
-              'Work alongside experienced field teams making real, measurable impact.',
-              'Your skills find their highest purpose here.',
-            ].map((text, i) => (
-              <div key={i} style={{ display: 'flex', alignItems: 'flex-start', gap: 10, marginBottom: 10 }}>
-                <span style={{ color: CRIMSON, fontWeight: 700, fontSize: '0.95rem', lineHeight: 1.6 }}>✦</span>
-                <span style={{ fontSize: '0.88rem', color: EARTH, lineHeight: 1.6, fontWeight: 600 }}>{text}</span>
-              </div>
-            ))}
           </div>
 
           {/* RIGHT — form centered */}
@@ -180,6 +170,63 @@ export const GetInvolved: React.FC = () => {
             </div>
           </div>
 
+        </div>
+      </section>
+
+      {/* ── Volunteer in 4 Steps ──────────────────────────────────────────── */}
+      <section style={{ background: SECTION_ALT, padding: '72px 5% 100px' }}>
+        <div style={{ maxWidth: 1100, margin: '0 auto' }}>
+          <h2 style={{ textAlign: 'center', fontFamily: "'Georgia', serif", fontSize: 'clamp(1.6rem, 3vw, 2.2rem)', fontWeight: 800, color: EARTH, marginBottom: 56 }}>
+            Volunteer in 4 Steps
+          </h2>
+
+          <div className="vol-steps-row" style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'center', position: 'relative' }}>
+            {[
+              { num: '01', title: 'REGISTER',          desc: 'Submit your volunteer application above.',                         small: true  },
+              { num: '02', title: 'GET ONBOARDED',     desc: 'Attend a brief orientation to know the team and the work.',       small: false },
+              { num: '03', title: 'SERVE THE COMMUNITY', desc: 'Work on real projects in education, health, or livelihoods.',   small: true  },
+              { num: '04', title: 'EARN RECOGNITION',  desc: 'Receive an official certificate and carry the journey forward.',  small: false },
+            ].map(({ num, title, desc, small }, i) => (
+              <div key={num} style={{ display: 'flex', alignItems: 'flex-end' }}>
+                <div style={{
+                  width: small ? 170 : 200,
+                  height: small ? 190 : 220,
+                  clipPath: 'polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)',
+                  background: CRIMSON,
+                  display: 'flex', flexDirection: 'column',
+                  alignItems: 'center', justifyContent: 'center',
+                  textAlign: 'center', padding: '20px 16px',
+                  flexShrink: 0,
+                  marginBottom: small ? 0 : 40,
+                  marginLeft: 0,
+                  zIndex: 2,
+                  boxShadow: '0 4px 20px rgba(0,0,0,0.15)',
+                }}>
+                  <span style={{ fontSize: '1.05rem', fontWeight: 900, color: '#fff', lineHeight: 1.2, marginBottom: 6 }}>{title}</span>
+                  <span style={{ fontSize: '0.72rem', color: 'rgba(255,255,255,0.82)', lineHeight: 1.45, maxWidth: 140 }}>{desc}</span>
+                </div>
+
+                {i < 3 && (
+                  <svg className="vol-step-arrow" width="80" height="90" viewBox="0 0 80 90" style={{
+                    flexShrink: 0, margin: '0 -20px', zIndex: 3,
+                    alignSelf: 'center',
+                  }}>
+                    {small ? (
+                      <>
+                        <path d="M12 72 C18 68, 22 55, 24 42 C26 28, 32 18, 45 14 C52 12, 58 14, 64 20" fill="none" stroke="#1a1a1a" strokeWidth="6" strokeLinecap="round" />
+                        <path d="M58 12 L66 20 L56 24" fill="none" stroke="#1a1a1a" strokeWidth="6" strokeLinecap="round" strokeLinejoin="round" />
+                      </>
+                    ) : (
+                      <>
+                        <path d="M12 18 C18 22, 22 35, 24 48 C26 62, 32 72, 45 76 C52 78, 58 76, 64 70" fill="none" stroke="#1a1a1a" strokeWidth="6" strokeLinecap="round" />
+                        <path d="M58 78 L66 70 L56 66" fill="none" stroke="#1a1a1a" strokeWidth="6" strokeLinecap="round" strokeLinejoin="round" />
+                      </>
+                    )}
+                  </svg>
+                )}
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -249,6 +296,8 @@ export const GetInvolved: React.FC = () => {
         .responsive-h1 { font-size: 2.8rem; }
         @media (max-width: 768px) {
           .vol-ursha-wrapper { grid-template-columns: 1fr !important; gap: 32px !important; }
+          .vol-steps-row { flex-direction: column !important; gap: 16px !important; }
+          .vol-step-arrow { transform: rotate(90deg); margin: -8px 0 !important; }
         }
         .section-title { font-size: 2rem; color: ${EARTH}; margin-bottom: 10px; }
         .section-subtitle { font-size: 0.95rem; color: ${EARTH_MUTED}; max-width: 700px; margin: 0 auto; }

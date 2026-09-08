@@ -116,37 +116,6 @@ const DonatePage: React.FC = () => {
         </div>
       </section>
 
-      {/* ── Full-width photo banner ───────────────────────────────────────────── */}
-      <div style={{ position: 'relative', lineHeight: 0 }}>
-        <img
-          src="/youth.jpg"
-          alt="Young lives we serve — Johar Foundation"
-          style={{ width: '100%', height: 400, objectFit: 'cover', objectPosition: 'center', display: 'block' }}
-        />
-        <div style={{
-          position: 'absolute', inset: 0,
-          background: 'linear-gradient(to right, rgba(60,53,48,0.72) 0%, rgba(60,53,48,0.20) 100%)',
-          display: 'flex', alignItems: 'center', padding: '0 6%',
-        }}>
-          <div>
-            <p style={{
-              fontFamily: "'Lora', serif",
-              fontStyle: 'italic',
-              fontSize: 'clamp(1.1rem, 2.5vw, 1.6rem)',
-              color: WHITE,
-              maxWidth: 560,
-              lineHeight: 1.65,
-              margin: '0 0 12px',
-            }}>
-              "Every rupee you give stays in the field. No marble lobbies, no retreats — just work."
-            </p>
-            <div style={{ width: 52, height: 3, background: CRIMSON, borderRadius: 2 }} />
-          </div>
-        </div>
-      </div>
-      <div style={{ marginTop: -72, position: 'relative', zIndex: 2 }}>
-        <WaveDivider topColor="transparent" bottomColor={SECTION_ALT} />
-      </div>
 
       {/* ── Main Grid ────────────────────────────────────────────────────────── */}
       <section style={{ background: SECTION_ALT, padding: '40px 5%' }}>
