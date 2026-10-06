@@ -26,8 +26,7 @@ export const ContactForm: React.FC = () => {
       return;
     }
     if (name === 'phone') {
-      const maxDigits = formData.countryCode === '+91' ? 10 : 13;
-      const digits = value.replace(/\D/g, '').slice(0, maxDigits);
+      const digits = value.replace(/\D/g, '').slice(0, 10);
       setFormData({ ...formData, phone: digits });
       return;
     }
@@ -42,9 +41,9 @@ export const ContactForm: React.FC = () => {
       setErrorMessage('Please enter a valid email address (e.g. name@example.com).');
       return;
     }
-    if (formData.phone.length < 7 || formData.phone.length > 13) {
+    if (formData.phone.length !== 10) {
       setStatus('error');
-      setErrorMessage('Please enter a valid phone number (7-13 digits).');
+      setErrorMessage('Please enter a valid 10-digit mobile number.');
       return;
     }
     setStatus('submitting');
@@ -137,7 +136,7 @@ export const ContactForm: React.FC = () => {
           <input type="text" name="countryCode" value={formData.countryCode} onChange={handleChange} disabled={status === 'submitting'} style={{ width: 52, padding: '14px 6px', fontSize: '0.92rem', color: '#555', backgroundColor: '#eee', borderRight: '1.5px solid #e9ecef', border: 'none', outline: 'none', textAlign: 'center', fontFamily: 'inherit' }} />
           <div style={{ position: 'relative', flex: 1, display: 'flex', alignItems: 'center' }}>
             <FaPhone style={{ ...iconStyle, left: 12 }} />
-            <input type="tel" name="phone" placeholder="Mobile Number *" required disabled={status === 'submitting'} value={formData.phone} onChange={handleChange} style={{ ...iconInput, border: 'none', borderRadius: 0, flex: 1 }} maxLength={formData.countryCode === '+91' ? 10 : 13} />
+            <input type="tel" name="phone" placeholder="Mobile Number *" required disabled={status === 'submitting'} value={formData.phone} onChange={handleChange} style={{ ...iconInput, border: 'none', borderRadius: 0, flex: 1 }} maxLength={10} />
           </div>
         </div>
         <div style={iconWrap}>

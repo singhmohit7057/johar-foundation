@@ -46,13 +46,13 @@ const polaroidCards = [
   { src: 'https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=400&q=80', caption: 'Tribal Youth',   rot: '-7deg', top: '10px',  left: '20px',  z: 3  },
   { src: 'https://images.unsplash.com/photo-1509099836639-18ba1795216d?w=400&q=80', caption: 'Education',     rot: '5deg',  top: '30px',  left: '200px', z: 6  },
   { src: 'https://images.unsplash.com/photo-1469571486292-0ba58a3f068b?w=400&q=80', caption: 'Community',     rot: '-3deg', top: '20px',  left: '400px', z: 4  },
-  { src: 'https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=400&q=80', caption: 'Women Leaders', rot: '4deg',  top: '150px', left: '80px',  z: 7  },
-  { src: 'https://images.unsplash.com/photo-1542810634-71277d95dcbb?w=400&q=80',    caption: 'Skill Dev',     rot: '-6deg', top: '170px', left: '270px', z: 9  },
-  { src: 'https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=400&q=80', caption: 'Jharkhand',    rot: '2deg',  top: '160px', left: '460px', z: 5  },
-  { src: 'https://images.unsplash.com/photo-1509099836639-18ba1795216d?w=400&q=80', caption: 'Odisha',        rot: '-2deg', top: '310px', left: '30px',  z: 8  },
-  { src: 'https://images.unsplash.com/photo-1469571486292-0ba58a3f068b?w=400&q=80', caption: 'Bihar',         rot: '7deg',  top: '330px', left: '210px', z: 2  },
-  { src: 'https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=400&q=80', caption: 'Self-Reliance', rot: '-5deg', top: '320px', left: '420px', z: 10 },
-  { src: 'https://images.unsplash.com/photo-1542810634-71277d95dcbb?w=400&q=80',    caption: 'Impact',        rot: '3deg',  top: '200px', left: '150px', z: 1  },
+  { src: '/hero-children-school.jpg',   caption: 'Youth',          rot: '4deg',  top: '150px', left: '80px',  z: 7  },
+  { src: '/hero-school-girls.jpg',      caption: 'Education',      rot: '-6deg', top: '170px', left: '270px', z: 9  },
+  { src: '/hero-women-workshop.jpg',    caption: 'Empowerment',    rot: '2deg',  top: '160px', left: '460px', z: 5  },
+  { src: '/hero-tribal-community.jpg',  caption: 'Community',      rot: '-2deg', top: '310px', left: '30px',  z: 8  },
+  { src: '/hero-shg-meeting.jpg',       caption: 'SHG',            rot: '7deg',  top: '330px', left: '210px', z: 2  },
+  { src: '/hero-women-workers.jpg',     caption: 'Livelihoods',    rot: '-5deg', top: '320px', left: '420px', z: 10 },
+  { src: '/hero-school-children.jpg',   caption: 'Schools',        rot: '3deg',  top: '200px', left: '150px', z: 1  },
 ];
 
 const HeroCopyContent = ({ size }: { size: 'mobile' | 'tablet' | 'desktop' }) => (

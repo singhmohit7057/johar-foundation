@@ -10,7 +10,6 @@ const languages = [
   { label: 'Bengali', native: 'বাংলা',    code: 'bn' },
   { label: 'Odia',    native: 'ଓଡ଼ିଆ',    code: 'or' },
   { label: 'Santali',  native: 'ᱚᱞ ᱪᱤᱠᱤ',   code: 'sat' },
-  { label: 'Sanskrit', native: 'संस्कृतम्', code: 'sa'  },
 ];
 
 export const Navbar: React.FC = () => {
