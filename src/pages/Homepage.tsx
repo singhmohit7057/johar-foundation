@@ -519,90 +519,106 @@ const HomePage: React.FC = () => {
 
       {/* 5. INTERACTIVE REGIONAL MAP FOOTPRINT PREVIEW */}
       <div className="jwf-snap-section" style={sectionWrapperStyle}>
-        <div style={{ textAlign: 'center', marginBottom: '45px' }}>
-          <h2 style={{ fontSize: '2.2rem', color: theme.colors.secondary, fontWeight: '800', margin: '0 0 10px 0' }}>
+        <div style={{ textAlign: 'center', marginBottom: '22px' }}>
+          <h2 style={{ fontSize: '2.2rem', color: theme.colors.primary, fontWeight: '800', margin: '0 0 10px 0' }}>
             States We Serve
           </h2>
           <p style={{ color: '#666', fontSize: '0.95rem', maxWidth: '600px', margin: '0 auto' }}>
-            Hover or tap on a state to highlight our active implementation hubs across Eastern India.
+            Hover or tap on a state to highlight our active implementation hubs across India.
           </p>
         </div>
 
-        <div className="map-split-container" style={{
-          display: 'flex', backgroundColor: '#fff', border: '1px solid #ececec',
-          borderRadius: '24px', overflow: 'hidden', boxShadow: '0 10px 30px rgba(0,0,0,0.06)',
-        }}>
-          {/* Left: map */}
-          <div style={{ flex: 1, backgroundColor: '#fafafa', display: 'flex', justifyContent: 'center', alignItems: 'center', padding: '24px' }}>
-            <ComposableMap
-              projection="geoMercator"
-              projectionConfig={{ center: [85.05, 22.74], scale: 2600 }}
-              width={500}
-              height={600}
-              style={{ width: '100%', maxWidth: '340px', height: 'auto', display: 'block' }}
-            >
-              <Geographies geography="/india-states.json">
-                {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
-                {({ geographies }: { geographies: any[] }) =>
-                  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                  geographies.filter((geo: any) => footprintRegions.some(r => r.name === geo.properties.name)).map((geo: any) => {
-                    const stateName: string = geo.properties.name || '';
-                    const match = footprintRegions.find(r => r.name === stateName);
-                    const id = match!.id;
-                    const isActive = hoveredState === id;
-                    return (
-                      <Geography
-                        key={geo.rsmKey}
-                        geography={geo}
-                        tabIndex={0}
-                        onClick={() => setHoveredState(id)}
-                        onMouseEnter={() => setHoveredState(id)}
-                        style={{
-                          default: {
-                            fill: isActive ? theme.colors.primary : '#dcdcdc',
-                            stroke: '#fff',
-                            strokeWidth: 2,
-                            outline: 'none',
-                            cursor: 'pointer',
-                            transition: 'fill 0.2s ease',
-                          },
-                          hover: {
-                            fill: theme.colors.primary,
-                            stroke: '#fff',
-                            strokeWidth: 2,
-                            outline: 'none',
-                            cursor: 'pointer',
-                          },
-                          pressed: { fill: theme.colors.primary, stroke: '#fff', strokeWidth: 2, outline: 'none' },
-                        }}
-                      />
-                    );
-                  })
-                }
-              </Geographies>
-            </ComposableMap>
-          </div>
+        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', position: 'relative' }}>
+          {/* Globe container — white */}
+          <div style={{
+            position: 'relative',
+            width: 500, height: 500,
+            borderRadius: '50%',
+            background: 'radial-gradient(circle at 38% 35%, #ffffff 0%, #f5f2ee 45%, #e8e2d8 80%, #d8d0c4 100%)',
+            boxShadow: '0 24px 64px rgba(60,53,48,0.18), inset 0 -10px 28px rgba(60,53,48,0.08), inset 8px 8px 24px rgba(255,255,255,0.9)',
+            overflow: 'hidden',
+            flexShrink: 0,
+          }}>
+            {/* Specular highlight */}
+            <div style={{
+              position: 'absolute', top: '7%', left: '16%',
+              width: '40%', height: '26%',
+              borderRadius: '50%',
+              background: 'radial-gradient(ellipse, rgba(255,255,255,0.75) 0%, transparent 70%)',
+              pointerEvents: 'none', zIndex: 3,
+            }} />
+          <ComposableMap
+            projection="geoMercator"
+            projectionConfig={{ center: [82, 22], scale: 1050 }}
+            width={700}
+            height={720}
+            style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', width: '112%', height: '112%' }}
+          >
+            <Geographies geography="/india-states.json">
+              {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
+              {({ geographies }: { geographies: any[] }) =>
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                geographies.map((geo: any) => {
+                  const stateName: string = geo.properties.name || '';
+                  const match = footprintRegions.find(r => r.name === stateName);
+                  const id = match?.id;
+                  const isActive = id && hoveredState === id;
+                  const isRegion = !!match;
+                  return (
+                    <Geography
+                      key={geo.rsmKey}
+                      geography={geo}
+                      tabIndex={isRegion ? 0 : -1}
+                      onClick={() => id && setHoveredState(id)}
+                      onMouseEnter={() => id ? setHoveredState(id) : setHoveredState('')}
+                      onMouseLeave={() => setHoveredState('')}
+                      style={{
+                        default: {
+                          fill: isActive ? theme.colors.primary : isRegion ? '#d4929f' : '#ddd8d0',
+                          stroke: '#fff',
+                          strokeWidth: 1,
+                          outline: 'none',
+                          cursor: isRegion ? 'pointer' : 'default',
+                          transition: 'fill 0.2s ease',
+                        },
+                        hover: {
+                          fill: isRegion ? theme.colors.primary : '#ccc8c2',
+                          stroke: '#fff',
+                          strokeWidth: 1,
+                          outline: 'none',
+                          cursor: isRegion ? 'pointer' : 'default',
+                        },
+                        pressed: { fill: isRegion ? theme.colors.primary : '#ccc8c2', stroke: '#f5f2ee', strokeWidth: 1, outline: 'none' },
+                      }}
+                    />
+                  );
+                })
+              }
+            </Geographies>
+          </ComposableMap>
 
-          {/* Right: info panel */}
-          <div style={{ flex: '1.2', padding: '45px', display: 'flex', flexDirection: 'column', justifyContent: 'center', boxSizing: 'border-box', borderLeft: '1px solid #f0f0f0' }}>
-            {/* State name heading */}
-            <h3 style={{ margin: '0 0 15px 0', fontSize: '1.8rem', color: theme.colors.secondary, fontWeight: '700' }}>
+          {/* State name watermark — bottom-right inside globe */}
+          {hoveredState && footprintRegions.find(r => r.id === hoveredState) && (
+            <div style={{
+              position: 'absolute',
+              bottom: 110,
+              right: 150,
+              zIndex: 4,
+              pointerEvents: 'none',
+              fontSize: '0.88rem',
+              fontWeight: 900,
+              color: `${theme.colors.primary}55`,
+              letterSpacing: '0.04em',
+              fontStyle: 'italic',
+              userSelect: 'none',
+              textAlign: 'right',
+              lineHeight: 1.2,
+              transition: 'opacity 0.2s ease',
+            }}>
               {footprintRegions.find(r => r.id === hoveredState)?.name}
-            </h3>
-            {/* Description */}
-            <p style={{ margin: '0 0 25px 0', color: '#555', fontSize: '0.9rem', lineHeight: '1.6' }}>
-              {footprintRegions.find(r => r.id === hoveredState)?.description}
-            </p>
-            {/* Bullet highlights */}
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', marginBottom: '28px' }}>
-              {footprintRegions.find(r => r.id === hoveredState)?.highlights.map((h) => (
-                <div key={h} style={{ display: 'flex', alignItems: 'center', gap: '10px', fontSize: '0.85rem', color: '#333', fontWeight: '600' }}>
-                  <span style={{ width: 6, height: 6, borderRadius: '50%', backgroundColor: theme.colors.primary, flexShrink: 0 }} />
-                  {h}
-                </div>
-              ))}
             </div>
-          </div>
+          )}
+          </div>{/* end globe */}
         </div>
       </div>
 
