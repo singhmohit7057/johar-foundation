@@ -690,40 +690,20 @@ const HomePage: React.FC = () => {
       <WaveDivider topColor="#fafafa" bottomColor={theme.colors.secondary} flip />
       */}
 
-      <WaveDivider topColor="#F9F7F2" bottomColor={theme.colors.secondary} flip />
+      <WaveDivider topColor="#F9F7F2" bottomColor={theme.colors.background} flip />
 
       {/* 7. VOLUNTEER WORKSPACE ACTION PREVIEW */}
-      <div className="jwf-snap-section" style={{ backgroundColor: theme.colors.secondary, color: 'white', position: 'relative', overflow: 'hidden' }}>
-        {/* Decorative thematic icon stamps */}
-        {[
-          { Icon: FaUsers,           top: '10%',    left: '3%',   size: 40, circle: 82,  rotate: -10 },
-          { Icon: FaHandHoldingHeart,bottom: '10%', right: '4%',  size: 36, circle: 74,  rotate: 8   },
-          { Icon: FaVenus,           top: '8%',     right: '7%',  size: 34, circle: 70,  rotate: 6   },
-          { Icon: FaGraduationCap,   bottom: '12%', left: '5%',   size: 36, circle: 74,  rotate: -7  },
-          { Icon: FaGlobe,           top: '45%',    left: '1%',   size: 28, circle: 58,  rotate: -15 },
-          { Icon: FaBriefcase,       top: '40%',    right: '2%',  size: 28, circle: 58,  rotate: 12  },
-        ].map(({ Icon, size, circle, rotate, ...pos }, i) => (
-          <div key={i} aria-hidden className="wwa-leaf" style={{
-            position: 'absolute', ...pos,
-            width: circle, height: circle,
-            borderRadius: '50%',
-            background: 'rgba(255,255,255,0.06)',
-            display: 'flex', alignItems: 'center', justifyContent: 'center',
-            transform: `rotate(${rotate}deg)`,
-          }}>
-            <Icon style={{ fontSize: size, color: 'rgba(255,255,255,0.5)' }} />
-          </div>
-        ))}
+      <div className="jwf-snap-section" style={{ backgroundColor: theme.colors.background, color: theme.colors.secondary, position: 'relative', overflow: 'hidden' }}>
         <div style={{ ...sectionWrapperStyle, textAlign: 'center', padding: '70px 5%', position: 'relative', zIndex: 1 }}>
           <FaHandHoldingHeart size={40} color={theme.colors.primary} style={{ marginBottom: '15px' }} />
-          <h2 style={{ fontSize: '2.2rem', fontWeight: '800', margin: '0 0 15px 0', color: 'white' }}>
+          <h2 style={{ fontSize: '2.2rem', fontWeight: '800', margin: '0 0 15px 0', color: theme.colors.secondary }}>
             Your time is worth something here.
           </h2>
-          <p style={{ color: '#bbb', fontSize: '1rem', maxWidth: '600px', margin: '0 auto 35px auto', lineHeight: '1.6' }}>
+          <p style={{ color: '#666', fontSize: '1rem', maxWidth: '600px', margin: '0 auto 35px auto', lineHeight: '1.6' }}>
             Our programs exist because people showed up. A few hours or a full season — all of it moves things forward.
           </p>
           <Link to="/get-involved" style={{
-            display: 'inline-block', backgroundColor: 'white', color: 'black', textDecoration: 'none',
+            display: 'inline-block', backgroundColor: theme.colors.primary, color: 'white', textDecoration: 'none',
             padding: '12px 35px', borderRadius: '50px', fontWeight: 'bold', fontSize: '0.9rem'
           }} className="white-hover-btn">
             Become a Volunteer

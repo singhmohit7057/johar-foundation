@@ -141,7 +141,7 @@ export const ContactForm: React.FC = () => {
         </div>
         <div style={iconWrap}>
           <FaTag style={iconStyle} />
-          <input type="text" name="subject" placeholder="Subject *" required disabled={status === 'submitting'} value={formData.subject} onChange={handleChange} style={iconInput} />
+          <input type="text" name="subject" placeholder="Subject" disabled={status === 'submitting'} value={formData.subject} onChange={handleChange} style={iconInput} />
         </div>
       </div>
 
