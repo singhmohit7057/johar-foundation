@@ -10,6 +10,7 @@ import {
   FaHandHoldingHeart,
   FaGlobe, FaVenus, FaBookOpen, FaBriefcase, FaStethoscope, FaChartBar
 } from 'react-icons/fa6';
+import { FaHandshake, FaLeaf } from 'react-icons/fa';
 
 // Multi-Ticker Marquee Continuous Items Array Source
 const sliderSectors = [
@@ -518,8 +519,43 @@ const HomePage: React.FC = () => {
 
 
       {/* 5. INTERACTIVE REGIONAL MAP FOOTPRINT PREVIEW */}
-      <div className="jwf-snap-section" style={sectionWrapperStyle}>
-        <div style={{ textAlign: 'center', marginBottom: '22px' }}>
+      <div className="jwf-snap-section" style={{ ...sectionWrapperStyle, position: 'relative', overflow: 'hidden' }}>
+        {/* Background icon grid — same as contact page */}
+        {(() => {
+          const icons = [FaGraduationCap, FaHandshake, FaUsers, FaGlobe, FaBriefcase, FaLeaf, FaHandHoldingHeart, FaStethoscope, FaBookOpen];
+          const cols = 12, rows = 10;
+          const cellW = 100 / cols, cellH = 100 / rows;
+          const items: React.ReactNode[] = [];
+          let idx = 0;
+          for (let r = 0; r < rows; r++) {
+            for (let c = 0; c < cols; c++) {
+              const jx = ((idx * 17 + 7) % 11) - 5;
+              const jy = ((idx * 13 + 3) % 11) - 5;
+              const top = r * cellH + cellH / 2 + jy * 0.8;
+              const left = c * cellW + cellW / 2 + jx * 0.6;
+              const Icon = icons[((r * 7 + c * 3) + idx) % icons.length];
+              const size = 13 + (idx % 4) * 3;
+              const rot = ((idx * 23 + 11) % 60) - 30;
+              const dur = 5 + (idx % 3) * 2;
+              const delay = (idx % 5) * 0.8;
+              items.push(
+                <Icon key={idx} aria-hidden className="jwf-map-icon" style={{
+                  position: 'absolute',
+                  top: `${Math.max(1, Math.min(97, top))}%`,
+                  left: `${Math.max(1, Math.min(97, left))}%`,
+                  fontSize: size,
+                  color: `${theme.colors.primary}14`,
+                  ['--r' as string]: `${rot}deg`,
+                  ['--dur' as string]: `${dur}s`,
+                  ['--delay' as string]: `${delay}s`,
+                }} />
+              );
+              idx++;
+            }
+          }
+          return items;
+        })()}
+        <div style={{ textAlign: 'center', marginBottom: '22px', position: 'relative', zIndex: 1 }}>
           <h2 style={{ fontSize: '2.2rem', color: theme.colors.primary, fontWeight: '800', margin: '0 0 10px 0' }}>
             States We Serve
           </h2>
@@ -528,7 +564,7 @@ const HomePage: React.FC = () => {
           </p>
         </div>
 
-        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', position: 'relative' }}>
+        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', position: 'relative', zIndex: 1 }}>
           {/* Globe container — white */}
           <div style={{
             position: 'relative',
@@ -684,7 +720,7 @@ const HomePage: React.FC = () => {
             Your time is worth something here.
           </h2>
           <p style={{ color: '#bbb', fontSize: '1rem', maxWidth: '600px', margin: '0 auto 35px auto', lineHeight: '1.6' }}>
-            Our programs exist because 30 people showed up. A few hours or a full season — all of it moves things forward.
+            Our programs exist because people showed up. A few hours or a full season — all of it moves things forward.
           </p>
           <Link to="/get-involved" style={{
             display: 'inline-block', backgroundColor: 'white', color: 'black', textDecoration: 'none',
@@ -747,6 +783,12 @@ const HomePage: React.FC = () => {
             scroll-snap-align: start;
           }
         }
+
+        @keyframes jwf-iconFloat {
+          0%, 100% { transform: translateY(0px) rotate(var(--r, 0deg)); }
+          50%       { transform: translateY(-5px) rotate(var(--r, 0deg)); }
+        }
+        .jwf-map-icon { animation: jwf-iconFloat var(--dur, 5s) ease-in-out infinite var(--delay, 0s); }
 
         .marquee-track {
           animation: infiniteScrollMarquee 32s linear infinite;
