@@ -96,7 +96,7 @@ const TermsAndConditions: React.FC = () => {
           }}>
             <p style={{ fontWeight: 'bold', color: theme.colors.secondary }}>Contact Legal Department</p>
             <p style={{ color: theme.colors.text, fontSize: '0.9rem' }}>
-              Email: info@joharfoundation.com<br />
+              Email: joharenafoundation@gmail.com<br />
               Johar Foundation (Section 8 Company)
             </p>
           </div>

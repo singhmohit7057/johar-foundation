@@ -2,7 +2,7 @@ import React from 'react';
 import { SEO } from '../shared/seo';
 import { DonateForm } from '../components/donateform';
 import {
-  FaUniversity, FaShieldAlt, FaFileInvoiceDollar, FaQrcode,
+  FaUniversity, FaShieldAlt, FaFileInvoiceDollar,
   FaBook, FaPlusSquare, FaStar, FaStethoscope, FaGraduationCap
 } from 'react-icons/fa';
 
@@ -148,18 +148,14 @@ const DonatePage: React.FC = () => {
                   <h3 style={{ margin: 0, fontSize: '1rem', fontWeight: 'bold', color: EARTH }}>Direct Bank Transfer</h3>
                 </div>
                 <div style={{ fontSize: '0.88rem', color: EARTH_MUTED, lineHeight: '1.8', marginBottom: '12px' }}>
-                  <strong>A/C Name:</strong> JOHAR FOUNDATION<br />
-                  <strong>A/C Number:</strong> [Account Number]<br />
-                  <strong>Bank Name:</strong> [Bank Name]<br />
-                  <strong>IFSC Code:</strong> [IFSC Code]<br />
-                  <strong>Branch:</strong> Bistupur, Jamshedpur
-                </div>
-                <div style={{ borderTop: `1px solid #e8e0d8`, paddingTop: '12px', display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '12px' }}>
-                  <FaQrcode size={18} color={EARTH} />
-                  <div style={{ fontSize: '0.88rem', color: EARTH_MUTED }}><strong>UPI ID:</strong> joharfoundation@bank</div>
+                  <strong>A/C Name:</strong> JOHAR WELFARE FOUNDATION<br />
+                  <strong>A/C Number:</strong> 20100079938168<br />
+                  <strong>Bank Name:</strong> BANDHAN BANK<br />
+                  <strong>IFSC Code:</strong> BDBL0002495<br />
+                  <strong>Branch:</strong> ADITYAPUR
                 </div>
                 <div style={{ backgroundColor: `${CRIMSON}08`, padding: '10px', borderRadius: '8px', fontSize: '0.8rem', color: EARTH_MUTED, lineHeight: '1.4', borderLeft: `3px solid ${CRIMSON}` }}>
-                  Please send your transaction screenshot at <strong style={{ color: CRIMSON }}>payment@joharfoundation.com</strong> for a formal donation receipt.
+                  Please send your transaction screenshot at <strong style={{ color: CRIMSON }}>joharenafoundation@gmail.com</strong> for a formal donation receipt.
                 </div>
               </div>
             </div>

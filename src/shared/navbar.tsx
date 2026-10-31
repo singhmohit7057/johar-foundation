@@ -193,8 +193,8 @@ export const Navbar: React.FC = () => {
           <a href="tel:+919117115050" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '10px', color: '#555', textDecoration: 'none', fontSize: '0.9rem' }}>
             <FaPhoneAlt size={13} color={theme.colors.primary} /> +91-9117115050
           </a>
-          <a href="mailto:info@joharfoundation.com" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '10px', color: '#555', textDecoration: 'none', fontSize: '0.9rem' }}>
-            <FaEnvelope size={13} color={theme.colors.primary} /> info@joharfoundation.com
+          <a href="mailto:joharenafoundation@gmail.com" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '10px', color: '#555', textDecoration: 'none', fontSize: '0.9rem' }}>
+            <FaEnvelope size={13} color={theme.colors.primary} /> joharenafoundation@gmail.com
           </a>
 
           {/* Social icons */}

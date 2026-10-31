@@ -101,7 +101,7 @@ const PrivacyPolicy: React.FC = () => {
           }}>
             <p style={{ fontWeight: 'bold', color: theme.colors.secondary }}>Questions about our Privacy Policy?</p>
             <p style={{ color: theme.colors.text, fontSize: '0.9rem' }}>
-              Email: info@joharfoundation.com<br />
+              Email: joharenafoundation@gmail.com<br />
               Address: Dream Height Building, Bistupur, Jamshedpur
             </p>
           </div>

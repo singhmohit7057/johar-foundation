@@ -243,7 +243,7 @@ export const GetInvolved: React.FC = () => {
             We collaborate with corporations and government bodies to scale impact.
           </p>
           <a
-            href="mailto:support@joharfoundation.com"
+            href="mailto:joharenafoundation@gmail.com"
             style={{
               display: 'inline-block',
               padding: '12px 35px',

@@ -295,7 +295,7 @@ const Impact: React.FC = () => {
               Or if you have any pictures from our events, we would love to see them.
             </p>
             <a
-              href="mailto:support@joharfoundation.com?subject=Field%20Program%20Photos"
+              href="mailto:joharenafoundation@gmail.com?subject=Field%20Program%20Photos"
               className="share-photos-btn"
               style={{
                 backgroundColor: 'transparent',

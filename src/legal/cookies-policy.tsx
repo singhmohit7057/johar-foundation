@@ -94,7 +94,7 @@ const CookiesPolicy: React.FC = () => {
             <p style={{ fontWeight: 'bold', color: theme.colors.secondary }}>Managing your Preferences</p>
             <p style={{ color: theme.colors.text, fontSize: '0.9rem' }}>
               If you have any questions about our use of cookies or other technologies, please email us at:<br />
-              <strong>info@joharfoundation.com</strong>
+              <strong>joharenafoundation@gmail.com</strong>
             </p>
           </div>
         </div>

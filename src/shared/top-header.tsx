@@ -145,8 +145,8 @@ export const TopHeader: React.FC = () => {
           <a href="tel:+919117115050" style={{ color: 'inherit', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '8px' }}>
             <FaPhoneAlt size={12} /> <span className="hide-mobile">+91-9117115050</span>
           </a>
-          <a href="mailto:info@joharfoundation.com" style={{ color: 'inherit', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '8px' }}>
-            <FaEnvelope size={12} /> <span className="hide-mobile">info@joharfoundation.com</span>
+          <a href="mailto:joharenafoundation@gmail.com" style={{ color: 'inherit', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '8px' }}>
+            <FaEnvelope size={12} /> <span className="hide-mobile">joharenafoundation@gmail.com</span>
           </a>
         </div>
 

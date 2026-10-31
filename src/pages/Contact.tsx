@@ -204,7 +204,7 @@ const Contact: React.FC = () => {
                 {[
                   { icon: '📍', title: 'Office', detail: 'Dream Height Building, Bistupur, Jharkhand' },
                   { icon: '📞', title: 'Phone', detail: '+91 9117115050' },
-                  { icon: '✉️', title: 'Email', detail: 'info@joharfoundation.com' },
+                  { icon: '✉️', title: 'Email', detail: 'joharenafoundation@gmail.com' },
                 ].map(({ icon, title, detail }) => (
                   <div key={title} style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
                     <div style={{

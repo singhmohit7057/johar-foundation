@@ -153,13 +153,13 @@ export const Footer: React.FC = () => {
           <h4 style={{ marginBottom: '20px', color: '#fff', fontSize: '1rem', fontWeight: 'bold' }}>Contact Us</h4>
           <div style={{ fontSize: '0.85rem', color: 'rgba(255,255,255,0.75)', lineHeight: '1.8' }}>
             <a
-              href="mailto:info@joharfoundation.org"
+              href="mailto:joharenafoundation@gmail.com"
               style={{ display: 'flex', alignItems: 'center', gap: '8px', color: hoveredLink === 'email' ? '#fff' : 'rgba(255,255,255,0.75)', textDecoration: 'none', marginBottom: '10px', transition: 'color 0.3s ease' }}
               onMouseEnter={() => setHoveredLink('email')}
               onMouseLeave={() => setHoveredLink(null)}
             >
               <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0 }}><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
-              info@joharfoundation.org
+              joharenafoundation@gmail.com
             </a>
             <a
               href="tel:+919117115050"
