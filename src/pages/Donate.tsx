@@ -1,17 +1,77 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { SEO } from '../shared/seo';
 import { DonateForm } from '../components/donateform';
 import {
-  FaUniversity, FaShieldAlt, FaFileInvoiceDollar,
-  FaBook, FaPlusSquare, FaStar, FaStethoscope, FaGraduationCap
+  FaUniversity, FaShieldAlt, FaFileInvoiceDollar, FaCopy, FaCheck,
+  FaStethoscope, FaGraduationCap, FaBriefcase, FaVenus, FaChild, FaRunning
 } from 'react-icons/fa';
 
 const CRIMSON     = '#A62639';
+
+const copyToClipboard = (text: string) => {
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    return navigator.clipboard.writeText(text);
+  }
+  // Fallback for older browsers / iOS Safari
+  const el = document.createElement('textarea');
+  el.value = text;
+  el.style.cssText = 'position:fixed;top:-9999px;left:-9999px;opacity:0';
+  document.body.appendChild(el);
+  el.focus(); el.select();
+  try { document.execCommand('copy'); } catch {}
+  document.body.removeChild(el);
+  return Promise.resolve();
+};
+
+const BankCard: React.FC = () => {
+  const [copied, setCopied] = useState<string | null>(null);
+  const copy = (key: string, value: string) => {
+    copyToClipboard(value).then(() => {
+      setCopied(key);
+      setTimeout(() => setCopied(null), 2000);
+    });
+  };
+
+  const rows = [
+    { key: 'name',   label: 'A/C Name',   value: 'JOHAR WELFARE FOUNDATION' },
+    { key: 'acc',    label: 'A/C Number', value: '20100079938168' },
+    { key: 'bank',   label: 'Bank Name',  value: 'BANDHAN BANK' },
+    { key: 'ifsc',   label: 'IFSC Code',  value: 'BDBL0002495' },
+    { key: 'branch', label: 'Branch',     value: 'ADITYAPUR' },
+  ];
+
+  return (
+    <div className="bank-box" style={{ backgroundColor: '#fff', padding: '20px', borderRadius: '16px', border: '1px dashed #c4b8ac', boxShadow: '0 4px 15px rgba(0,0,0,0.05)', flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '16px' }}>
+        <FaUniversity size={18} color="#3C3530" />
+        <h3 style={{ margin: 0, fontSize: '1rem', fontWeight: 'bold', color: '#3C3530' }}>Direct Bank Transfer</h3>
+      </div>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 8, marginBottom: '16px' }}>
+        {rows.map(({ key, label, value }) => (
+          <div key={key} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 8, padding: '8px 10px', borderRadius: 8, backgroundColor: '#f9f7f2' }}>
+            <div style={{ fontSize: '0.85rem', color: '#5a514a' }}>
+              <strong style={{ color: '#3C3530' }}>{label}:</strong> {value}
+            </div>
+            <button
+              onClick={() => copy(key, value)}
+              title={`Copy ${label}`}
+              style={{ background: 'none', border: 'none', cursor: 'pointer', padding: '4px 6px', borderRadius: 6, color: copied === key ? '#1abc9c' : CRIMSON, transition: 'color 0.2s', flexShrink: 0 }}
+            >
+              {copied === key ? <FaCheck size={13} /> : <FaCopy size={13} />}
+            </button>
+          </div>
+        ))}
+      </div>
+      <div style={{ backgroundColor: `${CRIMSON}08`, padding: '10px', borderRadius: '8px', fontSize: '0.8rem', color: '#5a514a', lineHeight: '1.4', borderLeft: `3px solid ${CRIMSON}` }}>
+        Please send your transaction screenshot at <strong style={{ color: CRIMSON }}>joharenafoundation@gmail.com</strong> for a formal donation receipt.
+      </div>
+    </div>
+  );
+};
 const EARTH       = '#3C3530';
 const BG          = '#F9F7F2';
 const SAND        = '#E8DCC8';
 const WARM_TAN    = '#C4A882';
-const WHITE       = '#FFFFFF';
 const SECTION_ALT = '#FAFAFA';
 const EARTH_MUTED = '#5a514a';
 
@@ -142,22 +202,7 @@ const DonatePage: React.FC = () => {
                 </div>
               </div>
 
-              <div className="bank-box" style={{ backgroundColor: WHITE, padding: '20px', borderRadius: '16px', border: '1px dashed #c4b8ac', boxShadow: '0 4px 15px rgba(0,0,0,0.05)', flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '12px' }}>
-                  <FaUniversity size={18} color={EARTH} />
-                  <h3 style={{ margin: 0, fontSize: '1rem', fontWeight: 'bold', color: EARTH }}>Direct Bank Transfer</h3>
-                </div>
-                <div style={{ fontSize: '0.88rem', color: EARTH_MUTED, lineHeight: '1.8', marginBottom: '12px' }}>
-                  <strong>A/C Name:</strong> JOHAR WELFARE FOUNDATION<br />
-                  <strong>A/C Number:</strong> 20100079938168<br />
-                  <strong>Bank Name:</strong> BANDHAN BANK<br />
-                  <strong>IFSC Code:</strong> BDBL0002495<br />
-                  <strong>Branch:</strong> ADITYAPUR
-                </div>
-                <div style={{ backgroundColor: `${CRIMSON}08`, padding: '10px', borderRadius: '8px', fontSize: '0.8rem', color: EARTH_MUTED, lineHeight: '1.4', borderLeft: `3px solid ${CRIMSON}` }}>
-                  Please send your transaction screenshot at <strong style={{ color: CRIMSON }}>joharenafoundation@gmail.com</strong> for a formal donation receipt.
-                </div>
-              </div>
+              <BankCard />
             </div>
 
             {/* Right Column: Form */}
@@ -173,34 +218,36 @@ const DonatePage: React.FC = () => {
       {/* ── How your donations help ───────────────────────────────────────────── */}
       <section style={{ background: BG, padding: '80px 5%' }}>
         <div style={{ maxWidth: '1100px', margin: '0 auto', textAlign: 'center' }}>
-          <h2 style={{ color: CRIMSON, fontSize: '2rem', marginBottom: '15px', fontWeight: 'bold' }}>HOW WILL YOUR DONATIONS FOR NGO HELP?</h2>
-          <p style={{ color: EARTH_MUTED, marginBottom: '50px', fontSize: '1rem' }}>Your generous online donation will provide under-served children with essential resources. YOUR donations will:</p>
+          <h2 style={{ color: CRIMSON, fontSize: '2rem', marginBottom: '14px', fontWeight: 800 }}>Where Your Donation Goes</h2>
+          <p style={{ color: EARTH_MUTED, marginBottom: '52px', fontSize: '1rem', maxWidth: 640, margin: '0 auto 52px' }}>
+            Every rupee you give goes directly into one of these six impact areas in India and beyond.
+          </p>
 
-          <div style={{ display: 'flex', justifyContent: 'center', flexWrap: 'wrap', gap: '20px' }}>
-            <div style={impactItemStyle}>
-              <FaBook size={45} color="#1abc9c" />
-              <p style={{ fontSize: '0.85rem', fontWeight: '500', color: EARTH }}>Send me back to school</p>
-            </div>
-            <div style={impactItemStyle}>
-              <FaPlusSquare size={45} color="#e84393" />
-              <p style={{ fontSize: '0.85rem', fontWeight: '500', color: EARTH }}>Give me access to healthcare</p>
-            </div>
-            <div style={impactItemStyle}>
-              <FaStar size={45} color="#f39c12" />
-              <p style={{ fontSize: '0.85rem', fontWeight: '500', color: EARTH }}>Help me dream big</p>
-            </div>
-            <div style={impactItemStyle}>
-              <FaStethoscope size={45} color="#9b59b6" />
-              <p style={{ fontSize: '0.85rem', fontWeight: '500', color: EARTH }}>Make me a doctor</p>
-            </div>
-            <div style={impactItemStyle}>
-              <FaGraduationCap size={45} color="#f1c40f" />
-              <p style={{ fontSize: '0.85rem', fontWeight: '500', color: EARTH }}>Give me access to education</p>
-            </div>
+          <div style={{ display: 'flex', justifyContent: 'center', flexWrap: 'wrap', gap: '28px' }}>
+            {[
+              { Icon: FaGraduationCap, label: 'Education',           detail: 'Quality learning for underserved children' },
+              { Icon: FaBriefcase,     label: 'Skill Development',   detail: 'Vocational training for sustainable livelihoods' },
+              { Icon: FaVenus,         label: "Women's Empowerment", detail: 'SHGs, legal literacy, financial independence' },
+              { Icon: FaChild,         label: 'Child Welfare',       detail: 'Nutrition, safety, and rights for every child' },
+              { Icon: FaRunning,       label: 'Youth',               detail: 'Sports, mentorship, and opportunity' },
+              { Icon: FaStethoscope,   label: 'Health & Family',     detail: 'Health camps, maternal care, nutrition' },
+            ].map(({ Icon, label, detail }) => (
+              <div key={label} style={{ ...impactItemStyle, width: 150 }}>
+                <div style={{
+                  width: 70, height: 70, borderRadius: '50%',
+                  background: `${CRIMSON}10`, display: 'flex',
+                  alignItems: 'center', justifyContent: 'center', marginBottom: 12,
+                }}>
+                  <Icon size={32} color={CRIMSON} />
+                </div>
+                <p style={{ fontSize: '0.9rem', fontWeight: 700, color: EARTH, margin: '0 0 5px' }}>{label}</p>
+                <p style={{ fontSize: '0.75rem', color: EARTH_MUTED, lineHeight: 1.5, margin: 0 }}>{detail}</p>
+              </div>
+            ))}
           </div>
 
-          <div style={{ marginTop: '60px', maxWidth: '900px', margin: '60px auto 0', lineHeight: '1.8', color: EARTH_MUTED, fontSize: '0.95rem' }}>
-            Through your contributions, we can reach more children and support their various needs. Together, let's build a "Bharat" where every child has equal opportunities for growth and development in a safe and protective environment.
+          <div style={{ marginTop: '52px', maxWidth: '800px', margin: '52px auto 0', lineHeight: '1.8', color: EARTH_MUTED, fontSize: '0.95rem' }}>
+            Your support directly funds grassroots programmes across India — from self-help groups and vocational training to health camps and school re-enrollment. Together, we build communities that don't just survive, but lead.
           </div>
         </div>
       </section>

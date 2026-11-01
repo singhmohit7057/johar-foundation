@@ -16,8 +16,27 @@ export const DonateForm: React.FC = () => {
 
   const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
   const [errorMessage, setErrorMessage] = useState('');
+  const [errors, setErrors] = useState<Record<string, string>>({});
 
   const presetAmounts = ['500', '1000', '2500', '5000'];
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  const validateDonor = (data = donorData) => {
+    const e: Record<string, string> = {};
+    if (!data.fullName.trim()) e.fullName = 'This field is required.';
+    if (!data.mobile) e.mobile = 'This field is required.';
+    else if (data.mobile.replace(/\s/g, '').length !== 10 || !/^[6-9]/.test(data.mobile.replace(/\s/g, ''))) e.mobile = 'Please enter a valid phone number.';
+    if (!data.email.trim()) e.email = 'This field is required.';
+    else if (!emailRegex.test(data.email)) e.email = 'Please enter a valid email (e.g. name@example.com).';
+    if (data.panNumber && !/^[A-Z]{5}[0-9]{4}[A-Z]{1}$/.test(data.panNumber)) e.panNumber = 'Invalid PAN format (e.g. ABCDE1234F).';
+    return e;
+  };
+
+  const handleDonorBlur = (name: string) => {
+    const e = validateDonor();
+    if (e[name]) setErrors(prev => ({ ...prev, [name]: e[name] }));
+    else setErrors(prev => { const n = { ...prev }; delete n[name]; return n; });
+  };
 
   const handleDonorChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -26,34 +45,24 @@ export const DonateForm: React.FC = () => {
       const digits = value.replace(/\D/g, '').slice(0, 10);
       const formatted = digits.length > 5 ? `${digits.slice(0, 5)} ${digits.slice(5)}` : digits;
       setDonorData({ ...donorData, mobile: formatted });
+      if (errors.mobile) setErrors(prev => { const n = { ...prev }; delete n.mobile; return n; });
       return;
     }
     if (name === 'panNumber') {
       const pan = value.toUpperCase().slice(0, 10);
       setDonorData({ ...donorData, panNumber: pan });
+      if (errors.panNumber) setErrors(prev => { const n = { ...prev }; delete n.panNumber; return n; });
       return;
     }
     setDonorData({ ...donorData, [name]: value });
+    if (errors[name]) setErrors(prev => { const n = { ...prev }; delete n[name]; return n; });
   };
 
   const handleDonateSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!amount || parseFloat(amount) <= 0) {
-      setStatus('error');
-      setErrorMessage('Please specify a valid donation amount.');
-      return;
-    }
-    if (donorData.mobile.replace(/\s/g, '').length !== 10) {
-      setStatus('error');
-      setErrorMessage('Mobile number must be exactly 10 digits.');
-      return;
-    }
-    if (donorData.panNumber && !/^[A-Z]{5}[0-9]{4}[A-Z]{1}$/.test(donorData.panNumber)) {
-      setStatus('error');
-      setErrorMessage('Invalid PAN format. Expected: ABCDE1234F');
-      return;
-    }
-
+    const errs = validateDonor();
+    if (!amount || parseFloat(amount) <= 0) errs.amount = 'Please specify a valid donation amount.';
+    if (Object.keys(errs).length > 0) { setErrors(errs); return; }
     setStatus('submitting');
     setErrorMessage('');
 
@@ -151,21 +160,21 @@ export const DonateForm: React.FC = () => {
         <div style={{ textAlign: 'center', padding: '30px 10px' }}>
           <FaCheckCircle style={{ color: '#1abc9c', fontSize: '3.5rem', marginBottom: '20px' }} />
           <h4 style={{ color: theme.colors.secondary, fontSize: '1.4rem', fontWeight: '700', margin: '0 0 10px 0' }}>
-            Intent Logging Received!
+            Thank You for Your Donation!
           </h4>
           <p style={{ color: '#555', fontSize: '0.92rem', lineHeight: '1.6', margin: '0 0 25px 0' }}>
-            Thank you for step-allocating your pledge tracking parameters. Our financial verification coordinators will email your tax benefit settlement vouchers shortly.
+            Your contribution means the world to us. We have received your donation and will be in touch at your email shortly with a receipt and further details.
           </p>
           <button 
             type="button"
             onClick={() => setStatus('idle')}
             style={{ backgroundColor: theme.colors.secondary, color: 'white', border: 'none', padding: '12px 28px', borderRadius: '50px', fontWeight: 'bold', fontSize: '0.85rem', cursor: 'pointer' }}
           >
-            Reset Form View
+            Donate Again
           </button>
         </div>
       ) : (
-        <form onSubmit={handleDonateSubmit}>
+        <form onSubmit={handleDonateSubmit} noValidate>
           {/* SECTION 1: AMOUNT */}
           <div style={fieldGroupStyle}>
             <label style={labelStyle}>Select Donation Amount</label>
@@ -239,29 +248,39 @@ export const DonateForm: React.FC = () => {
           {/* SECTION 2: DONOR DETAILS */}
           <div style={{ ...fieldGroupStyle, padding: '16px', backgroundColor: '#fafafa', borderRadius: '8px', border: '1.5px solid #e9ecef' }}>
             <label style={labelStyle}>Donor Information</label>
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px', marginBottom: '10px' }}>
-              <div style={inputContainerStyle}>
-                <FaUser style={{ position: 'absolute', left: '18px', color: '#adb5bd', fontSize: '0.9rem' }} />
-                <input type="text" name="fullName" required placeholder="Full Name *" disabled={status === 'submitting'} value={donorData.fullName} onChange={handleDonorChange} style={{ ...inputStyle, paddingLeft: '40px' }} />
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px' }}>
+              <div>
+                <div style={{ ...inputContainerStyle, border: `1px solid ${errors.fullName ? '#e74c3c' : '#e9ecef'}` }}>
+                  <FaUser style={{ position: 'absolute', left: '18px', color: '#adb5bd', fontSize: '0.9rem' }} />
+                  <input type="text" name="fullName" placeholder="Full Name *" disabled={status === 'submitting'} value={donorData.fullName} onChange={handleDonorChange} onBlur={() => handleDonorBlur('fullName')} style={{ ...inputStyle, paddingLeft: '40px' }} />
+                </div>
+                {errors.fullName && <p style={{ color: '#e74c3c', fontSize: '0.72rem', margin: '3px 0 4px', paddingLeft: 2 }}>{errors.fullName}</p>}
               </div>
-              <div style={{ ...inputContainerStyle, overflow: 'hidden' }}>
-                <span style={{ paddingLeft: '12px', paddingRight: '6px', fontSize: '0.85rem', color: '#555', whiteSpace: 'nowrap', flexShrink: 0 }}>+91</span>
-                <input type="tel" name="mobile" required placeholder="XXXXX XXXXX *" disabled={status === 'submitting'} value={donorData.mobile} onChange={handleDonorChange} maxLength={11} style={{ ...inputStyle, paddingLeft: '4px' }} />
+              <div>
+                <div style={{ ...inputContainerStyle, overflow: 'hidden', border: `1px solid ${errors.mobile ? '#e74c3c' : '#e9ecef'}` }}>
+                  <span style={{ paddingLeft: '12px', paddingRight: '6px', fontSize: '0.85rem', color: '#555', whiteSpace: 'nowrap', flexShrink: 0 }}>+91</span>
+                  <input type="tel" name="mobile" placeholder="Mobile Number *" disabled={status === 'submitting'} value={donorData.mobile} onChange={handleDonorChange} onBlur={() => handleDonorBlur('mobile')} maxLength={11} style={{ ...inputStyle, paddingLeft: '4px' }} />
+                </div>
+                {errors.mobile && <p style={{ color: '#e74c3c', fontSize: '0.72rem', margin: '3px 0 4px', paddingLeft: 2 }}>{errors.mobile}</p>}
               </div>
             </div>
-            <div style={inputContainerStyle}>
-              <FaEnvelope style={{ position: 'absolute', left: '18px', color: '#adb5bd', fontSize: '0.9rem' }} />
-              <input type="email" name="email" required placeholder="Email Address *" disabled={status === 'submitting'} value={donorData.email} onChange={handleDonorChange} style={{ ...inputStyle, paddingLeft: '40px' }} />
+            <div style={{ marginTop: '10px' }}>
+              <div style={{ ...inputContainerStyle, border: `1px solid ${errors.email ? '#e74c3c' : '#e9ecef'}` }}>
+                <FaEnvelope style={{ position: 'absolute', left: '18px', color: '#adb5bd', fontSize: '0.9rem' }} />
+                <input type="email" name="email" placeholder="Email Address *" disabled={status === 'submitting'} value={donorData.email} onChange={handleDonorChange} onBlur={() => handleDonorBlur('email')} style={{ ...inputStyle, paddingLeft: '40px' }} />
+              </div>
+              {errors.email && <p style={{ color: '#e74c3c', fontSize: '0.72rem', margin: '3px 0 0', paddingLeft: 2 }}>{errors.email}</p>}
             </div>
           </div>
 
           {/* SECTION 3: TAX BENEFITS */}
           <div style={fieldGroupStyle}>
             <label style={labelStyle}>Tax Benefit (Section 80G)</label>
-            <div style={inputContainerStyle}>
+            <div style={{ ...inputContainerStyle, border: `1px solid ${errors.panNumber ? '#e74c3c' : '#e9ecef'}` }}>
               <FaIdCard style={{ position: 'absolute', left: '18px', color: '#adb5bd', fontSize: '0.9rem' }} />
-              <input type="text" name="panNumber" placeholder="PAN Card Number (optional)" disabled={status === 'submitting'} value={donorData.panNumber} onChange={handleDonorChange} style={{ ...inputStyle, paddingLeft: '40px' }} />
+              <input type="text" name="panNumber" placeholder="PAN Card Number (optional)" disabled={status === 'submitting'} value={donorData.panNumber} onChange={handleDonorChange} onBlur={() => handleDonorBlur('panNumber')} style={{ ...inputStyle, paddingLeft: '40px' }} />
             </div>
+            {errors.panNumber && <p style={{ color: '#e74c3c', fontSize: '0.72rem', margin: '3px 0 0', paddingLeft: 2 }}>{errors.panNumber}</p>}
             <p style={{ fontSize: '0.72rem', color: '#888', marginTop: '6px', lineHeight: '1.4' }}>
               * PAN is mandatory for donations to claim tax exemption features under registered acts.
             </p>

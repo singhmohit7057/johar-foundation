@@ -76,7 +76,7 @@ const CookiesPolicy: React.FC = () => {
           <h3 style={subHeadingStyle}>3. Types of Cookies we use</h3>
           <ul style={{ paddingLeft: '20px', color: theme.colors.text }}>
             <li><strong>Essential Cookies:</strong> These are strictly necessary to provide you with services available through our website (e.g., accessing secure donation areas).</li>
-            <li><strong>Analytics Cookies:</strong> These help us understand how our website is being used, allowing us to improve your experience in Jharkhand and beyond.</li>
+            <li><strong>Analytics Cookies:</strong> These help us understand how our website is being used, allowing us to improve your experience in India and beyond.</li>
             <li><strong>Preference Cookies:</strong> These allow the website to remember choices you make (such as your language preference) to provide enhanced, more personal features.</li>
           </ul>
 

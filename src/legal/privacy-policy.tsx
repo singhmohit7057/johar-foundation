@@ -60,7 +60,7 @@ const PrivacyPolicy: React.FC = () => {
       <div style={sectionStyle}>
         <div style={cardStyle}>
           <p style={{ color: theme.colors.text }}>
-            Johar Foundation ("we", "us", or "our") is committed to protecting your privacy. This Privacy Policy explains how we collect, use, and safeguard your information when you visit our website or engage with our community initiatives in Jharkhand and Eastern India.
+            Johar Foundation ("we", "us", or "our") is committed to protecting your privacy. This Privacy Policy explains how we collect, use, and safeguard your information when you visit our website or engage with our community initiatives across India.
           </p>
 
           <h3 style={subHeadingStyle}>1. Information We Collect</h3>
