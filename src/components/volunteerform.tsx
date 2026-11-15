@@ -75,8 +75,7 @@ export const VolunteerForm: React.FC = () => {
     <div style={{ textAlign: 'center', padding: '40px 10px' }}>
       <FaRegCheckCircle style={{ color: '#1abc9c', fontSize: '3rem', marginBottom: '16px' }} />
       <h3 style={{ color: '#333', fontWeight: 700, margin: '0 0 10px' }}>Thank You!</h3>
-      <p style={{ color: '#666', fontSize: '0.9rem', lineHeight: 1.6, margin: '0 0 24px' }}>We've received your application. Our team will be in touch soon.</p>
-      <button onClick={() => setStatus('idle')} style={{ backgroundColor: theme.colors.primary, color: 'white', border: 'none', padding: '10px 28px', borderRadius: '6px', fontWeight: 700, cursor: 'pointer', fontSize: '0.9rem' }}>Submit Another</button>
+      <p style={{ color: '#666', fontSize: '0.9rem', lineHeight: 1.6, margin: 0 }}>We've received your application. Our team will be in touch soon.</p>
     </div>
   );
 

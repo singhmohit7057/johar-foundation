@@ -59,30 +59,6 @@ export const Footer: React.FC = () => {
             >
               Who We Are
             </Link>
-            <Link 
-              to="/initiatives" 
-              style={linkStyle('initiatives')}
-              onMouseEnter={() => setHoveredLink('initiatives')}
-              onMouseLeave={() => setHoveredLink(null)}
-            >
-              Initiatives
-            </Link>
-            <Link 
-              to="/impact" 
-              style={linkStyle('impact')}
-              onMouseEnter={() => setHoveredLink('impact')}
-              onMouseLeave={() => setHoveredLink(null)}
-            >
-              Impact
-            </Link>
-            <Link 
-              to="/resources" 
-              style={linkStyle('resources')}
-              onMouseEnter={() => setHoveredLink('resources')}
-              onMouseLeave={() => setHoveredLink(null)}
-            >
-              Resources
-            </Link>
           </div>
         </div>
 
@@ -112,7 +88,7 @@ export const Footer: React.FC = () => {
               onMouseEnter={() => setHoveredLink('get-involved')}
               onMouseLeave={() => setHoveredLink(null)}
             >
-              Get Involved
+              Volunteer
             </Link>
           </div>
         </div>

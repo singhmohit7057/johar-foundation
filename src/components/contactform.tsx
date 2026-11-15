@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { theme } from '../theme/styles';
 import { submitToWeb3Forms } from '../forms/formservice';
-import { FaSpinner } from 'react-icons/fa';
+import { FaSpinner, FaCheckCircle } from 'react-icons/fa';
 import { FaUser, FaEnvelope, FaPhone, FaTag, FaPenToSquare } from 'react-icons/fa6';
 
 const ERR = '#e74c3c';
@@ -64,11 +64,10 @@ export const ContactForm: React.FC = () => {
   };
 
   if (status === 'success') return (
-    <div style={{ textAlign: 'center', padding: '40px 0' }}>
-      <div style={{ fontSize: '3rem', marginBottom: '10px' }}>✉️</div>
-      <h3 style={{ color: theme.colors.secondary }}>Thank You!</h3>
-      <p style={{ color: theme.colors.text }}>Your message has been sent successfully.</p>
-      <button onClick={() => setStatus('idle')} style={{ marginTop: '20px', backgroundColor: theme.colors.primary, color: 'white', border: 'none', padding: '10px 25px', borderRadius: '4px', cursor: 'pointer' }}>Send Another</button>
+    <div style={{ textAlign: 'center', padding: '40px 10px' }}>
+      <FaCheckCircle style={{ color: '#1abc9c', fontSize: '3rem', marginBottom: '16px' }} />
+      <h3 style={{ color: '#333', fontWeight: 700, margin: '0 0 10px' }}>Thank You!</h3>
+      <p style={{ color: '#666', fontSize: '0.9rem', lineHeight: 1.6, margin: 0 }}>We've received your message. Our team will be in touch soon.</p>
     </div>
   );
 
