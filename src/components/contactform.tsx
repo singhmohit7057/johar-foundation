@@ -4,7 +4,7 @@ import { submitToWeb3Forms } from '../forms/formservice';
 import { FaSpinner, FaCheckCircle } from 'react-icons/fa';
 import { FaUser, FaEnvelope, FaPhone, FaTag, FaPenToSquare } from 'react-icons/fa6';
 
-const ERR = '#e74c3c';
+const ERR = '#A62639';
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 export const ContactForm: React.FC = () => {
@@ -16,7 +16,7 @@ export const ContactForm: React.FC = () => {
     const e: Record<string, string> = {};
     if (!data.name.trim()) e.name = 'This field is required.';
     if (!data.email.trim()) e.email = 'This field is required.';
-    else if (!emailRegex.test(data.email)) e.email = 'Please enter a valid email (e.g. name@example.com).';
+    else if (!emailRegex.test(data.email)) e.email = 'Please enter a valid email.';
     if (!data.phone) e.phone = 'This field is required.';
     else if (data.phone.length !== 10 || !/^[6-9]/.test(data.phone)) e.phone = 'Please enter a valid phone number.';
     if (!data.message.trim()) e.message = 'This field is required.';
